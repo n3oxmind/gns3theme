@@ -1,0 +1,1702 @@
+# Change Log
+
+## 2.1.4 12/03/2018
+
+* Update node on server on any change, Fixes: #2429
+* Mark IOU layer 1 keepalive messages feature as non-functional. Fixes #2431.
+* Images refresh when added via settings, Fixes:#2423
+* Emit project_loaded_signal after project creation
+* Add option Show interface labels on new project, Ref. #2308
+* Improve finding pyuic3.exe on Windows
+* Use debug for error downloading file messages. Fixes #2398.
+* Refresh buttons in the cloud node to query the server for available interfaces. Fixes #2416.
+* Handle Certifacte Error, Ref. gns3-server#1262
+* Backward compatibility for tests, Ref. #2405?
+* Use UTF-8 for IOURC file migration.
+* Look for symbols on controller, Ref. #2405
+* Display an error message if Telnet console program cannot be executed.
+
+## 2.1.3 19/01/2018
+
+* Change messages when there are different client and server versions. Fixes #2391.
+* Fix "Transport selection via DSN is deprecated" message. Sync is configured with HTTPTransport.
+* Refresh CPU/RAM info every 1 second. Ref #2262.
+* Only check for AVG on Windows
+* Improve the search for VBoxManage.
+* Allow telnet console to node with name containing double quotes. Fixes #2371.
+
+## 2.1.2 08/01/2018
+
+* Update VMware promotion in setup wizard.
+* Confirm exit. Fixes #2359.
+* Fix with .exe build
+
+## 2.1.1 22/12/2017
+
+* Fix dragging appliance into topology from nodes window, fixes: #2363
+* Fix Appliances in Docked mode, fixes: #2362
+* Create local variable in order to debug issue in the next occurrence, #2366
+* Fix ParseError: not well-formed (invalid token), #2364
+* Fix local variable 'vm' referenced before assignment #2365
+* Fix: 'NodesDockWidget' object has no attribute 'uiNodesView', #2362
+* Tentative fix for packet capture not working correctly when remote main server is configured. Ref #2111.
+* Log Qt messages with log.debug() instead of log.info().
+* Fix auto idle-pc from preferences. Fixes #2344.
+* Snapshoting project without timeout but with  button. Ref. #2314
+* Improve validation for idle-pc.
+* Activate faulthandler.
+* Add PATH to OS X console commands
+* Use raw triple quotes in large console settings This eliminates one level of quoting
+* Fix issue in node summary when console is not supported by a node.
+* Remove unused symbols. Fixes #2320.
+* Show console information in Topology Summary Dock. Fixes #2258.
+* New option: require KVM. If false, Qemu VMs will not be prevented to run without KVM.
+* Implement variable replacement for Qemu VM options.
+* Show on what server a node is installed in the servers summary pane. Fixes #2279.
+* Add more info when cannot remove capture file after stopping packet capture in a remote project. Ref #1223.
+* Do not overwrites the disk images when copied to default directory. Fixes #2326.
+* Only replace quoted telnet for macOS Telnet commands. Ref #2328.
+* Support Telnet path containing spaces. Ref #2328.
+* Fix problem when embedded telnet client path contains a space on macOS. Ref #2328.
+* Do not launch console for builtin nodes when using the "Console to all nodes" button. Fixes #2309.
+* Update frame_relay_switch_configuration_page_ui.py
+* Turn off timeout for node creation
+
+## 2.1.0 09/11/2017
+
+* Update dynamips binary on OSX
+
+## 2.1.0rc4 07/11/2017
+
+* Accurate upload progress dialogs for large files
+* Disable direct file upload on default
+* Add registry version 5
+* Direct file upload enabled on default
+* Progress Dialog: don't count finished queries done in background
+* Add debug messages to file upload
+* Image Upload Manager for uploading
+* Fix race condition on NodesDockWidget, fixes: #2304
+* Do not write an error message when importing non existing config from a directory. Fixes #2296.
+* Fix bug when replacing Telnet path on OSX. Ref #2274.
+* Back to development on 2.1.0rc3
+
+## 2.1.0rc3 19/10/2017
+
+* Add debug when using Telnet path on OSX. Ref #2274.
+* Force to use the telnet client embedded in DMG. Ref #2274.
+* Upload directly to compute - experimental feature
+* Filter additional QXcbConnection log messages
+* Do not add missing file extension for screenshot file names on Mac. Fixes #2287.
+* Log Qt messages as info instead of error. Ref #2281.
+
+## 2.1.0rc2 04/10/2017
+
+* Only show "can't get settings from controller" message in debug mode.
+* Remove explicit Telnet path on OS X. Ref #2274
+* Disable WebSocket notification for lower PyQT version than 5.6. Fixes #2272
+* Increase timeout to 5 minutes when creating and restoring a snapshot.
+* Add more information when a request timeouts. Ref #2277.
+* Do not show the progress dialog when moving a node. Ref #2275.
+* Increase timer before showing a progress dialog from 250ms to 500ms. Ref #2275.
+* Use embedded Telnet client on OS X. Ref #2274.
+* Fix small bug when adding an appliance template and the name already exists.
+* Use RAW sockets by default on Linux for VMware VM connections.
+* Increase timeout to get compute servers from controller. Ref #2269.
+* Fix "Node doesn't exist" after deletion, but still on the canvas. Fixes #2266.
+* Make sure the warning button icon appears in cloud properties dialog on Windows. Fixes #2245.
+* Fix bug when cancelling the importation of a configuration file. Fixes #2260.
+
+## 2.1.0rc1 13/09/2017
+
+* Fix missing spice console option in appliance template schema. Fixes #2255.
+
+## 2.1.0b2 05/09/2017
+
+* Fix resources dependencies for cloud configuration page (Fixes: #2251)
+* Disabled possibility of moving items under zero layer (Fixes #2220)
+* dialog-warning.svg fallback for themed icon (Ref. #2245)
+* Change width of packet filters dialog (Fixes #2244)
+* Fix high CPU usage when using packet filters. Fixes #2240.
+* Toggle Node menu item (Fixes #2227)
+* Fixes multiselection styles change crash on LineItem (#2216)
+* Fixes loading symbols for QEMU at Edit Page (#2214)
+* Fixes exception when right click on Dynamips router in the device dock (#2211)
+* Update frame_relay_switch_configuration_page.ui
+
+## 2.1.0b1 04/08/2017
+
+* Info added to the Nat node
+* Add missing popup information in cloud and docker node
+* Handle invalid json in websockets
+* Avoid invalid bad request error when receiving partial answer
+* Catch parse error for broken SVG
+* Filter QXcbConnection log messages
+* Catch class 'PyQt5.QtNetwork.QNetworkReply'> returned a result with an error set
+* Fix KeyError: 'overlay_notifications'
+
+## 2.1.0a2 31/07/2017
+
+* Fix permission error when importing a project on a remote server
+* Fix RecursionError
+* Fix 'NodesDockWidget' object has no attribute 'loadPath'
+* Fix 'MainWindow' object has no attribute '_settings
+* Fix object has no attribute 'warning_signal'
+* Fix timeout issues when using an appliance
+* Make sure ubridge path is not a directory
+
+## 2.1.0a1 24/07/2017
+
+* Packet filtering
+* Suspend a link
+* Duplicate a node
+* Move config to central server
+* Appliance templates on server
+
+## 2.0.3 13/06/2017
+
+* Display error when we can't export files
+* Fix auth header not sent is some conditions
+* If we have auth issue at server startup continue to get better error
+* Do not override IOU configuration file when you change the image
+* Fix some PNG loading issues on Windows
+* Handle label with missing elements
+* Support floating value for font size
+* Handle partial json in a response
+* Add Dominik as a new team member
+
+## 2.0.2 30/05/2017
+
+* Show a default symbol in case of corrupted file
+* When another gui is already running exit instead of proper close to avoid any issue
+* Fix duplicate on remote server use wrong location
+* Display the location of settings when we disallow opening due to old release
+* Improve search for dynamips in development on OSX
+* Fix error display when loading a .png custom symbol
+* Fix a crash in the progress dialog
+* Fix a race condition when exporting a closed project
+* Fix RuntimeError: wrapped C/C++ object of type NodeItem has been deleted
+
+## 2.0.1 16/05/2017
+
+* Improve inline help. Fixes #1999. Add a warning about wifi interfaces in the cloud. Fixes #1902.
+* Copy remote directory path into clipboard in "Show in FileManager". Fixes #1966.
+* Fix display of error in progress dialog when we don't have thread
+* Fix lost slot and port in dynamips settings
+* Do not run import / export of project in seperate thread
+* Assert when running an HTTP query outside the main thread
+* Proper error when you try to load the pid file as config file
+* Log malformed svg text item
+* Fix a race condition when right click and delete a node at the same time
+* Fix a race condition when snapshoting a closed project
+* Update doctor_dialog.py
+* Catch remaining missing function listxattr on some Linux host.
+* Fix a race condition when creating node and closing project
+* Fix error if you put a path in a .gns3a file for qemu
+* Fix AttributeError: 'NoneType' object has no attribute '_refreshVisibleWidgets'
+* Do not crash if the logging code raise an exception
+* Fix some crash in dynamips device preference page
+* Fix warning when loading IOU images on Windows
+* Do not crash if you don't have configure a packet capture program on Windows
+* Ignore error when we can't kill the packet capture
+* Fix AttributeError: 'NoneType' object has no attribute 'wasCanceled'
+* Fix RuntimeError: wrapped C/C++ object of type QComboBox has been deleted
+* Fix RuntimeError: wrapped C/C++ object of type QTreeWidgetItem has been deleted
+* Fix detection of https when use for the local server
+* Silent the _COMPIZ_TOOLKIT_ACTION warning
+* Cacth TypeError: native Qt signal is not callable
+* Fix AttributeError: 'C7200' object has no attribute 'warning_signal'
+* Catch missing function listxattr on some linux host
+* Disallow opening a .gns3 on a remote server
+* Fix project closing when we have multiple client connected
+
+## 2.0.0 02/05/2017
+
+* Clarify that we don't override vmware custom adapters
+* Strip space from path at project creation
+
+## 2.0.0rc4 20/04/2017
+
+* Catch all error during the generation of log messages.
+* Catch a rare node creation error
+* Fix missing menu text at application startup
+* Fix a race condition in the drawing item
+* Catch system error when connecting to local server
+* Catch a rare error when killing the capture
+* Improve pcap streaming speed
+* Upgrade to 5.7.1
+* Recent projects list bug
+* Fix a race condition in the preferences dialog
+* Try to fix some windows Z issues
+* Catch a garbage collection issue in the right click on a link
+* Fix a compatibility issue with Python 3.4
+
+## 1.5.4 13/04/2017
+
+* Limit ubridge permission to the admin group on OSX
+* Upgrade to Qt 5.7.1 on Windows
+
+## 2.0.0rc3 31/03/2017
+
+* Improve timeout handling
+* Improve logging when we display a qt message box
+* Try to detect computer hibernation
+* Fix crash when we send some errors to the user console
+* Use QtFile for managing file capture
+* Allow to delete a profile from the profile select dialog
+* Filter hidden folder in the profil directory
+* Prevent user putting port in the remote host name
+* Fix RuntimeError: wrapped C/C++ object of type EllipseItem has been deleted
+* Fix a rare error in LinkItem
+* Fix Image field in nodes list is stale after changing an image
+* Fix RuntimeError: Set changed size during iteration
+* Better detection of remote server changes
+* Add a notice about the fact you need to apply server settings
+* Check python version only for setup.py install
+* Catch appliance error when creating an appliance new version
+* If a node can't be deleted do not remove it
+* If something is wrong during packet capture do not disconnect us from the server
+* Fix saving dynamips
+* Try to fix the hang dialog on some computers
+* Fix a rare crash in progress dialog
+* If we pass --profile skip the profile select dialog
+* Raise an error if the progress dialog is not created from the main thread
+* Log qt log to python log
+* Fix image are not uploaded to remote main server
+* Fix race condition when editing a project
+* Poll settings each 5 seconds
+* Avoid progress dialog not disapear
+* Remove wrong mention about the fact super putty is include
+* Avoid a crash when an ios router don't have a chassis
+* Fix a potentatial crash in the progress dialog
+* Support official docker images in appliances
+
+## 2.0.0rc2 10/03/2017
+
+* Deploy on pypi when we tag
+* Fix rare crash in GNS3 VM preference page
+* Fix an error on Windows when loading SVG files
+* Prevent a potential crash
+* Workaround a rare crash when sending analytics
+* Catch error when you try to create a node a not existing server
+* Fix an error when your local server crash and computer return non unicode
+* Fix KeyError: 'slot1'
+* Fix a rare crash in import appliance
+* Rollback to PyQT 5.8 because 5.8.1 seem to have trouble at install
+* Update pyqt5 from 5.8 to 5.8.1
+
+## 2.0.0 RC 1 06/03/2017
+
+* UltraVNC support
+* Display less noisy dialog when we can't connect to the remote server
+* Prevent the usage of gns3vm as a remote server name
+* Fix the VMware wizard for not using a remote server by default
+* Prevent the GNS3 VM to appear in remote compute in the VM wizard
+* Remove iouyap settings
+* Fix missing permission error management
+* Avoid a crash when create a new dynamips version in the appliance wizard
+* Disallow user to add the same server as a remote server and as local server
+* Fix 'module' object has no attribute 'run'
+* Monitor and display local server stderr
+* Fix some import errors
+* Remove placeholder string from appliance wizard
+* Avoiding calling multiple time /computes at the same time. And reduce timeout
+* Support for appliance v4
+* Some tweaks for enabling/disabling HDPI mode.
+* Do not display error at first step of the setup wizard
+* Disable HDPI by default on Linux and allow to configure it
+* Fix an issue when you edit a VPCS node from the node view
+* Catch a race condition in managing error static assets download
+* Handle error if you try to import an appliance without having the images
+* Improve crash proof code of the progress dialog
+
+## 2.0.0 beta 4 19/01/2017
+
+* Update pyqt5 from 5.7.1 to 5.8
+* Drop from console view the show command not supported by 2.0
+* Try to avoid segfault in some PyQT version
+* Support for strike and underline
+* Do not use native font selector on mac it could crash
+* Use a dedicated QNetwork manager for notification
+* Fix a display error in console error message
+* Use signal for writting on console to avoid some potential segfault
+* Fix a rare warning
+* Add more debug when we have an http error
+* Disable timeout on project open
+* Support for gvncviewer
+* Fix a rare crash in the file editor dialog
+* Fix a race condition when we display the error
+* Fix an issue with invalid hostname detected as an IPV6
+* When you update a a node from the node view send settings to controller
+* Fix error when permission on the loaded image is broken
+* Fix crash with invalid image file in appliance wizard
+* Fix error when loading an handmade appliance file
+* Fix no error if your VNC client is not configured
+* Avoid high cpu usage when connection is lost
+* Support {name} in cloud template
+* Fix text of the export dialog
+* Fix error message when a project is already open
+* Fix missing info in tooltip of ethernet switch
+* The server manage the vmname when we update the linked virtual box VM
+* Fix z value for text
+* Avoid a segfault when display an error
+* Add sata options in the appliance schema
+* Fix a rare crash when exporting IOU configurations
+* Allow additionnal properties in registry files
+* Fix a potential crash when a symbol is not found
+* Strip unused code for OVA support in the registry
+* Increase the timeout for killing local server
+* Fix error when changing the layer of a drawing item
+* Fix double click for open file on OSX
+* Add debug to see the arguments use to start the application
+* Put the selected engine in the first position of the listbox
+* Fix rare crash with dynamips
+* Fix rare crash in the progress dialog
+* Fix a rare crash in console view
+* Fix crash when you drag a file inside GNS3
+
+## 2.0.0 beta 3 19/01/2017
+
+* Fix error if you already have an image with a different name on remote server
+* Drop gns3 converter from requirements
+* Show correct server name in tooltip
+* Menu item to open controller webpage
+* Fixes potential exception when adding network module to an IOS router. Fixes #1774.
+* Do not export a file config file if empty
+* Allow to set console type in qemu wizard
+* Fix overwrite of projects
+* Fix creation of new appliance version when filename is different
+* Fix you can't configure port 0 on ethernet switch
+* Fix a race condition when saving as a project and closing it
+* Reorder multi link when you delete one
+* Ensure we can't connect to occupy port
+* Fix AttributeError: 'QImageSvgRenderer' object has no attribute '_svg'
+* Fix Unsaved preferences in GNS3 VM warning
+* Force margins in configuration tabs.
+* Sata disk interface support for Qemu VMs.
+* Remove "sata" disk interface. Does not exist in Qemu. Ref #1749
+* Add SATA and none disk interfaces on Qemu VM configuration page. Fixes #1749.
+* Update pyqt5 from 5.7 to 5.7.1
+* Fix TypeError: argument of type 'NoneType' is not iterable
+* Fix an error when you edit readme and no projet is opened
+* Upgrade Qt 5.7
+
+## 1.5.3 12/01/2017
+
+* Upgrade Qt 5.7
+
+## 2.0.0 beta 2 20/12/2016
+
+* AUX console button text change in MainWindow.
+* Fix GNS3 Client not connecting to remote controller
+* Delete from project list deleted projects
+* Keep a shared list of projects internally
+* Fix recent files in new project dialog
+* Move recent projects to the file menu
+* Fix Tail process for wireshark trace not killed when we change project
+* Move project menu items. Ref #1713.
+* Display recent files for local controller, recent project for remote controller
+* Do not display the remote server if the server is use as a GNS3 VM
+* If the notification stream is stopped by something we auto reconnect
+* Ignore system proxy to avoid trouble with "Security Suites"
+* Avoid close and delete a project at the same time
+* Alpha sort of servers summaries
+* Fix new remote server doesn't show up in compute summary
+* Fix interface number for Switch & Hub templates
+* Fix sync of node alignements with the server
+* Fix rare condition when you close a project and add a node
+* Options -q for quiet startup
+* Fix an error when apply permission on OSX
+* Support Qemu cpus in GNS3A
+* Support for BIOS images
+* Fix IdlePC can't be found during setup wizard
+
+## 2.0.0 beta 1 07/12/2016
+
+* Use osascript on OSX for asking admin permission
+* Change the method for creating the tmpdir for symbols cache
+* Fix a connection error at the end of the setup wizard
+* Change how some tabs are organized or named.
+* General settings => local settings
+* Drop more reference to use local server
+* Remove local server checkbox from preferences
+* Make sure to not start local server during setup wizard remote server
+* Fix Error when editing IOS image created using .gns3a file
+* Fix test suites around sip deleted
+* Do not auto start the local server in setup wizard
+* On OSX execute all sudo in a single operation
+* Catch key Compute  is missing during conversion error
+* Fix rare crash in gns3.dialogs.appliance_wizard in validateCurrentPage
+* Fix  AttributeError: 'Nat' object has no attribute 'configPage'
+* Catch one more RuntimeError: wrapped C/C++
+* Fix a rare crash in port
+* Fix a rare crash when set symbol
+* Fix a potential crash
+* Fix a potential crash at exit
+* Fix crashes
+* Remove unused settings from general preferences
+* Catch error when you try to import a IOU bin as a licence
+* Fix rare crash when exiting
+* Fix crash when freeing some ressources
+* Fix timeout when exporting large project
+* Avoid a rare crash when we free a port
+* Fix you can't download symbols after you got an error
+
+## 2.0.0 alpha 4 24/11/2016
+* Mark preferences changes when you change a QPlainTextEdit
+* Force the VPCS config initial file
+* Replace the IOU licence path by an input text
+* Fix 403 when loading a remote project
+* Fix some possible server not starting on Windows
+* Hide the connection refused dialog when we success to reconnect
+* Avoid a rare crash when changing topology
+* When loading another project disconnect from current project
+* Do not crash if we can't list remote list of GNS3 VM engines
+* Init the VPCS base config
+* Fix invalid ressource path on OSX
+* Fix segfault when deleting a node
+* Do not download multiple time the same symbol
+* Kill tail process when capture stop
+* Fix Topology summary contain non existing links
+* Fix a rare crash when deleting a link
+* Fix export of debug informations when not connected to the controller
+* Fix AttributeError: 'DockerVM' object has no attribute 'server'
+* Fix error message if you double click on builtin switch
+* Fix a rare crash in packet capture
+* Restrict ubridge to admin users on OSX
+* Natural sort of Nodes in topology summary
+* Drop serial console type
+* Display an error if you try to open a 0.8.x file
+* Fix tab order when editing a compute
+* Fix a crash in ethernet switch settings
+* Dissallow unknown extensions
+
+## 2.0.0 alpha 3 28/10/2016
+* Fix error when opening a project from the cli with a gns3 installed via setup.py
+* Fix a rare crash in snapshot dialog
+* Fix crash when importing project on a remote server
+* Fix crash in appliance wizard
+* Fix crash when local server is not available
+* Disallow  to overwrite a running project
+* Fix a rare crash when deleting a link
+* Fix appliance with wrong file name after import
+* Fix a crash at startup on Mac when coming from old GNS3 version
+* Fix key error in settings  if a compute no longer exists
+* All check for vmware linked base are already made server side
+* Fix Save as is not switching to the saved project
+* Auto reopen a project if connection is lost
+* Empty the list of computes nodes when connection is lost
+* Try to fix duplicate nodes after snapshot restore on some user computer
+* Allow only IPV4 in setup wizard
+* Catch error if user tmp directory is read only
+* Raise a proper error if packet capture program is invalid
+* Fix AttributeError: 'NoneType' object has no attribute 'upper'
+* Fix rare crash when killing wireshark
+* Export debug informations also from the controller
+* Fix a crash in vm wizard
+* Fix error when uploading an images from preferences
+* Fix snap to grid when initialy drop a node in the topology
+* Optimize snap-to-grid code
+* Fix a crash with linked clone
+* Move prevent using twice the same VM when linked clone is not enable
+* Fix If you show interface label and delete the link ghost interface label will appear
+* Display short interface label instead of long version
+* Fix error  AttributeError: 'NoneType' object has no attribute 'capabilities'
+* Fix PermissionError when killing local server
+* Handle empty color
+* Fix rare crash in save as
+* Fix crash in restore default server settings
+* Fix an error during import of some 0.8x projects
+
+## 2.0.0 alpha 2 20/10/2016
+
+* Support pure remote server for importing appliance
+* Dissallow binding GNS3 server to an IPV6 (not supported by some emulators)
+* Drop vmware host type choice in client
+* Ask user to restart GNS3 after VMware installation
+* Improve duplicate prevention in topology summary
+* Add a duplicate button in the project library dialog
+* Fix error introduce in previous commits
+* Fix duplicates in recent project list
+* Fix a project override error
+* Fix Duplicated node in node summary when restoring a snapshot
+* Fix a crash in the VMware / VirtualBox wizard
+* If console host is 0.0.0.0 use controller address
+* Fix save issue when importing an appliance
+* Strip HTML in console view logs and log files
+* Fix TypeError: _expandAllSlot() takes 1 positional argument but 2 were given
+* Fix Cannot open created project by using Recents projects
+* Update edit project Ui.
+* Update crash report key
+* Fix a crash when exporting debug without project open
+* Fix a crash in rare condition when logging informations to the console
+* Fix a crash in compute summary view
+* Add a text about how to change the topology size in 2.0 in general preferences
+* Improve warning when connection issue to GNS3 VM
+* Fix crash in setup wizard
+* Fix the wizard for creating appliance template doesn't support remote main server
+* Appliance wizard support remote controller
+* Fix  Browse button is not working in the local server page in the setup wizard
+* Check if local server is running in the setup wizard
+* Hide setup wizard after first successful run
+* Import appliance and New project are display at the same time
+* Support remote controller in the setup wizard
+* Fix When importing a gns3a the correct qemu binary is not selected
+* Increase creation timeout for docker container
+* Make WaitForLambdaWorker more crash proof
+* Fix a crash when importing appliance
+* Fix error in import appliances
+* Try to fix the a segfault when importing appliance
+* Fix crash in upload images
+* Trust the server for link creation error (avoid sync issue)
+* Fix an Error in server preference page
+* Fix compatibility with remote server of 1.X
+* New appliance dialog should not be display if you cancel the setup wizard
+
+## 2.0.0 alpha 1 29/09/2016
+* Save as you go
+* Smart packet capture
+* Capture on any link between any node
+* Select where to run a VPCS node
+* Delete a project from the GUI
+* Project options
+* The cloud is a real node
+* Cloud templates
+* New cloud interface
+* VPCS / Ethernet Switch / Ethernet Hub templates
+* Search OS images in multiple locations
+* Periodic extraction of startup configs for Dynamips and IOU
+* Custom cloud, Ethernet hub and Ethernet switch templates
+* Snap to grid for all objects
+* Synchronize the node templates when using multiple GUI
+* Link label style
+* New place holders in command line for opening consoles
+* %i will be replaced by the project UUID
+* %c will be replaced by the connection string
+* Export a portable project from multiple remote servers
+* New save as
+* Snapshots with remote servers
+* Better start / stop / suspend all nodes
+* Edit config
+* NAT node
+* Support for colorblind users
+* Support for non local server
+* Support for profiles
+* Suspend the GNS3VM when closing GNS3
+* Edit the scene size
+* New API
+
+
+## 1.5.3 rc1 20/12/2016
+
+* Fix Error when editing IOS image created using .gns3a file
+* Fix error when opening a project from the cli with a gns3 installed via setup.py
+* Fix a crash at startup on Mac when coming from old GNS3 version
+* Fix an error during import of some 0.8x projects
+* Ask for restart after installing vmrun
+* Improve warning when connection issue to GNS3 VM
+* Changes wording in VM wizards.
+* Changed sentence.
+* Display an error if settings come from a more recent version of GNS3
+* Fix Error when no GNS3 VM is configured and you click on new Docker or IOU
+* Disallow / in docker container name
+* Update iTerm3 console settings
+* Fix rename ethernet switch doesn't release the name
+* Support for VNC display number in command line replacement
+* Fix a crash when a directory with image is not accessible at gns3a import
+
+## 1.5.2 18/08/2016
+
+* Make more clear that VMware VM are not ESXi
+* Add AppData and Desktop files
+* Fix you can not select the server for VPCS
+* Fix error when removing an interface from a cloud
+* Fix crash when scanning a directory for image and you don't have permission on a file
+* Bring back the warning dialog when no router is configured
+* Fix rare crash in server summary
+* Fix crash during export
+
+## 1.5.1 06/07/2016
+
+* Try to fix a crash when reseting interface label
+* Fix a crash with broken file system
+* Fix EtherSwitch default name format
+* Fix crash when you have utf-8 char in the README
+* Fix rare crash when creating a link
+* Stop node before hot unlink
+* Prevent a crash due to issue in Qt
+* Add another security to prevent client to send empty hostname
+* Fix rare crash when deleting interface from the cloud
+* Fix rare crash in topology summary view
+* Ask user to send explanation if they cross a rare error
+* Fix rare crash when deleting a node
+* Hotlink support for Docker
+* Fix typo in the a warning dialog
+* Fix Remote GNS3 VM requires local server
+* Fix AttributeError: 'NoneType' object has no attribute '_server'
+* No timeout when importing a .gns3project
+
+## 1.5.0 27/06/2016
+
+* Fix double extension of portable project
+* Disallow export of project with a cloud
+* Change view grid -> show the grid.
+* Check if a link can be removed from a running node. Fixes #1320.
+* Hide non implemented console options in general preferences. Ref #1315.
+* Improve snap to grid
+* Change grid color
+* Avoid a crash with snap to grid and ostinato logo
+* Add a view grid
+* Fix you can no longer capture if you start stop capture multiple time
+* A button to open the file browser with the configuration file location
+* Add snap to grid feature
+
+## 1.5.0rc2 15/06/2016
+
+* Ethernet0 => eth0 for docker
+* Validate appliance schema before loading it
+* Fix a rare crash when loading images
+* Fixes doctor failure with 1.5rc1. Fixes #1290.
+* Check for template name collisions.
+* Log GNS3 doctor exceptions.
+* Option to hide the new appliance template button. Fixes #1277.
+
+## 1.5.0rc1 01/06/2016
+
+* Avoid a segfault when exiting with debug enabled
+* Fix the GNS3 VM is visible even if deactivated
+* Do not automatically stop the GNS3 VM by default.
+* Block VMnet host traffic by default. Solves the traffic loop issue on Windows.
+* Remove tooltip for Qemu VM base mac address.
+* Fix you cannot select the remote server of your choice in qemu wizard
+* Fix issue when deleting a running container
+* Allow to block network traffic originating from the host OS for vmnet interfaces (Windows only).
+* Change tooltip for Qemu VM base MAC address.
+* Improve image import
+* Support dragging an image in the GNS3 topology from the system file browser
+* Fix an issue with import with no GNS3 VM
+* Fix error when using {} in the node name
+* Display the progress dialog after 250ms
+* Fix a crash when exporting a project with virtualbox or VMware VM
+* Set default VMware VM adapter type to e1000.
+
+
+## 1.5.0b1 23/05/2016
+
+* Remote server selector not enabled in import appliance wizard
+* New server dialog is now windows modal
+* Fixes issue when UDPPortAllocatedSlot() is called multiple times.
+* Private-config is optional.
+* Fixes alternative IOS image selection when loading a project.
+* Accept fill_color property for rectangle/ellipse objects. Compatibility for old 1.0 projects.
+* Fixes check for NPF service and add check for NPCAP service on Windows.
+* :latest for docker image is managed server side
+* Remove unbreakable space
+* Fix Checkbox and radio button are not readable with charcoal style
+* Fix existing remotez server is not recognised
+* Fix Cannot change docker image adapter number from docker image configuration
+* Fix got an unexpected keyword argument 'ram_limit'
+* Check that both Qt and PyQt version >= 5.6 to enable high DPI scaling.
+* Check Qt version, not PyQt. Fixes #1232.
+* Fix you can not turn off the GNS3VM with remote server
+
+## 1.5.0a2 10/05/2016
+
+* Fix issue with PyPi
+
+## 1.5.0a1 10/05/2016
+
+* Rebase Qcow2 disks when starting a VM if needed
+* Docker support
+* import / export portable projects (.gns3project)
+
+## 1.4.6 28/04/2016
+
+* Fix a typo in qemu preferences
+* Fix upload of large image to the VM
+* Reduce the number of connection tries from 120 to 40 when connecting the GNS3 server running inside the GNS3 VM.
+* Include link to the GNS3 academy. Fixes #1178.
+* Snapback feature for port labels. Fixes #1182.
+* Prevent users to select VirtualBox.exe instead of VBoxManage.exe. Fixes #1195.
+* Improve the vmrun error message
+* If we can not read the registry try to guess vmware type from vmrun path
+* Ensure that you can not duplicate an interface in a cloud
+* Disallow removal of link of running emulator without support of hotlink
+* Check PyQT version support dev version
+* Show server CPU usage if it's 0
+* Clear warnings about using linked clones with VMware Player.
+* Double click center on link
+* Double click on an element in topology summary center the view on it
+* Fix a very very rare crash when closing a project
+* Avoid a small blink of the waiting text
+* Fix a crash with image item
+* Show a symbol in the middle of the link when packet capturing is activated. Ref #789.
+* GNS3 doctor: check if the NPF service is running. Fixes #1124.
+* Fixes progress dialog is None in accept()
+* Fix another race conditions in progress dialog
+* Replace the installation instructions by a link to the doc
+
+## 1.4.5 23/03/2016
+
+* Change some sentences.
+* Sort snapshots by date
+* Block save as and snapshot when a device is running
+* If you hit enter in the new project dialog it's work
+* Display upload size during progress
+* This should avoid blinking dialog. And display better progress
+* SetupWizard: limit the number of vCPUs for the GNS3 VM to the number of physical cores.
+* Remove blocking code. Ref #1109.
+* Fixes "QThread: Destroyed while thread is still running",
+* Add a timeout when you are not able to join the remote server
+* Remove bad smell from progress dialog and handle ESC key
+* Remove root required messages in cloud node. Ref #608.
+* Show a warning when the GUI is run with root rights. Fixes #608.
+* Change message when closing GNS3 with running device.
+* Ask the user to stop device before closing
+* At startup display a warning if another GUI is already running
+* Fix a crash if you delete a file while refreshing the list of appliances
+* Fix double opening of serial console
+* Always ask the server for builtin
+* Improve detection of vmrun on OSX
+* Delete image from images dir when no longer need
+* Sort node name in topology summary
+* Allow to show a message box for test without starting GNS3
+* Drop licence for paramiko since we no longer use it
+
+## 1.4.4 23/02/2016
+
+* Fix crash when selecting no image in GNS3A but clicking on Download
+* Fix crash when you have a file size None (testing a new gns3a)
+* Prevent the progress dialog to cancel the GNS3VM when it's finish
+* Add a command show gns3vm to get the GNS3 VM statusM
+* Prevent setup wizard to appear if VM is running
+* Display error dialog if a custom console is invalid
+* Crash when you import GNS3A just after installing gns3 Fix #1063
+* Change the way we check is setup wizard has been turned off Fix #1071
+* Do not failed if GNS3 VM server has an incorrect version
+* Include the output from vmrun or  VBoxManage when they return an error code.
+* Fixes bug that forced the GNS3 VM running in VirtualBox to restart even if no preferences had been changed.
+* Allows to cancel the progress dialog when GNS3 tries to contact the server running in the GNS3 VM.
+* Ask user to upgrade via the VM menu
+
+## 1.4.3 19/02/2016
+
+* Allow idlepc 0x0 in topology
+* Show an explicit error message when status code 0 is returned. Fixes #1034.
+* Fixes minor bug when dropping a VirtualBox VM on the scene. Fixes #748.
+* Correctly check local server if only local is available in vm wizard
+* Make the GNS3 VM server running value more reliable
+* Make VM configuration dialog modal
+* Cannot take GIF screenshots (write is not supported by Qt).
+
+## 1.4.2 17/02/2016
+
+* Allow gif image (not animated) since patent expire in 2004
+* Countdown before starting the GNS3 VM
+* Prevent IOU GNS3A install on Windows
+* Set timeout from 1 to 3 seconds when waiting for GNS3 VM server. Ref #1034.
+* Redirect stderr to stdout when executing VBoxManage or vmrun. Ref #1027.
+* Update VMware banners
+* Prevent a crash in progress dialog
+* Update for 4K monitor
+* Allow to cancel the start of the GNS3 VM
+* Update the .net converter
+* Detect and fix duplicate port name in topology
+* Allow to open a custom console on any node
+* All node are now SVG items
+* Move Qt code to a module so we can add new code in differents files
+* Fix rare crash when updating node
+* Prevent duplicate server in server summary
+* Fix a regression in Host and Cloud
+* Check if GNS3 is not installed twice in doctor
+* Allow to add custom command to the list
+* Update Readme Python 3.4 is require
+* Allow to import unknown files via GNS3A
+* Fix a problem with gns3 running in background after exit
+* Move common code for ports dump to vm.py
+* Move common code _updatePortSettings to vm.py
+* Fix a crash when searching for alternative images
+* Fix a crash with corrupted topology from 1.0
+* Remove all the docker code from 1.4 gui to avoid confusion
+* Create a dialog for choosing the console command.
+* Catch error if Dynamips is disabled for local and no remote available
+* Put a link for the GNS3 VM in the setup wizard
+* When importing appliance explain why options is gray
+* User configurable default name format for VMware and VirtualBox. Ref #748
+* Changes "base name prefix" to "default name format". Ref #748.
+* User configurable base name support for Dynamips, IOU and VPCS. Ref #748.
+* Refactor "Import config" router dialog. Fixes #752.
+* Fixes ValueError: cannot mmap an empty file. Fixes #723.
+* Saves the "show port names" state in topology files. Fixes #778.
+* Fix KeyError: 'midplane' when loading 7200 in some cases
+* Hide the server select box for builtin switch if Dynamips local is off
+* Fix an issue where the Existing image button can disappear from wizard
+* Fix a race condition when you ask for image list but close the windows
+* Fix alignments of VMware and VirtualBox in VM choice type
+* Better explanation during server choice
+* Disabled remote button when we have no remote in server wizard
+* Improved lookup for VMware host type. Fixes #970.
+* Change some text in nodes view.
+* Allow to edit a node via a right click in the node
+* Show error if a problem occur when getting remote server KVM status
+* Display a clean error when an appliance has an invalid JSON
+* MobaXterm integration
+* Allow to show the command line used to start a VM
+* Add - GNS3 at the end of the windows name
+* Fix a crash with doctor on windows
+* Fix crash in doctor if ubridge path is empty
+
+## 1.4.1 01/02/2016
+
+* Improvement to detect VMware Player on Linux. Ref #970.
+* You can move Dock widgets everywhere
+* Link to download VIX api
+* Fix SSH present in the server preferences
+* Check dynamips and ubridge permission.
+* Show a dialog for checking some common issues
+* Show a summary with server usages
+* Close project on VM when closing the project on all servers
+* Allow to not rotate the text when changing all text colors
+* Raise an error when psutil is too old
+* Fix a race condition when closing the server
+* Fix a very very rare crash in topology summary view
+* Reset port label positions. Fixes #811.
+* Drop SSH support
+* Fix inversion of port label when loading a topology
+* Fix error when importing Windows XP OVA
+* Warn if configuration file contain invalid unicode characters
+* Fix a crash when importing some OVA
+* Reset the telnet command on Mac
+* Fix only one console work for OSX
+* Fix a rare crash when loading topology with missing image
+* Fix a rare race condition when inserting an image
+* Fix a crash when pid file is empty
+* Fix a rare crash in progress dialogs
+* Fix a crash if you don't have vms when importing a gns3a
+* Warn user during appliance install if server is not avaible
+* Fix error when you stop the GNS3 VM but break the config before
+* startup_config is not mandatory inside .gns3 file
+* Fix wrong host on SSH connection
+* Fix select of image broken if you need to select multiple images
+* Fix a crash when changing qemu cluster size to more than 512
+* Fix IOU support in gns3a
+* Add urxvt support
+* Add a step in the wizard checking KVM support
+
+## 1.4.0 12/01/2016
+
+* Fix rare crash when showing the progress dialog
+* Fix crash on Windows when a gui is already running
+* Add default idle-pc value for c7200-adventerprisek9-mz.155-2.XB. Fixes #389.
+
+## 1.4.0rc3 05/01/2016
+
+* Add information about antivirus and firewall in case of connection fail
+* Change link to doc for missing router image
+* On windows and OSX experimental Qemu GNS3A support
+* Wait server in thread
+* Fix local server non avaible in appliance wizard when local server started by hand.
+* Improve pid checks
+* Allow Qemu appliances to optionally specify desired disk interfaces in their configuration (defaults to "ide").
+* Fix project non closing when you have only remote servers
+* Fix Windows layout not saved in some scenario
+* Added the ability to name Qemu/VirtualBox/VMware interfaces with numbers starting from 1, along with named aliases for numbers starting from 0, and a tooltip explaining the possible name format variables.
+* Added missing Qemu adapters to the topology schema.
+* Fix Cannot save my topology getting an error message for temporary topology
+* Fix creation of ASA devices
+* Turn off Docker until 1.5
+* Fix display of server preferences on small screen
+* Fix If you turn off the local server and close the gui and reopen preferences you have an issue
+* Zoc 7 support
+* Fix warning when closing GUI
+* Fix crash when opening a new topologies after gns3 converter failure
+
+## 1.3.13 11/12/2015
+
+* Release server 1.3.13
+
+## 1.3.12 11/12/2015
+
+* Fix warning when closing GUI
+* Update links for new website.
+* Ask user to send bug reports to GNS3.com
+* Fix travis dependencies installation
+* Drop Webkit from 1.3.X
+* Fix crash when opening a new topologies after gns3 converter failure
+* Set Wireshark 2.0 as default OSX version
+* iTerm 2.9 support
+* Add informations about GNS3 VM
+* Drops securecrt.vbs
+* Fix analytics report on OSX
+* Analytics send windows
+* Fix the progress dialog freeze bug
+* Fix typo in analytics
+* Send stats to GNS3 team
+* Licenses compliance.
+* Fix error when importing dynamips config from non existent directory
+* Fix crash when url is invalid
+* Add a debug level 2 in the console
+
+## 1.4.0rc2 10/12/2015
+
+* Prevent user turning off the Local server when using the GNS3 VM
+* Force VM wizard to be modal
+* Fix unicode error when exporting debug informations
+* Fix Debug can't be deactivated for current session
+* Support relative path for configuration file.
+* Report bug to GNS3.com
+* Avoid crash when cancel connection to a server
+* Fix version number display twice when installing appliance
+* Show a warning when you try to save as a remote topology
+* Fix application restart after self upgrade
+* Cleanup server autostart
+* Have default console port start from 2000.
+* Fix crash when opening a new topologies after gns3 converter failure
+* Fix SSH support
+* Fix bus error when writting on console
+* Fix Ok & Cancel button in preferences are broken
+* Fix After a project load failure you can't open new project
+* More fix around closing the GUI
+* Fix crash in progress dialog on OSX
+* Kill already running zombie server
+* Store the pid of the server when started
+* Fix a crash in rare case after a PyQT garbage collect
+* Allow to use the VNC port range for console
+* Preferences dialog resize
+* Fix a race condition when opening telnet from apple script
+* Experimental support for tabbed terminal on OSX
+* Fix validation error when saving topology with an usage
+* Fix another case of not closing windows
+* Fix GUI doesn't close after connection error to remote server
+* Add usage text to device template and on hover
+* Fix a rare crash in progress dialog
+* Fix crash when displaying an error from the update
+* Url encode royal tx url
+* Use Royal TX URI scheme thanks to @lemonmojo
+* OSX support for Royal TSX
+* Merge branch 'master' into unstable
+* Set Wireshark 2.0 as default OSX version
+* iTerm 2.9 support
+* Update debug information dialog.
+* Change text for export debug information.
+* Add informations about GNS3 VM
+
+## 1.4.0rc1 12/15/2015
+
+* Rename an appliance if the default name is already taken
+* Existing image option should be hidden when none is available
+* Warn users about the need to uncompress the image
+* Fix crash when you have no qemu vms and use gns3a
+* Change sentry key
+* Fix format_exception() missing 2 required positional arguments: 'value' and 'tb' in topologyFile
+* Fix dialog box not returning their result
+* Log to console the Qt Message Boxes
+* Drops securecrt.vbs
+
+## 1.4.0b5 02/11/2015
+
+* Fix crash when loading invalid appliance file
+* Show a message is starting or is stopping in progress dialog
+* Drop duplicate code
+* Changes some references for "GNS3 VM" to "Local GNS3 VM". Ref #506.
+* Fixes progress dialog remains #741.
+* Support more boot order for Qemu
+* Add Royal TS terminal
+* Add a Qt compatible version of partial
+* Show Upload filename instead of waiting for
+* Fix error where ISO is detected as an OVA during gns3a import
+* Removes News Dock Widget.
+* Support cdrom image in missing images detections
+* Fix crash when appliance is missing
+* Support for capture description in Wireshark window title.
+* Set the name of the VM in OSX Terminal application
+* Fix crash of symbol selector if the first file is a non builtin symbol
+* Install appliance from wizard instead of web app
+* Fix crash when using an old version of 1.4 server
+* Ensure default settings are saved when starting the app
+
+## 1.4.0b4 19/10/2015
+
+* Mockup of appliances wizard
+* Fix tests
+* Fix Crash when opening an appliance #728
+* Mock up for appliance wizard.
+* Registry: add -nographic to Qemu options by default. Fixes #730.
+* Registry: support for initrd, cpu throttling and process priority.
+* Support for modifications to a base Qemu VM (not a linked clone).
+* Registry: adds support for switch category, first_port_name and port_segment_size.
+* Fix traceback when exiting the GUI
+* Show a download button
+* Corrects some typos.
+* Drops securecrt.vbs
+* Display an error message if QtWebkit is not installed.
+* Fix console port lost when applying settings
+* Remove unused code
+* Fix analytics report on OSX
+* Fix invalid path with frozen application
+* When raising an appliance not found error show full path
+* Remove unnecessary checks to know if the local server is running.
+* Analytics send windows
+* Fixes issue when loading a project using VMware vmnet interfaces. Fixes #319.
+* Fix the progress dialog freeze bug
+* Revert "Try to solve Scanning for Appliance images doesn't end"
+* Try to fix the progress dialog freeze bug
+* Drop dead code from getting started dialog
+* Fix Appliance installs image without adapting the filename
+* Raise error if reference in GNS3a is invalid
+* Fix typo in analytics
+* Add information on how to debug
+* Send stats to GNS3 team
+* Licenses compliance.
+* Handles warning notifications.
+* Try to solve Scanning for Appliance images doesn't end
+* Fix TypeError: 'NoneType' object is not iterable  in isLocalServerRunning
+* Fix crash AttributeError: 'NoneType' object has no attribute getNewProjectSettings
+* Fix error when importing dynamips config from non existent directory
+* Fix crash when url is invalid
+* Add a debug level 2 in the console
+* Fix a crash when loading appliance
+* Merge branch 'master' into unstable
+* Support upload of multiple vmdk file
+* Support PNG in the custom symbol selection dialog
+* Add custom messages when computing Idle-PC values. Fixes #704.
+* Display the version of Qt in the console
+* Do not crash when parsing a Qt version with a snapshot notation
+* Force nc path to /usr/bin/nc on Apple
+* Revert "Drop netcat for unix socket it's not supported by OSX"
+* Catch errors when we have an infinite recursion when copying a folder
+* Fix crash in recent files when changing locale
+* Catch error when we can't extract egg
+* Fix securecrt command line (backported from master)
+* Updates SecureCRT command line.
+* When it's an ova explain to user he need to download the ova
+* OVA file support
+* Ignore .cache directory
+* Fix update manager crash on Windows
+* Support for image in local subdirectory
+* Fix duplicate code
+* Fixes issue when saving Idle-PC into template. Fixes #674.
+* Add link for downloading VMware
+* Cache md5sum in memory when loading a gns3a
+* Support symbol import from GNS3A
+* Allow user to select symbol from his library
+* Improve HTTP progress reliability
+* Support ubuntu default VNC client (Vinagre)
+* Adds the COPYING file.
+* Fix  error when receiving an HTTP error during HTTP progress
+* Support port_name_format in GNS3 a files
+* options is not mandatory in a .gns3 file
+* Xshell 5 support
+* Add missing gns3-converter to requirements.txt
+* Fixes Qemu binaries not listed in the node configuration dialog. Fixes #683.
+* Fixes SecureCRT command line.
+* Speedup directory scan for images when loading a gns3a file
+* Show a progress bar during directory scan when searching for appliances
+* Search image by default also in the download directory
+* Fixes issue when Telnet doesn't let you to login to an appliance on Linux.
+
+## 1.3.11 07/10/2015
+
+* Display the version of Qt in the console
+* Catch errors when we have an infinite recursion when copying a folder
+* Fix crash in recent files when changing locale
+* Catch error when we can't extract egg
+* Updates SecureCRT command line.
+* Fixes issue when saving Idle-PC into template. Fixes #674.
+* Adds the COPYING file.
+* Xshell 5 support
+* Add missing gns3-converter to requirements.txt
+* Fixes issue when Telnet doesn't let you to login to an appliance on Linux.
+* Improve alignments. Fixes #215.
+* Spelling correction
+
+## 1.4.0b3 22/09/15
+
+* Add a warning if you don't select VMware or VBox in Setup Wizard
+* Fix Configuration not always saved in client
+* Fixes file path reference issue.
+* Fix Appliance doesn't work on local Server #669
+* Allows Qemu VM template editing if the server is not running. Fixes #671.
+* Fixes NIO_VMNET != NIO_VMnet.
+* Automatically add the -no-kvm option if -icount is detected to help with the migration of ASA VMs created before version 1.4
+* Fix the Runtime error
+* Improve alignments. Fixes #215.
+* Updates kernel command line of ASA.
+
+## 1.4.0beta2 17/09/15
+
+* Drop netcat for unix socket it's not supported by OSX
+* VMware fusion is supported
+* Fix race conditions in http_client
+* On OSX show a warning when using an old Qemu
+* Tab support for xfce4-terminal
+* Improve alignments. Fixes #215.
+* Fixes ethertype validation error.
+* Improve check for uBridge permissions.
+* Fix an uuid is display instead of the server url
+* Set root permission to ubridge on OSX
+* Show GNS3 version at startup
+* Allows to select a remote server to run a switch. Fixes #653.
+* Support for packet capture on VMware VM links.
+* Always use ubridge with VMware by default
+* Fix PermissionError: [Errno 1] Operation not permitted when kill process
+* Support drag & drop gns3a
+* Fix an error when loading IOU schema with private_config
+* Support open a file via double click on OSX
+* Initial version of an appliance file format
+* Adds docker symbols. Fixes #643.
+* Call the vmnet management script from the GUI (with admin rights). Implements #639.
+* Use self update only if experimental features are allowed
+* Add an option for enabling experimental features
+* Backport docker support from Google Summer Of Code (not enabled)
+* Merge branch 'qinq_ethertype' of https://github.com/Bevaz/gns3-gui into Bevaz-qinq_ethertype
+* Allows VMware VMs to use vmnet interfaces for connections without using uBridge.
+* Add a firewall symbol
+* Detect broken link in topologies
+* Fix project not closing
+* Fix autostart
+* Fix file not found exception in vpcs list dir
+* Add missing virtio-net-pci to the json schema
+* Fix the all devices views
+* Fix double click event on Note Item
+* Fix Accepting insecure https connections creates additional server entry
+* Allow developer to debug packet capture on Windows
+* Fix saveAs error  unsupported operand type(s) for +=: 'NoneType' and 'str'
+* Catch error when antivirus corrupt our own JSON errors
+* Add a note about VIX API require for VMware player
+* Create image directory if not exists
+* Allow GUI to be start with python -m gns3
+* Avoid errors in qemu configuration if server has been deleted
+* Fix error when the IOS image directory is not writable
+* Do not crash if something intercept the call to the update server
+* Fix super(): no arguments in SSH client
+* Catch error when configuration file contain invalid UTF-8 chars
+* Fix JSON schema for dynamips power supply and  sensors
+* Fix missing boot_priority in JSON schema
+* Complete the error message about corrupted topologies
+* Removes ASAv warning in Qemu Wizard.
+* EthernetSwitch: Allow to choose ethertype for QinQ outer tag.
+* Adds missing properties for rectangle and ellipse in schema validation.
+* Use Qemu 0.11.0 instead of version 0.13.0 on Windows.
+* Fixes bug when opening Node properties dialog via a double click.
+* SecureCRT (installed on personal profile) command line.
+
+## 1.3.10 04/09/2015
+
+* Updates kernel command line of ASA.
+* Fix file not found exception in vpcs list dir
+* Fix saveAs error  unsupported operand type(s) for +=: 'NoneType' and 'str'
+* Catch error when antivirus corrupt our own JSON errors
+* Use Qemu 0.11.0 instead of version 0.13.0 on Windows.
+* Removes "resources_type" references. Fixes #493.
+* Fixes bug when opening Node properties dialog via a double click.
+* SecureCRT (installed on personal profile) command line.
+
+## 1.4.0beta1 07/08/2015
+
+* Show an error if you try to use a local server not started
+* CLear the list before asking for VM list for Vbox and Vmware
+* Fix password lost for remote servers
+* Fix schema for virtualbox 1.3.2 topologies
+* Refactor all VM wizards
+* Fix Apply not enabled when removing a remote server
+* Fix remote server list display when use_local_server for Qemu
+* Fixes #601 (spelling error).
+* Store the url of server in gns3_gui for third party apps
+* Fix error when editing a qemu device with a relative path
+* Catch exception when starting packet capture reader for a remote packet capture. Fixes #597.
+* Fixes KeyError: 'vmx_path'. Fixes #595.
+* Support for CPUs setting for Qemu VMs.
+* Fix chicken of VNC command and add a warning about bugs in OSX VNC
+* Fix issue whith auto update when we release a new build
+
+## 1.4.0alpha4 04/08/2015
+
+* Use half the available physical memory for the GNS3 VM in the Setup Wizard.
+* Drop useless notion of resource_type
+* Fix When you modify config from outside router list is not refresh
+* Sync auth settings between 1.3 and 1.4
+* Group HTTP bad request by path
+* Disallow connection to a different major version in all cases
+* Show the server choice in wizard if you have a VM or a remote server
+* Fix local server settings erased at each launch
+* Support for Qemu disk interfaces, cd/dvd-rom image and boot priority.
+* Prevents progress dialog to stay displayed (fixes graphical bug).
+* Check that DHCP is enabled on the VirtualBox host-only network associated with the VirtualBox GNS3 VM. Fixes #287.
+* Fixes Qt5 incompatibility.
+* Catch exception when trying to launch Wireshark.
+* Fixes migration of cloud interfaces. Fixes #582.
+* Wait for the server to be fully started in the GNS3 VM. Fixes #581.
+* Fix issue with file upload and Qt 5.5
+* Improves the symbol dialog. Implements #514.
+
+## 1.3.9 03/08/2015
+
+* Catch exception when trying to launch Wireshark.
+* Backport: fixes migration of cloud interfaces.
+
+## 1.4.0alpha3 28/07/2015
+
+* IOUVM converter
+* Create qemu disk image on remote server
+* Fix _addRemoteServer() got an unexpected keyword argument 'local'
+* Do not crash if configuration file is removed
+* Fixes rare issue when adding a link. Fixes #573.
+* Fixes crash with  PyQt 5.5. Fixes #568.
+* Changes how to look for the vmrun.exe location.
+* Inform user before exiting preferences dialog with changes
+* Write GNS3 upgrade to appdata
+* Fix windows asking for upgrade to the wrong version
+
+## 1.3.8 27/07/2015
+
+* Fixes rare issue when adding a link. Fixes #573.
+* Backport: option to drop nvram & disk files for IOS routers in order to save disk space.
+* Avoid the creation of a NIO when one has been cancelled.
+* Fix Crash with chinese characters
+* Use the same location for the server config on GUI and server
+* Catch invalid reply from the remote server
+
+## 1.4.0alpha2 22/07/2015
+
+* Cloud support with the GNS3 VM.
+* Display an error message when Qemu binaries cannot be retrieved in the Qemu VM configuration page.
+* Remove default FLASH when no hda disk for Qemu VMs. Fixes  #535.
+* Use the registry to find vmrun if the default VMware install path doesn't exist. Fixes #546.
+* Avoid the creation of a NIO when one has been cancelled.
+* Fix Crash with chinese characters
+* Display an error if terminal command is invalid
+* Prevents "Show in File Manager" to be used with generic switches.
+* Remove unused dependencies
+* Drop PyQt4 support and show an error for users
+* Fixes symbol for VM template gone after restart. Fixes #538.
+* Fix VirtualBox GNS3 VM
+* Fix issue with remote server not saved/migrated
+* Remove ram as a mandatory dynamips settings
+* Force UTF-8 when reading server configuration file
+
+## 1.4.0alpha1 09/07/2015
+
+* Remove unused cloud code from the 1.4
+* Setup Wizard (to be tweaked). Implements #402.
+* Adds -no-kvm to the ASA template and ignore -no-kvm on platforms other than Linux. Should resolve #472.
+* Explicitly set the acceleration method to tcg for ASA templates. Should resolve #472.
+* Show an error if the console port range overlaps the default VNC port range (5900 to 6000) in the server preferences.
+* Support self update of the application
+* Option to adjust the local server IP address to be in the same subnet as the GNS3 VM.
+* Warning about deprecated ASA on Qemu
+* Moves KVM setting to Qemu preferences.
+* VNC console support for Qemu VMs. Implements #447.
+* Change the location of the config file on OSX
+* Adds first port name option (for management interfaces). Completes #309.
+* Add a force quit button when closing the app
+* Basic auth support for remote servers
+* Adds symbol overview in tooltips for all symbol text fields.
+* Remove SVG icons used in hover events.
+* Support for custom symbols
+* RAM usage based load balancing. #419.
+* Creates a new "Servers" config section and moves "LocalServer", "RemoteServers" and "GNS3VM" under it.
+* Support spaces in the local server log path.
+* Round-Robin load balancing support. #419.
+* Auto upload image if missing on remote server
+* ACPI shutdown support for VMware VMs. Fixes #436.
+* Add timestamps to gns3_gui.log
+* Store MD5 of images in topology
+* SSL support
+* GNS3 VM support
+* Add a specific icon for VPCS
+* Ensure no colored log output on Windows
+* Enable KVM acceleration option.
+* Apply the result of the auto Idle-PC feature to other routers with the same IOS image.
+* Improve config change autodetect
+* Show in file manager (#260: to complete using the VM directory instead).
+* Open/save dialog is opened in project folder when importing/exporting configs. Fixes #299.
+* IPv6 support.
+* Import/Export support for IOU nvrams.
+* Option to drop nvram & disk files for IOS routers in order to save disk space.
+* Fix IOU server edit
+* JSON schema for checking topologies
+* Support for base MAC address for Qemu VMs.
+* Drop Python 3.3
+* ACPI shutdown support for Qemu VMs.
+* ACPI shutdown support for VirtualBox VMs.
+* Rename node configurator to node properties.
+* Merge pull request #381 from GNS3/doubleclick_label
+* If you doubleclick on a label we open the change hostname dialog
+* Fix GNS3 server location for OSX
+* Serial console implementation for VMware VMs.
+* Ubridge configuration support.
+* Adds a wizard for creating images with qemu-img and mofified qemu configuration page to use it.
+* Download remote project with md5 support
+* SSH support
+* Avoid moving .gns3_temporary files.
+* New inline help text for the idle-pc dialog.
+* Add support for IOS-XRv under qemu wizard.
+* Upload images from gui
+* Text can now has an alpha channel, allowing for transparent or semi-transparent text.
+* The device list in the configuration dialog is hidden by default when only one device is selected.
+* Adds multi select support in all device template pages.
+* Adjusted the double click action so that a click on a stopped node opens the configuration dialog with all selected nodes and a double click on a started node consoles to all selected devices.
+* VMware support for Windows and Linux
+* Listen for notifications from servers.
+* Migration to QT5
+* Wireshark remote packet capture
+
+
+## 1.3.7 22/06/2015
+
+* Makes sure Hub Ethernet port names are string.
+* Support spaces in the local server log path.
+* Fixes issue when setting the local server settings.
+* Fix a crash with Python 3.3
+* Fixes WICs are not displayed correctly. Fixes #434.
+* Do not load settings that the GUI doesn't use.
+
+## 1.3.6 16/06/2015
+
+* Fix an issue with 1.4dev compatibility
+
+## 1.3.5 16/06/2015
+
+* Do not crash in a very rare case on Windows when stoping local server
+* Escape usage to glob
+* Fix QMessageBox.NoButton): argument 1 has unexpected type 'Servers'
+* Turn on/off local server auth
+* Fix 'ValueError' object has no attribute 'errno' in IOS decompress
+* Fix error if communication with the update server is intercepted by a third party.
+* Fix auth errors if you change the local server IP
+* Support auth for local server
+* Ensure no colored log output on Windows
+* Fixes issue with default router settings for templates.
+* Display a proper message if you use a remote server started with --local
+* Catch zlib error when uncompress IOS
+* Raise error if we pass non string to Port name
+* Add basic auth support for local server
+
+## 1.3.4 02/06/2015
+
+* Check if an IOS image is set in the IOS router template
+* Ensure the version number is written in configuration file
+* Prevent users to add links to running Qemu VMs and start a capture on running VirtualBox VMs.
+* Fix resize issue in server page
+* Fix segfault when starting OSX server with allow connection from anywhere
+* Fixes bug when editing c7200 templates.
+* Fixes IOS decompression. Fixes #370.
+* Topology auto start work for VPCS
+* Avoid moving .gns3_temporary files.
+* Handles MemoryError.
+* Fix crash when a process listen on GNS3 port return an empty JSON
+* Another fix for the topology None error
+* Fix a rare crash in completion
+* Fix crash when loading topology in rare conditions
+
+## 1.3.3 14/05/2015
+
+* New inline help text for the idle-pc dialog.
+* Reactivate auto idle-pc in device contextual menu + save a chosen idle-pc value in template.
+* Adds name to the thank you section.
+* Prevent users to use VirtualBox linked clone VMs in temporary projects (for now).
+* Capture error if the command is invalid
+* Cleanup egg cache when exit
+* Fix a crash in console when you used non UTF-8 terminal
+* Fix crash during save as
+* Change title when exporting an IOS startup-config.
+* Removes analytics client on closing.
+
+## 1.3.3rc1 07/05/2015
+
+* Catch broken pipe error catched for OSX
+* Prevent a topology made for next version to be open in previous version
+* Check if the local server is really a local server
+* NIO NAT support for QEMU VMs (user mode back-end is used).
+* Modified version requirements, so that they require the dependency versions as minimums. Added some more detailed instructions for compilation on Windows.
+* Prevent user to enter a None port
+* Fix broken pipe error on OSX when frozen
+* Prevent the same link created twice on OSX
+* Project loading: names and IDs must be assigned to ports on the client side after nodes have been created. Fixes #326. Fixes config updating for IOS router and IOU devices.
+* Fix a crash when dropping a .gns3
+* Cleanup VPCS code
+* Turn off config parser interpolation
+* Support unicode characters in regex
+* Fixes duplicate entries for "Recent files" on Windows. Fixes #316.
+* Fixes VPCS multi-host. Fixes #318.
+* Fixes issues when importing configs for IOS, IOU and VPCS. Fixes #314.
+* Fixes issue when console setting present in IOS router templates.
+* Do not send empty settings when creating VMs.
+* Do not set a default private-config when creating a new IOS router template. Fixes #317.
+* Refactors how startup-config and private-config are handled for IOS routers.
+* Fixes IOU and QEMU tests.
+* Makes sure all IOS router settings are saved in the project file & simplify loading from a project.
+*  Makes sure all VirtualBox VM settings are saved in the project file & simplify loading from a project.
+*  Makes sure all VPCS VM settings are saved in the project file & simplify loading from a project.
+* Makes sure all IOU VM settings are saved in the project file & simplify loading from a project.
+* Makes sure all QEMU VM settings are saved in the project file & simplify loading from a project.
+* Fix save as by correctly renaming VM uuid project directory
+* Fix save as duplicate the .gns3 file
+* Fix broken project in Another assert topology fixe
+* Prevent user to enter bad hostname
+* Fixes an issue when the IOU VM template has a console setting.
+* Releasing adding a link. Fixes #235.
+* Fix RuntimeError: wrapped C/C++ object of type QNetworkReply has been deleted.
+* Do not crash if terminal doesn't support UTF-8
+* Fix windows build
+* Fixes "show only devices with captures" in the topology summary.
+
+## 1.3.2 28/04/2015
+
+* Fixes bug when IOS configs are not in VM settings.
+* Fixes small issue with Qemu VM monitor.
+* Fixes issue when only one port is added after a QEMU VM is created. Fixes #296.
+* Avoid Cygwin warning with VPCS on Windows.
+* Fixes issues with QThread handling.
+* Fixes missing title + icon in layer position warning message box.
+* Allows the warning message box to be displayed once only when moving an object to a background layer.
+* Fixes small issue with old monitor setting.
+* Check the config path is set when creating a IOU or IOS router.
+* Removes residual link when a NIO cannot be created on the server. Fixes #294.
+* Fix VPCS tests
+* Do not crash if an antivirus intercept a message and send non UTF-8
+* Avoid C++ runtime error when progress dialog is finished.
+* Merge remote-tracking branch 'origin/master'
+* Move FileCopyThread to FileCopyWorker.
+* If project loading fail fallback to real temporary project
+* Do not crash if rotation is a string
+* I think it's prevent empty topologies
+* Explicit utf-8 decoding.
+* Fixes rare maximum recursion depth exceeded exception.
+* Check for invalid base VM configuration files.
+* Catch ValueError exception thrown by mmap(): cannot mmap an empty file.
+* Use QThreads the correct way (moveToThread).
+* Fixes broken serial console connection.
+* Fixes "RuntimeError: wrapped C/C++ object ... has been deleted" exceptions with item links.
+* Allows exported config files to be created even when there is no config set on VMs.
+* Do not try to export empty VPCS startup configs.
+* Prevent issues when a file with a simple number is considered valid JSON.
+* Explicit error when mmap throw an invalid argument exception.
+* Do not replace invalid utf-8 characters when reading the iourc file (we catch the exception to tell the user this is an invalid file).
+* Explicit utf-8 encoding where necessary to avoid Unicode errors on Windows (we require/set an utf-8 locale on other systems).
+* Save as dialog opens in the projects directory. Fixes #267.
+* Adds Terminal + nc for serial console connections on OSX. Fixes #228.
+* Improve warning when non unicode char in iourc
+* Crash report not for developers and new key
+* Do not crash if we can't change IOU permission
+* More checks when decompressing IOS images.
+* Warn users that they must provide their router images.
+* Display an error and link to the documentation if no router available
+* Display print( in std console and Qt Console
+* Fix tests and a potential issue where initial_content is not send
+* Fix a crash in qemu loading
+* Removes unnecessary progress dialog when listing VirtualBox VMs.
+* Fixes issues when pushing configs for Dynamips and IOU.
+* Allow for empty initial-config path for IOU VM templates. Send IOU VM settings while creating it (POST) and not using the update API call immediately after (PUT).
+* Allow for empty startup-config and private-config paths for IOS routers.
+* Send QEMU VM settings while creating it (POST) and not using the update API call immediately after (PUT).
+* Include resources and tests in pypi packages
+* Fix issue during project import on Windows with non local server
+
+## 1.3.1 11/04/2015
+
+* Release
+
+## 1.3.1rc4 09/04/2015
+
+* Fix crash when save as can't create a directory
+* Allow less strict dependencies
+
+## 1.3.1rc3 07/04/2015
+
+* Send HTTP errors 400 to the crash report system
+
+## 1.3.1rc2 06/04/2015
+
+* Fix race condition during old project import
+
+## 1.3.1rc1 05/04/2015
+
+* Fix rare occasion when user manage to put text in port field
+* Fix a crash when exporting vpcs startup script
+* Fix an issue with sending iourc when a topologies is reloaded
+* Solve issue when iourc contains non ascii characters
+* Handle corrupted zip file with IOS image
+* Don't crash if we try to contact a non GNS3 remote server returning JSON
+* Skip tests in package
+* Check port range
+* Add a warning about too much ram for IOS
+* Fix crash if project is already closed
+* Check if wait for connection thread still running before emitting a signal.
+* Check if process files thread still running before emitting a signal.
+* Raven is an optionnal dependencies for Debian
+* Fix crash if a dumped topology as no node during save as
+* Fix: remove old ID references for ATM and Frame-Relay switches.
+
+## 1.3.0 30/03/2015
+
+* Fix etherswitch router
+* Fix issues with progress dialog
+* Fix save as
+
+## 1.3.0rc2 23/03/2015
+
+* Fix crash when in same occasion the project name is missing
+* Update sentry key
+* Display adapters in the tooltips in the correct order.
+* Open consoles in alphanumerical order.
+* Auto idle-PC improvements.
+* Adds project id when requesting UDP port.
+* Fixes Thread problem. Fixes  #229.
+* Cancel network requests if the progress dialog itself is canceled. Avoid closing the preferences dialog or any configuration dialog if there is a pending request. Fixes #227.
+* Fixes #228 (no alternative interface has been chosen).
+* Catch OSError when reading or writing the local server config file.
+* Fixes GUI that could not be closed when using an already running local server.
+* Save configs when project is committed.
+* Del key deletes selected link
+* Fix crash is no remote servers is available
+
+## 1.3.0rc1 19/03/2015
+
+* Handle legacy snapshots
+* Add server informations for Qemu, VirtualBox and VPCS info boxes
+* Support sending IOURC from client to remote servers
+* Fixes crash when quick restart the client
+* Add 1MB disk for EtherSwitch router templates (to store the vlan database)
+* Fixes alignment options to ignore devices labels
+* Compute IDLEPC on remote servers
+* Prevent using lab instruction in a temporary project
+* Display a warning on console if server port is already in used
+* Display an error if server version is incorrect
+
+## 1.3.0beta2 13/03/2015
+
+* Alternative local server shutdown (faster GUI closing on Windows).
+* Grey out local server preferences if the local server is not activated.
+* Adds "template" to the Wizard titles.
+* Option to automatically take or not a screenshot when saving a project.
+* Support RAM setting for VirtualBox VMs.
+* Fixed duplicate VM template entries for Qemu, VirtualBox and IOU.
+
+## 1.3.0beta1 11/03/2015
+
+* New title for VMs/Devices/routers preference pages.
+* Deactivate auto idle-pc in contextual menu while we think about a better implementation.
+* Optional IOU license key check.
+* Relative picture paths are saved in projects.
+* Relative path support of IOU, IOS and Qemu images.
+* More checks when automatically starting the local server and find an alternative port if needed.
+* Support for HDC and HDD disk images in Qemu.
+* Fixed base IOS and IOU base configs.
+* Fixed GNS3 console issues.
+* Renamed server.conf and server.ini to gns3_server.conf and gns3_server.ini respectively.
+* Remove remote servers list from module preferences + some other prefences re-factoring.
+* Automatically convert old projects on remote servers.
+* Bump the progress dialog minimum duration before display to 1000ms.
+* Fixed port listing bug with Cloud and Host nodes.
+* Fixed Qemu networking.
+* Give a warning when a object is move the background layer.
+* Option to draw a rectangle when a node is selected.
+* New project icon (little yellow indicator).
+* Default name for screenshot file is "screenshot".
+* Alignment options (horizontal & vertical).
+* Fixed import / export of the preferences file.
+* Fixed pkg_ressource bug.
+* Brought back Qemu preferences page.
+* Include SSL cacert file with GNS3 Windows exe and Mac OS App to send crash report using HTTPS.
+* Fixed adapter bug with VirtualBox.
+* Fixed various errors when a project was not initialized.
+
+## 1.3.0alpha1 03/03/2015
+
+* No more console port and UDP tunneling settings by type of module
+* Fixe save
+* Settings are stored as JSON
+* All communication with servers display a waiting dialog
+* Add a revision number in the topology file
+* Qemu can run on a server without graphical interface
+* Automated crash reports
+* You can now copy paste from the GNS 3 console
+
+
+## 1.2.3 2015/01/17
+
+* Fixed temporary files path setting in general preferences which was not used.
+* Fixed missing devices from the node view when they use a remote server.
+* Fixed broken ASA kernel/initrd file browsers.
+* Fixed bug with WICs interfaces no showing up in the port list.
+
+## 1.2.2 2015/01/16
+
+### Small improvements / new features
+ 
+* EtherSwitch routers can be added and configured like other IOS routers.
+* Change hostname option in the contextual device menu.
+* Import & export config options in contextual device menu.
+* Auto screenshot when saving a project.
+* Auto start project support (you have to manually edit your .gns3 project file).
+* Changes to the IOU L2 initial-config (16 Ethernet interfaces, no shutdown by default and 0 serial interfaces).
+* Upgraded SuperPutty to version 1.4.0.5 in the all-in-one installer.
+* Possibility to apply or not the same text to all selected items when editing notes.
+* Base configs are now stored in the GNS3 config directory.
+* Short port names in the topology summary.
+* Added the VirtualBox VM name in VirtualBox device tooltips.
+* Set 5 seconds timeout for local server connections.
+* Check if any device runs and warn the user before closing a project.
+* Restore the debug level status when starting.
+* Automatically select the symbol and category corresponding the edited item in the symbol selection dialog.
+* Scale SVG images to icon sizes.
+* Console switching from local/remote to remote/local while a VirtualBox VM is running.
+* Default Jungle dock location is now bottom right corner.
+ 
+### Bug fixes
+ 
+* Fixed the default jungle news loading on Windows.
+* Fixed SuperPutty integration (not the default, still have to select it in the preferences).
+* Avoid uninitialized nodes to be saved in the project file.
+Prevent GNS3 to crash on Windows when importing GNS3 config file.
+* Fixed resource access on Mac OS X.
+* Fixed transparency or border style restoration for ellipses and rectangles.
+* Support spaces in the controller name of VirtualBox clones.
+* Ignore Unicode errors when executing vboxmanage.
+* Get Windows interface list from the registry if the COM service fails.
+
+## 1.2.1 2014/12/04
+
+* Support for full screen mode (View -> Fullscreen).
+* Bundled Qemu 0.13.0 in the Windows all-in-one. Default for all local Qemu VMs.
+* Bundled Qemu 0.14.1 in the Mac OS X App. Default for all local Qemu VMs.
+* Changed ASA defaults to use Qemu 0.13.0 (on Windows), have 4 interfaces and CPU throttling to 65%.
+* Fixed SecureCRT command line when space in the device name.
+* Fixed port sorting issues.
+* Added default path for VBoxManage on Mac OS X
+* Upgraded gns3-converter to version 1.1.1 for Windows all-in-one and Mac OS X DMG.
+* New idle-PC field validation.
+* Possibility to load the project from command line (or double-click on a project on Windows).
+* Fixed Unicode error when using VirtualBox VM with a name containing non-english characters.
+
+## 1.2 2014/11/20
+
+* New GUI styles: charcoal (default) & classic. Changing GUI Preferences
+* Integration of GNS3 converter (allows old .net topologies to be opened).
+* Allow Qemu VM to have no interface.
+* Automatically extract IOS configs when a project is closed.
+* Show the cancel button in Wizards on Mac OS X.
+* Fix crash on Windows 32-bit.
+* Fix "new project" bug when using the GNS3 IOU VM.
+* Fix "could not find unused port" WinError 10013 bug
+* qemu-system-i386 is the new default on 32-bit platforms.
+* Option to deactivate the new project dialog at startup.
+* Add "open a project" and "recent projects" buttons to the new project dialog.
+* Fix platform detection issue with some Cisco IOS image file name.
+* Add delay (default 500 ms) when Console to all nodes.
+* Check for duplicate node names in Preferences.
+* Fix bug when editing a Qemu VM configured to run on a remote server.
+* News dock widget is smaller.
+* Fix SecureCRT issue when disconnecting from an IOU device on Windows.
+* Update VPCS to version 0.6 in the all-in-one installer.
+
+## 1.1 2014/11/20
+
+* Fixed broken cloud.
+* Fixed broken remote server.
+* Fixed Qemu binaries not showing up when editing a Qemu VM.
+* Fixed EtherSwitch (until we come with a default template for it).
+* Serial console for local VirtualBox.
+* Warning message when creating an IOU device with a remote server in the Wizard.
+* New Idle-PC dialog.

@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>NewApplianceDialog</class>
+ <widget class="QDialog" name="NewApplianceDialog">
+  <property name="windowModality">
+   <enum>Qt::ApplicationModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>483</width>
+    <height>475</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>New appliance template</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget{
+	background-color: #002b36;
+}
+QMenuBar::item{
+	background-color: #002b36;
+}
+QDockWidget::title{
+	background: #073642;
+	padding-left: 5px;
+}
+QDockWidget, QMenuBar{
+    color: #839496;
+    font: bold 14px;
+}
+QTextEdit, QPlainTextEdit, QLineEdit, QSpinBox, QComboBox {
+  background-color: #073642;
+  font: 13px;
+  color: #839496;
+}
+QTextEdit#uiConsoleTextEdit {
+  background-color: #002b36;
+  color: #839496;
+  font: 13px;
+}
+QTabWidget {
+	font: 14px;
+	border-top: 2px;
+}
+QTabBar::tab {
+    background: #073642;
+    color: #839496;
+    min-width: 8ex;
+    padding: 2px;
+	border-top-right-radius: 6px;
+	border-top-left-radius: 6px;
+}
+QTabBar::tab:selected {
+    background: #8a8a8a;
+	color: #1d2021;
+}
+QGroupBox {
+    color: #808080;
+    font: 14px;
+    padding: 15px;
+    border-style: none;
+}
+QMainWindow::separator {
+	background: #073642;
+	width: 1px;
+	height: 1px;
+}
+QComboBox {
+	selection-background-color: #d75f00;
+	selection-color: #1c1c1c;
+}
+
+QToolBar{
+	background: #073642;
+	border: 0px;
+}
+QPushButton {
+	background-color: #8a8a8a;
+    color: #1d2021;
+	font: 14px;
+}
+QToolButton {
+	background-color: #8a8a8a;
+    color: #1d2021;
+	font: 14px;
+}
+QTreeWidget, QListWidget {
+	background-color: #002b36;
+	color: #839496;
+    alternate-background-color: #073642;
+	font: 14px;
+}
+QTreeWidget#uiTreeWidget {
+	background-color: #073642;
+	color: #839496;
+	font: bold 16px;
+}
+QTreeWidget::item:selected, QTreeWidget::item:hover, QMenu::item:selected,QToolButton::hover,QPushButton::hover,QTabBar::tab:hover {
+	background-color: #d75f00;
+	color: #1c1c1c;
+}
+QMenu {
+	background-color: #002b36;
+    color: #839496;
+}
+QLabel {
+	color: #839496;
+	font: 14px;
+}
+QLabel#uiTitleLabel {
+	color: #839496;
+	font: bold 16px;
+}
+
+QAbstractScrollArea::corner {
+    background: #002b36;
+}
+QScrollBar::handle:horizontal {
+    background: #073642;
+    min-width: 20px;
+}
+QScrollBar::handle:vertical {
+    background: #073642;
+    min-width: 20px;
+}
+QScrollBar:vertical {
+    width: 6px;
+}
+QScrollBar:horizontal {
+    height: 6px;
+}
+QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical, QScrollBar::down-arrow:horizontal, QScrollBar::up-arrow:horizontal { 
+	border: 0px;
+    height: 0px; 
+    width: 0px; 
+}
+         
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal, QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+  background: none
+}
+QStatusBar {
+	background-color: #073642;
+	color: #839496;
+}
+
+QRadioButton, QCheckBox {
+  color: #839496;
+}
+QRadioButton::disabled, QCheckBox::disabled {
+  color: gray;
+}
+
+
+</string>
+  </property>
+  <property name="modal">
+   <bool>true</bool>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QPushButton" name="uiImportApplianceTemplatePushButton">
+     <property name="text">
+      <string>Import an appliance template file</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:x-large; font-weight:600;&quot;&gt;OR&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QRadioButton" name="uiAddIOSRouterRadioButton">
+     <property name="text">
+      <string>&amp;Add an IOS router using a real IOS image (supported by Dynamips)</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QRadioButton" name="uiAddIOUDeviceRadioButton">
+     <property name="text">
+      <string>&amp;Add an IOU (IOS on UNIX) device using a L3 or L2 IOU image</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QRadioButton" name="uiAddQemuVMRadioButton">
+     <property name="text">
+      <string>&amp;Add a Qemu virtual machine</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QRadioButton" name="uiAddVirtualBoxVMRadioButton">
+     <property name="text">
+      <string>&amp;Add a VirtualBox virtual machine</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QRadioButton" name="uiAddVMwareVMRadioButton">
+     <property name="text">
+      <string>&amp;Add a VMware virtual machine</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QRadioButton" name="uiAddDockerVMRadioButton">
+     <property name="text">
+      <string>&amp;Add a Docker container</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QRadioButton" name="uiAddVPCSRadioButton">
+     <property name="text">
+      <string>Add a VPCS</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QRadioButton" name="uiAddCloudRadioButton">
+     <property name="text">
+      <string>Add a cloud</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QRadioButton" name="uiAddEthernetHubRadioButton">
+     <property name="text">
+      <string>Add a generic ethernet hub</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QRadioButton" name="uiAddEthernetSwitchRadioButton">
+     <property name="text">
+      <string>Add a generic ethernet switch</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <property name="spacing">
+      <number>20</number>
+     </property>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QDialogButtonBox" name="uiButtonBox">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="standardButtons">
+        <set>QDialogButtonBox::Cancel|QDialogButtonBox::Help|QDialogButtonBox::Ok</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../../resources/resources.qrc"/>
+ </resources>
+ <connections/>
+</ui>

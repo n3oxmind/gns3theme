@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PacketCapturePreferencesPageWidget</class>
+ <widget class="QWidget" name="PacketCapturePreferencesPageWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>446</width>
+    <height>327</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Packet capture</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget{
+	background-color: #002b36;
+}
+QMenuBar::item{
+	background-color: #002b36;
+}
+QDockWidget::title{
+	background: #073642;
+	padding-left: 5px;
+}
+QDockWidget, QMenuBar{
+    color: #839496;
+    font: bold 14px;
+}
+QTextEdit, QPlainTextEdit, QLineEdit, QSpinBox, QComboBox {
+  background-color: #073642;
+  font: 13px;
+  color: #839496;
+}
+QTextEdit#uiConsoleTextEdit {
+  background-color: #002b36;
+  color: #839496;
+  font: 13px;
+}
+QTabWidget {
+	font: 14px;
+	border-top: 2px;
+}
+QTabBar::tab {
+    background: #073642;
+    color: #839496;
+    min-width: 8ex;
+    padding: 2px;
+	border-top-right-radius: 6px;
+	border-top-left-radius: 6px;
+}
+QTabBar::tab:selected {
+    background: #8a8a8a;
+	color: #1d2021;
+}
+QGroupBox {
+    color: #808080;
+    font: 14px;
+    padding: 15px;
+    border-style: none;
+}
+QMainWindow::separator {
+	background: #073642;
+	width: 1px;
+	height: 1px;
+}
+QComboBox {
+	selection-background-color: #d75f00;
+	selection-color: #1c1c1c;
+}
+
+QToolBar{
+	background: #073642;
+	border: 0px;
+}
+QPushButton {
+	background-color: #8a8a8a;
+    color: #1d2021;
+	font: 14px;
+}
+QToolButton {
+	background-color: #8a8a8a;
+    color: #1d2021;
+	font: 14px;
+}
+QTreeWidget, QListWidget {
+	background-color: #002b36;
+	color: #839496;
+    alternate-background-color: #073642;
+	font: 14px;
+}
+QTreeWidget#uiTreeWidget {
+	background-color: #073642;
+	color: #839496;
+	font: bold 16px;
+}
+QTreeWidget::item:selected, QTreeWidget::item:hover, QMenu::item:selected,QToolButton::hover,QPushButton::hover,QTabBar::tab:hover {
+	background-color: #d75f00;
+	color: #1c1c1c;
+}
+QMenu {
+	background-color: #002b36;
+    color: #839496;
+}
+QLabel {
+	color: #839496;
+	font: 14px;
+}
+QLabel#uiTitleLabel {
+	color: #839496;
+	font: bold 16px;
+}
+
+QAbstractScrollArea::corner {
+    background: #002b36;
+}
+QScrollBar::handle:horizontal {
+    background: #073642;
+    min-width: 20px;
+}
+QScrollBar::handle:vertical {
+    background: #073642;
+    min-width: 20px;
+}
+QScrollBar:vertical {
+    width: 6px;
+}
+QScrollBar:horizontal {
+    height: 6px;
+}
+QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical, QScrollBar::down-arrow:horizontal, QScrollBar::up-arrow:horizontal { 
+	border: 0px;
+    height: 0px; 
+    width: 0px; 
+}
+         
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal, QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+  background: none
+}
+QStatusBar {
+	background-color: #073642;
+	color: #839496;
+}
+
+QRadioButton, QCheckBox {
+  color: #839496;
+}
+QRadioButton::disabled, QCheckBox::disabled {
+  color: gray;
+}
+
+
+</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0" colspan="2">
+    <widget class="QGroupBox" name="uiSettingsGroupBox">
+     <property name="title">
+      <string>Settings</string>
+     </property>
+     <layout class="QGridLayout">
+      <item row="5" column="0">
+       <widget class="QLabel" name="uiCaptureAnalyzerCommandLabel">
+        <property name="text">
+         <string>Packet capture analyzer command:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0" colspan="2">
+       <widget class="QLabel" name="uiCaptureReaderCommandLabel">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="text">
+         <string>Packet capture reader command:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0" colspan="2">
+       <widget class="QLineEdit" name="uiCaptureReaderCommandLineEdit">
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Command line replacements:&lt;/p&gt;&lt;p&gt;%c = capture file (PCAP format)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0" colspan="2">
+       <widget class="QCheckBox" name="uiAutoStartCheckBox">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="text">
+         <string>Automatically start the packet capture application</string>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0" colspan="2">
+       <widget class="QLabel" name="uiPreconfiguredCaptureReaderCommandLabel">
+        <property name="text">
+         <string>Preconfigured packet capture reader commands:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QPushButton" name="uiPreconfiguredCaptureReaderCommandPushButton">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>&amp;Set</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QComboBox" name="uiPreconfiguredCaptureReaderCommandComboBox"/>
+      </item>
+      <item row="6" column="0" colspan="2">
+       <widget class="QLineEdit" name="uiCaptureAnalyzerCommandLineEdit"/>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>253</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="1" column="1">
+    <widget class="QPushButton" name="uiRestoreDefaultsPushButton">
+     <property name="text">
+      <string>Restore defaults</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0" colspan="2">
+    <spacer name="spacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>5</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

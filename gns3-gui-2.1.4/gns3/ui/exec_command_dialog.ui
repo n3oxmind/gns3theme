@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ExecCommandDialog</class>
+ <widget class="QDialog" name="ExecCommandDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>651</width>
+    <height>343</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Command execution</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget{
+	background-color: #002b36;
+}
+QMenuBar::item{
+	background-color: #002b36;
+}
+QDockWidget::title{
+	background: #073642;
+	padding-left: 5px;
+}
+QDockWidget, QMenuBar{
+    color: #839496;
+    font: bold 14px;
+}
+QTextEdit, QPlainTextEdit, QLineEdit, QSpinBox, QComboBox {
+  background-color: #073642;
+  font: 13px;
+  color: #839496;
+}
+QTextEdit#uiConsoleTextEdit {
+  background-color: #002b36;
+  color: #839496;
+  font: 13px;
+}
+QTabWidget {
+	font: 14px;
+	border-top: 2px;
+}
+QTabBar::tab {
+    background: #073642;
+    color: #839496;
+    min-width: 8ex;
+    padding: 2px;
+	border-top-right-radius: 6px;
+	border-top-left-radius: 6px;
+}
+QTabBar::tab:selected {
+    background: #8a8a8a;
+	color: #1d2021;
+}
+QGroupBox {
+    color: #808080;
+    font: 14px;
+    padding: 15px;
+    border-style: none;
+}
+QMainWindow::separator {
+	background: #073642;
+	width: 1px;
+	height: 1px;
+}
+QComboBox {
+	selection-background-color: #d75f00;
+	selection-color: #1c1c1c;
+}
+
+QToolBar{
+	background: #073642;
+	border: 0px;
+}
+QPushButton {
+	background-color: #8a8a8a;
+    color: #1d2021;
+	font: 14px;
+}
+QToolButton {
+	background-color: #8a8a8a;
+    color: #1d2021;
+	font: 14px;
+}
+QTreeWidget, QListWidget {
+	background-color: #002b36;
+	color: #839496;
+    alternate-background-color: #073642;
+	font: 14px;
+}
+QTreeWidget#uiTreeWidget {
+	background-color: #073642;
+	color: #839496;
+	font: bold 16px;
+}
+QTreeWidget::item:selected, QTreeWidget::item:hover, QMenu::item:selected,QToolButton::hover,QPushButton::hover,QTabBar::tab:hover {
+	background-color: #d75f00;
+	color: #1c1c1c;
+}
+QMenu {
+	background-color: #002b36;
+    color: #839496;
+}
+QLabel {
+	color: #839496;
+	font: 14px;
+}
+QLabel#uiTitleLabel {
+	color: #839496;
+	font: bold 16px;
+}
+
+QAbstractScrollArea::corner {
+    background: #002b36;
+}
+QScrollBar::handle:horizontal {
+    background: #073642;
+    min-width: 20px;
+}
+QScrollBar::handle:vertical {
+    background: #073642;
+    min-width: 20px;
+}
+QScrollBar:vertical {
+    width: 6px;
+}
+QScrollBar:horizontal {
+    height: 6px;
+}
+QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical, QScrollBar::down-arrow:horizontal, QScrollBar::up-arrow:horizontal { 
+	border: 0px;
+    height: 0px; 
+    width: 0px; 
+}
+         
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal, QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+  background: none
+}
+QStatusBar {
+	background-color: #073642;
+	color: #839496;
+}
+
+QRadioButton, QCheckBox {
+  color: #839496;
+}
+QRadioButton::disabled, QCheckBox::disabled {
+  color: gray;
+}
+
+
+</string>
+  </property>
+  <property name="modal">
+   <bool>true</bool>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0" colspan="2">
+    <widget class="QPlainTextEdit" name="uiOutputTextEdit"/>
+   </item>
+   <item row="1" column="1">
+    <widget class="QDialogButtonBox" name="uiButtonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../../resources/resources.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>uiButtonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>ExecCommandDialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>uiButtonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>ExecCommandDialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
