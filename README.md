@@ -1,7 +1,7 @@
 		
 # gns3theme
 
-gns3theme is a shell script that will set/modify stylesheet to gns3-gui:
+gns3theme is a shell script that will apply a custom stylesheet to gns3-gui:
 - Change gns3 theme from a predefined themes 
 - Change ethernet/serial link width and color
 - Apply transparency to gns3-gui widgets
