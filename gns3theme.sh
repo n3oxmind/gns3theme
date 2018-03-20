@@ -160,15 +160,10 @@ ui_files=(main.py
         modules/builtin/pages/ethernet_switch_preferences_page.py
         modules/builtin/pages/ethernet_hub_preferences_page.py
         )
-_removeopacity() {
-    for uifile in "${ui_files[@]}"; do
-        sed -i '/.*\.setWindowOpacity.*/d' "$SRCDIR"/gns3/$uifile
-done
-}
 _uitransparent() {
     local opacity=$1
-    _removeopacity
     for uifile in "${ui_files[@]}"; do
+        sed -i '/.*\.setWindowOpacity.*/d' "$SRCDIR"/gns3/$uifile
         sed -i "s/\(^\ *\)\(.*\)\(\.show()$\)/\1\2.setWindowOpacity\($opacity\)\n\1\2\3/g" $SRCDIR/gns3/$uifile 
     done 
 }
@@ -293,7 +288,6 @@ done
 for flag in "${flags[@]}"; do
     if [ $flag == true ]; then
         _isroot
-        _removeopacity
         _gns3install
         break
     fi
