@@ -113,7 +113,7 @@ _changecolor() {
                -e "/QTreeWidget#uiTree/{n;n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui \
                -e "/QTabBar::tab\ /{n;n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui \
                -e "/QTextEdit#uiConsole/{n;n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui \
-               -e "/QTextEdit,\ /{n;n;n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui \
+               -e "/QTextEdit,\ /{n;n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui \
                -e "/QLabel/{n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui \
                -e "/QStatusBar/{n;n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui \
                -e "/QRadioButton/{n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui \
