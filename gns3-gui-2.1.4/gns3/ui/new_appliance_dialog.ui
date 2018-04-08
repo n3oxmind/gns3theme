@@ -24,27 +24,26 @@
   </property>
   <property name="styleSheet">
    <string notr="true">QWidget{
-	background-color: #002b36;
+	background-color: #fbf1c7;
 }
 QMenuBar::item{
-	background-color: #002b36;
+	background-color: #fbf1c7;
 }
 QDockWidget::title{
-	background: #073642;
+	background: #d5c4a1;
 	padding-left: 5px;
 }
 QDockWidget, QMenuBar{
-    color: #839496;
+    color: #282828;
     font: bold 14px;
 }
 QTextEdit, QPlainTextEdit, QLineEdit, QSpinBox, QComboBox {
-  background-color: #073642;
-  font: 13px;
-  color: #839496;
+  background-color: #d5c4a1;
+  color: #282828;
 }
 QTextEdit#uiConsoleTextEdit {
-  background-color: #002b36;
-  color: #839496;
+  background-color: #fbf1c7;
+  color: #282828;
   font: 13px;
 }
 QTabWidget {
@@ -52,84 +51,84 @@ QTabWidget {
 	border-top: 2px;
 }
 QTabBar::tab {
-    background: #073642;
-    color: #839496;
+    background: #d5c4a1;
+    color: #282828;
     min-width: 8ex;
     padding: 2px;
 	border-top-right-radius: 6px;
 	border-top-left-radius: 6px;
 }
 QTabBar::tab:selected {
-    background: #8a8a8a;
-	color: #1d2021;
+    background: #458588;
+	color: #FFFFFF;
 }
 QGroupBox {
-    color: #808080;
+    color: #076678;
     font: 14px;
     padding: 15px;
     border-style: none;
 }
 QMainWindow::separator {
-	background: #073642;
+	background: #d5c4a1;
 	width: 1px;
 	height: 1px;
 }
 QComboBox {
-	selection-background-color: #d75f00;
-	selection-color: #1c1c1c;
+	selection-background-color: #458588;
+	selection-color: #FFFFFF;
 }
 
 QToolBar{
-	background: #073642;
+	background: #d5c4a1;
 	border: 0px;
 }
 QPushButton {
-	background-color: #8a8a8a;
-    color: #1d2021;
+	background-color: #d79921;
+    color: #FFFFFF;
 	font: 14px;
 }
 QToolButton {
-	background-color: #8a8a8a;
-    color: #1d2021;
+	background-color: #d79921;
+    color: #FFFFFF;
 	font: 14px;
 }
 QTreeWidget, QListWidget {
-	background-color: #002b36;
-	color: #839496;
-    alternate-background-color: #073642;
+	background-color: #fbf1c7;
+	color: #282828;
+    alternate-background-color: #d5c4a1; 
 	font: 14px;
 }
 QTreeWidget#uiTreeWidget {
-	background-color: #073642;
-	color: #839496;
+	background-color: #d5c4a1;
+	color: #282828;
 	font: bold 16px;
 }
 QTreeWidget::item:selected, QTreeWidget::item:hover, QMenu::item:selected,QToolButton::hover,QPushButton::hover,QTabBar::tab:hover {
-	background-color: #d75f00;
-	color: #1c1c1c;
+	background-color: #458588;
+	color: #FFFFFF;
 }
 QMenu {
-	background-color: #002b36;
-    color: #839496;
+	background-color: #fbf1c7;
+    color: #282828;
 }
 QLabel {
-	color: #839496;
+	color: #282828;
 	font: 14px;
 }
 QLabel#uiTitleLabel {
-	color: #839496;
+	color: #282828;
 	font: bold 16px;
 }
 
 QAbstractScrollArea::corner {
-    background: #002b36;
+    background: #fbf1c7;
 }
 QScrollBar::handle:horizontal {
-    background: #073642;
+    background: #d5c4a1;
     min-width: 20px;
 }
 QScrollBar::handle:vertical {
-    background: #073642;
+    background: #d5c4a1;
     min-width: 20px;
 }
 QScrollBar:vertical {
@@ -148,12 +147,12 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal, QScrollBar::ad
   background: none
 }
 QStatusBar {
-	background-color: #073642;
-	color: #839496;
+	background-color: #d5c4a1;
+	color: #282828;
 }
 
 QRadioButton, QCheckBox {
-  color: #839496;
+  color: #282828;
 }
 QRadioButton::disabled, QCheckBox::disabled {
   color: gray;

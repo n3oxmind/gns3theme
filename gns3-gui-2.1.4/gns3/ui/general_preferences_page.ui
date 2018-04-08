@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1028</width>
-    <height>661</height>
+    <width>1324</width>
+    <height>738</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,7 +30,6 @@ QDockWidget, QMenuBar{
 }
 QTextEdit, QPlainTextEdit, QLineEdit, QSpinBox, QComboBox {
   background-color: #073642;
-  font: 13px;
   color: #839496;
 }
 QTextEdit#uiConsoleTextEdit {
@@ -60,11 +59,6 @@ QGroupBox {
     padding: 15px;
     border-style: none;
 }
-QMainWindow::separator {
-	background: #073642;
-	width: 1px;
-	height: 1px;
-}
 QComboBox {
 	selection-background-color: #d75f00;
 	selection-color: #1c1c1c;
@@ -78,6 +72,9 @@ QPushButton {
 	background-color: #8a8a8a;
     color: #1d2021;
 	font: 14px;
+}
+QPushButton#uiNewAppliancePushButton{
+border: none;
 }
 QToolButton {
 	background-color: #8a8a8a;
@@ -179,7 +176,6 @@ QDockWidget, QMenuBar{
 }
 QTextEdit, QPlainTextEdit, QLineEdit, QSpinBox, QComboBox {
   background-color: #073642;
-  font: 13px;
   color: #839496;
 }
 QTextEdit#uiConsoleTextEdit {
@@ -209,11 +205,6 @@ QGroupBox {
     padding: 15px;
     border-style: none;
 }
-QMainWindow::separator {
-	background: #073642;
-	width: 1px;
-	height: 1px;
-}
 QComboBox {
 	selection-background-color: #d75f00;
 	selection-color: #1c1c1c;
@@ -227,6 +218,9 @@ QPushButton {
 	background-color: #8a8a8a;
     color: #1d2021;
 	font: 14px;
+}
+QPushButton#uiNewAppliancePushButton{
+border: none;
 }
 QToolButton {
 	background-color: #8a8a8a;
