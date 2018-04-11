@@ -74,8 +74,8 @@ _isdigit () {
         exit 1
     fi
 }
-# List of pre-defined color schemes
-color_schemes_list() {
+# List pre-defined color schemes
+_listschemes() {
     sed -n '/scheme-template/,$p' $SRCDIR/../schemes.txt
 }
 _gns3scheme () {
@@ -221,7 +221,7 @@ re_hexcolor='^#[0-9a-fA-F]{6}$'
 re_opacity='^0\.[0-9]{,2}$'
 
 flags=(false false false false false false false false false false false false false false)
-OPTS="$(getopt -o o:,s:,i,h --long bg:,bg2:,fg:,fg2:,tbg:,opacity:,sbg:,sfg:,bbg:,bfg:,lw:,lc:,scheme:,help,install -n $0 -- "$@")"
+OPTS="$(getopt -o o:,s:,ihl --long bg:,bg2:,fg:,fg2:,tbg:,opacity:,sbg:,sfg:,bbg:,bfg:,lw:,lc:,scheme:,help,install -n $0 -- "$@")"
 if [ $? -ne 0 ]; then
     echo "Failed parsing options, see '$0 --help' for more info."
     exit 1
@@ -291,6 +291,10 @@ while [ $# -gt 0 ] && [ "$1" != "--" ]; do
         -s|--scheme)
             _gns3scheme "${2}" 
             shift 2
+            ;;
+        -l|--list-schemes)
+            _listschemes
+            exit 0
             ;;
         -h|--help)
             _usage
