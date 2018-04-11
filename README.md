@@ -28,6 +28,13 @@ n30x-dark3:       #252525 #2a2a2a #939393 #b7855f #2d2d2d #323232 #b7855f #c2185
 ```
 ![tomorrow](https://user-images.githubusercontent.com/10103340/38634778-6149a8e4-3d78-11e8-951d-ad65ccd43901.png)
 
+### Install tomorrow-night  theme
+```
+./gns3theme.sh --scheme tomorrow-night
+./gns3theme.sh --scheme tomorrow-night --opacity 0.95    # optional: apply transparency
+```
+![tmorrow-night](https://user-images.githubusercontent.com/10103340/38640836-40ef16c6-3d8a-11e8-9589-448666897817.png)
+
 ### Install solarized-light theme
 ```
 gns3theme --scheme solarized-light
