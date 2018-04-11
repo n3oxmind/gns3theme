@@ -35,12 +35,12 @@ gns3theme --scheme solarized-light --opacity 0.96    # optional: apply transpare
 ```
 ![solarized-light](https://user-images.githubusercontent.com/10103340/38635551-98d55090-3d7a-11e8-8552-68ee3891dc59.png)
 
-### Install solarized-dark theme
+### Install n30x-dark3 theme
 ```
-./gns3theme.sh --scheme solarized-dark
-./gns3theme.sh --scheme solarized-dark --opacity 0.95    # optional: apply transparency
+./gns3theme.sh --scheme n30x-dark3
+./gns3theme.sh --scheme n30x-dark3 --opacity 0.95    # optional: apply transparency
 ```
-![solarized-dark](https://user-images.githubusercontent.com/10103340/38635950-c26eb4c2-3d7b-11e8-825b-2c4c96c6be82.png)
+![n30x-dark3](https://user-images.githubusercontent.com/10103340/38636484-2955005a-3d7d-11e8-998e-08f1c5ebe95a.png)
 
 ### Install Other themes
 ```
