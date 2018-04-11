@@ -1,5 +1,5 @@
 #!/bin/env bash
-set -ex
+set -e
 if [ ! ./gns3hack.sh ]; then
     echo "Failed to locate src dir."
     exit 1
@@ -8,8 +8,8 @@ REPO_DIR=$(cd $(dirname $0) && 'pwd')
 SRCDIR=./gns3-gui-2.1.4
 
 _usage() {
-    printf "%s\n" "Usage: gns3hack gns3-gui_dir [OPTION]... <value>"
-    printf "%s\n" "       gns3hack gns3-project_dir [OPTION] <value>"
+    printf "%s\n" "Usage: $0 --scheme <scheme-name> [OPTIONS]"
+    printf "%s\n" "       $0 [OPTION].. "
     printf "%s\n" "OPTIONS:"
     printf "  %s\t\t\t%s\n" "--bg"  "Change primary background color"
     printf "  %s\t\t\t%s\n" "--bg2" "Change secondary background color"
@@ -22,19 +22,17 @@ _usage() {
     printf "  %s\t\t\t%s\n" "--lc" "Change ethernet link color"
     printf "  %s\t\t\t%s\n" "--lw" "Change ethernet and serial links width"
     printf "  %s\t\t%s\n" "-o, --opacity" "Apply transparency to gns3 gui"
-    printf "  %s\t\t%s\n" "--scheme" "Change gns3 scheme from predefined schemes"
-    printf "\t\t\t%s\n" "supported schemes: gruvbox-{light,dark}, solarized-{light,dark}"
-    printf "  %s\t\t%s\n" "--install" "Install gns3-gui"
+    printf "  %s\t\t%s\n" "-s, --scheme" "Change gns3 theme from predefined schemes"
+    printf "  %s\t%s\n" "-l, --list-schemes" "List gns3 schemes"
     printf "\n"
-    printf "%s\n" "Examples:"
-    printf "%s\n" "Install theme from predefined scheme"
-    printf "  %s\t\t%s\n"  "cd ~/Download/gns3-gui-1.2.4" 
-    printf "  %s\t\t%s\n"  "./gns3hack.sh --scheme gruvbox-light" 
-    printf "  %s\t\t%s\n"  "./gns3hack.sh --scheme solarized-light" 
+    printf "%s\n" "Install theme from predefined schemes"
+    printf "  %s\t\t%s\n"  "./gns3theme.sh --scheme gruvbox-light" 
+    printf "  %s\t\t%s\n"  "./gns3theme.sh --scheme solarized-light" 
+    printf "%s\n" "Use the scheme but with different selection color"
+    printf "  %s\t\t%s\n"  "./gns3theme.sh --scheme solarized-light --sbg ef5350"
     printf "%s\n" "Install custom scheme"
-    printf "  %s\t\t%s\n"  "cd ~/Download/gns3-gui-1.2.4" 
-    printf "  %s\t\t%s\n"  "./gns3hack.sh --bg \"#282828\" --bg2 \"#323232\" --fg \"#FFFFFF\" --tbg \"#303030\"" 
-    printf "  %s\t\t%s\n"  "./gns3hack.sh --bg \"#282828\" --bg2 \"#323232\" --fg \"#FFFFFF\" --tbg \"#303030\" -o 0.95" 
+    printf "  %s\t\t%s\n"  "./gns3theme.sh --bg 282828 --bg2 323232 --fg FFFFFF --tbg 303030 .." 
+    printf "  %s\t\t%s\n"  "./gns3theme.sh --bg 282828 --bg2 323232 --fg FFFFFF --tbg 303030 -o 0.95 .." 
 }
 tmpdir=$(mktemp -d -t)
 cp -af ${REPO_DIR}/* ${tmpdir}
@@ -52,7 +50,7 @@ fi
 # Validate the color
 _isvalidcolor () {
     if [[ ! "$1" =~ $re_hexcolor ]]; then
-        echo "ERROR: Color must be in hex format or names e.g. "#ffffff". "
+        echo "ERROR: Color must be in hex format or names e.g. "2d2d2d". "
         exit 1
     fi
 }
@@ -75,6 +73,10 @@ _isdigit () {
         echo "ERROR: Font-size must be in this format dd.d(12.5)"
         exit 1
     fi
+}
+# List of pre-defined color schemes
+color_schemes_list() {
+    sed -n '/scheme-template/,$p' $SRCDIR/../schemes.txt
 }
 _gns3scheme () {
     local scheme_name=${1}
@@ -227,67 +229,67 @@ fi
 while [ $# -gt 0 ] && [ "$1" != "--" ]; do 
     case "$1" in
         --bg)
-            _isvalidcolor "$2"
-            _changecolor "$2" "bg"
+            _isvalidcolor "#${2}"
+            _changecolor "#${2}" "bg"
             shift 2
             ;;
         --bg2)
-            _isvalidcolor "$2"
-            _changecolor "$2" "bg2"
+            _isvalidcolor "#${2}"
+            _changecolor "#${2}" "bg2"
             shift 2
             ;;
         --fg)
-            _isvalidcolor "$2"
-            _changecolor "$2" "fg"
+            _isvalidcolor "#${2}"
+            _changecolor "#${2}" "fg"
             shift 2
             ;;
         --fg2)
-            _isvalidcolor "$2"
-            _changecolor "$2" "fg2"
+            _isvalidcolor "#${2}"
+            _changecolor "#${2}" "fg2"
             flags[3]=true
             shift 2
             ;;
         --tbg)
-            _isvalidcolor "$2"
-            _changecolor "$2" "tbg"
+            _isvalidcolor "#${2}"
+            _changecolor "#${2}" "tbg"
             shift 2
             ;;
         --sbg)
-            _isvalidcolor "$2"
-            _changecolor "$2" "sbg"
+            _isvalidcolor "#${2}"
+            _changecolor "#${2}" "sbg"
             shift 2
             ;;
         --sfg)
-            _isvalidcolor $2
-            _changecolor "$2" "sfg"
+            _isvalidcolor #${2}
+            _changecolor "#${2}" "sfg"
             flags[6]=true
             shift 2
             ;;
         --bbg)
-            _isvalidcolor $2
-            _changecolor "$2" "bbg"
+            _isvalidcolor #${2}
+            _changecolor "#${2}" "bbg"
             shift 2
             ;;
         --bfg)
-            _isvalidcolor $2
-            _changecolor "$2" "bfg"
+            _isvalidcolor #${2}
+            _changecolor "#${2}" "bfg"
             shift 2
             ;;
         --lw)
-			_changevariable $2 "lw"
+			_changevariable ${2} "lw"
             shift 2
             ;;
         --lc)
-            _changecolor "$2" "lc"
+            _changecolor "#${2}" "lc"
             shift 2
             ;;
         -o|--opacity)
-            _isvalidopacity "$2"
-            _uitransparent "$2"
+            _isvalidopacity "${2}"
+            _uitransparent "${2}"
             shift 2
             ;;
         -s|--scheme)
-            _gns3scheme $2
+            _gns3scheme "${2}" 
             shift 2
             ;;
         -h|--help)
