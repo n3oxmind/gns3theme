@@ -9,7 +9,8 @@ gns3theme is a shell script that will apply a custom stylesheet to gns3-gui, all
 - Create a custom theme.
 
 ### List gns3 color schemes
-`./gns3theme.sh -l`
+```
+./gns3theme.sh -l
 scheme-template:  bg      bg2     fg      fg2     tbg     sbg     sfg     bbg     bfg     color
 solarized-light:  #fdf6e3 #eee8d5 #657b83 #0087ff #eee8d5 #0087ff #e4e4e4 #d70000 #1d2021 light
 solarized-dark:   #002b36 #073642 #839496 #0087ff #073642 #d75f00 #1c1c1c #8a8a8a #1d2021 dark
@@ -18,6 +19,7 @@ gruvbox-dark:     #282828 #3c3836 #ebdbb2 #fe8019 #3c3836 #fb4934 #32302f #45858
 tomorrow:         #ffffff #f2f2f2 #4d4d4d #0087ff #cccccc #d6d6d6 #4271ae #3e999f #ffffff light
 tomorrow-night:   #ffffff #f2f2f2 #4d4d4d #0087ff #cccccc #d6d6d6 #4271ae #3e999f #ffffff dark
 n30x-dark3:       #252525 #2a2a2a #939393 #b7855f #2d2d2d #323232 #b7855f #c2185b #1a1a1a dark
+```
 
 ### Install tomorrow  theme
 ```
@@ -26,18 +28,19 @@ n30x-dark3:       #252525 #2a2a2a #939393 #b7855f #2d2d2d #323232 #b7855f #c2185
 ```
 ![tomorrow](https://user-images.githubusercontent.com/10103340/38634778-6149a8e4-3d78-11e8-951d-ad65ccd43901.png)
 
-### Install solarized-dark theme
-```
-./gns3theme.sh --scheme solarized-dark
-./gns3theme.sh --scheme solarized-dark --opacity 0.95    # optional: apply transparency
-```
-![solarized-dark](https://user-images.githubusercontent.com/10103340/38635950-c26eb4c2-3d7b-11e8-825b-2c4c96c6be82.png)
 ### Install solarized-light theme
 ```
 gns3theme --scheme solarized-light
 gns3theme --scheme solarized-light --opacity 0.96    # optional: apply transparency
 ```
 ![solarized-light](https://user-images.githubusercontent.com/10103340/38635551-98d55090-3d7a-11e8-8552-68ee3891dc59.png)
+
+### Install solarized-dark theme
+```
+./gns3theme.sh --scheme solarized-dark
+./gns3theme.sh --scheme solarized-dark --opacity 0.95    # optional: apply transparency
+```
+![solarized-dark](https://user-images.githubusercontent.com/10103340/38635950-c26eb4c2-3d7b-11e8-825b-2c4c96c6be82.png)
 
 ### Install Other themes
 ```
