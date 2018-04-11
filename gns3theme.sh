@@ -6,6 +6,8 @@ if [ ! ./gns3hack.sh ]; then
 fi
 REPO_DIR=$(cd $(dirname $0) && 'pwd')
 SRCDIR=./gns3-gui-2.1.4
+USER=$(logname)
+gns3_gui_conf=/home/$USER/.config/GNS3/gns3_gui.conf
 
 _usage() {
     printf "%s\n" "Usage: $0 --scheme <scheme-name> [OPTIONS]"
@@ -97,11 +99,12 @@ _gns3scheme () {
     if [ ${scheme[9]} == "light" ]; then
         _changevariable black "lc"
         _changevariable 230 "gc"
-        #sed -i "s/\(\"style\": \).[^,]*/\1\"Classic\"/g" ${gns3_gui_conf}
+        sed -i "s/\(\"style\": \).[^,]*/\1\"Classic\"/g" ${gns3_gui_conf}
     else
         _changevariable gray "lc"
+        [[ ${scheme_name} == "tomorrow-night" ]] && _changevariable 36 "gc" || _changevariable 45 "gc"
         _changevariable 45 "gc"
-        #sed -i "s/\(\"style\": \).[^,]*/\1\"Classic\"/g" ${gns3_gui_conf}
+        sed -i "s/\(\"style\": \).[^,]*/\1\"Classic\"/g" ${gns3_gui_conf}
     fi
     _changevariable 1.2 "lw"
     _changevariable 35 "gs"
