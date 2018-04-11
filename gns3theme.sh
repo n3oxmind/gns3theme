@@ -1,5 +1,12 @@
 #!/bin/env bash
-set -e
+set -ex
+if [ ! ./gns3hack.sh ]; then
+    echo "Failed to locate src dir."
+    exit 1
+fi
+REPO_DIR=$(cd $(dirname $0) && 'pwd')
+SRCDIR=./gns3-gui-2.1.4
+
 _usage() {
     printf "%s\n" "Usage: gns3hack gns3-gui_dir [OPTION]... <value>"
     printf "%s\n" "       gns3hack gns3-project_dir [OPTION] <value>"
@@ -15,19 +22,27 @@ _usage() {
     printf "  %s\t\t\t%s\n" "--lc" "Change ethernet link color"
     printf "  %s\t\t\t%s\n" "--lw" "Change ethernet and serial links width"
     printf "  %s\t\t%s\n" "-o, --opacity" "Apply transparency to gns3 gui"
-    printf "  %s\t\t%s\n" "--theme" "Change gns3 theme from predefined themes"
-    printf "\t\t\t%s\n" "supported themes: gruvbox-{light,dark}, solarized-{light,dark}"
+    printf "  %s\t\t%s\n" "--scheme" "Change gns3 scheme from predefined schemes"
+    printf "\t\t\t%s\n" "supported schemes: gruvbox-{light,dark}, solarized-{light,dark}"
     printf "  %s\t\t%s\n" "--install" "Install gns3-gui"
     printf "\n"
     printf "%s\n" "Examples:"
-    printf "%s\n" "Install predefined theme"
+    printf "%s\n" "Install theme from predefined scheme"
     printf "  %s\t\t%s\n"  "cd ~/Download/gns3-gui-1.2.4" 
-    printf "  %s\t\t%s\n"  "./gns3hack.sh --theme gruvbox-light" 
-    printf "  %s\t\t%s\n"  "./gns3hack.sh --theme solarized-light" 
-    printf "%s\n" "Install custom theme"
+    printf "  %s\t\t%s\n"  "./gns3hack.sh --scheme gruvbox-light" 
+    printf "  %s\t\t%s\n"  "./gns3hack.sh --scheme solarized-light" 
+    printf "%s\n" "Install custom scheme"
     printf "  %s\t\t%s\n"  "cd ~/Download/gns3-gui-1.2.4" 
     printf "  %s\t\t%s\n"  "./gns3hack.sh --bg \"#282828\" --bg2 \"#323232\" --fg \"#FFFFFF\" --tbg \"#303030\"" 
     printf "  %s\t\t%s\n"  "./gns3hack.sh --bg \"#282828\" --bg2 \"#323232\" --fg \"#FFFFFF\" --tbg \"#303030\" -o 0.95" 
+}
+tmpdir=$(mktemp -d -t)
+cp -af ${REPO_DIR}/* ${tmpdir}
+cd $tmpdir
+trap clean_up 0 1 2 15
+clean_up() {
+    rm -rf ${tmpdir}
+    #echo "Finished cleaning."
 }
 if [ $# -lt 1 ]; then
     echo "$0: missing option"
@@ -61,90 +76,110 @@ _isdigit () {
         exit 1
     fi
 }
-_gns3themes () {
-    # Array format named=('bg' 'bg2' 'fg' 'fg2' 'tbg' 'sbg' 'sfg' 'bbg' 'bfg' lc' afont-type' 'style')
-    theme_name=$1
-    if [ "$theme_name" == "gruvbox-light" ]; then
-        scheme=('#fbf1c7' '#ebdbb2' '#282828' '#458588' '#d5c4a1' '#076678' '#f9f5d7' '#cc241d' '#3c3836' 'black')
-    elif [ "$theme_name" == "gruvbox-dark" ]; then
-        scheme=('#282828' '#3c3836' '#ebdbb2' '#fe8019' '#504945' '#fb4934' '#32302f' '#458588' '#1d2021' 'gray')
-    elif [ "$theme_name" == "solarized-light" ]; then
-        scheme=('#fdf6e3' '#eee8d5' '#657b83' '#808080' '#eee8d5' '#0087ff' '#e4e4e4' '#d70000' '#1d2021' 'black')
-    elif [ "$theme_name" == "solarized-dark" ]; then
-        scheme=('#002b36' '#073642' '#839496' '#808080' '#073642' '#d75f00' '#1c1c1c' '#8a8a8a' '#1d2021' 'gray')
-    else
-        echo "ERROR: Unsupported theme, Try '$0 --help' for more information."
+_gns3scheme () {
+    local scheme_name=${1}
+    scheme=($(grep "^${scheme_name}:" $SRCDIR/../schemes.txt | cut -d: -f2))
+    if [ -z ${scheme} ]; then
+        echo "ERROR: Unsupported scheme '$1'."
         exit 1
     fi
-    _changecolor ${scheme[0]} "bg" 
-    _changecolor ${scheme[1]} "bg2" 
-    _changecolor ${scheme[2]} "fg" 
-    _changecolor ${scheme[3]} "fg2" 
-    _changecolor ${scheme[4]} "tbg" 
-    _changecolor ${scheme[5]} "sbg" 
-    _changecolor ${scheme[6]} "sfg" 
-    _changecolor ${scheme[7]} "bbg" 
-    _changecolor ${scheme[8]} "bfg" 
-    _changecolor ${scheme[9]} "lc" 
+    _changecolor ${scheme[0]} "bg"
+    _changecolor ${scheme[1]} "bg2"
+    _changecolor ${scheme[2]} "fg"
+    _changecolor ${scheme[3]} "fg2"
+    _changecolor ${scheme[4]} "tbg"
+    _changecolor ${scheme[5]} "sbg"
+    _changecolor ${scheme[6]} "sfg"
+    _changecolor ${scheme[7]} "bbg"
+    _changecolor ${scheme[8]} "bfg"
+    if [ ${scheme[9]} == "light" ]; then
+        _changevariable black "lc"
+        _changevariable 230 "gc"
+        #sed -i "s/\(\"style\": \).[^,]*/\1\"Classic\"/g" ${gns3_gui_conf}
+    else
+        _changevariable gray "lc"
+        _changevariable 45 "gc"
+        #sed -i "s/\(\"style\": \).[^,]*/\1\"Classic\"/g" ${gns3_gui_conf}
+    fi
+    _changevariable 1.2 "lw"
+    _changevariable 35 "gs"
 }
 _changecolor() {
     local color=$1
     local type=$2
+    iflag=true
     if [ $type == "bg" ]; then
-        sed -i -e "/QWidget/{n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui \
-               -e "/QMenuBar::item/{n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui \
-               -e "/QTextEdit#uiConsole/{n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui \
-               -e "/QTreeWidget,/{n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui \
-               -e "/QMenu\ /{n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui \
-               -e "/QScrollBar:vertical/{n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui \
-               -e "/QScrollBar:horizontal/{n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui \
-               -e "/QScrollBar::up/{n;n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui \
+        sed -i -e "/QWidget/{n;s/#[^;].*/"$color";/}" \
+               -e "/QMenuBar::item/{n;s/#[^;].*/"$color";/}" \
+               -e "/QTextEdit#uiConsole/{n;s/#[^;].*/"$color";/}" \
+               -e "/QTreeWidget,/{n;s/#[^;].*/"$color";/}" \
+               -e "/QMenu\ /{n;s/#[^;].*/"$color";/}" \
+               -e "/QScrollBar:vertical/{n;s/#[^;].*/"$color";/}" \
+               -e "/QScrollBar:horizontal/{n;s/#[^;].*/"$color";/}" \
+               -e "/QScrollBar::up/{n;n;s/#[^;].*/"$color";/}" \
                -e "/QAbstractScrollArea/{n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui 
     elif [ $type == "bg2" ]; then
-        sed -i -e "/QTextEdit, /{n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui \
-               -e "/QTreeWidget#uiTree/{n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui \
-               -e "/QTabBar::tab\ /{n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui \
-               -e "/QScrollBar::handle/{n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui \
-               -e "/QTreeWidget,\ /{n;n;n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui \
+        sed -i -e "/QTextEdit, /{n;s/#[^;].*/"$color";/}" \
+               -e "/QTreeWidget#uiTree/{n;s/#[^;].*/"$color";/}" \
+               -e "/QTabBar::tab\ /{n;s/#[^;].*/"$color";/}" \
+               -e "/QScrollBar::handle/{n;s/#[^;].*/"$color";/}" \
+               -e "/QTreeWidget,\ /{n;n;n;s/#[^;].*/"$color";/}" \
                -e "/QLabel#uiTitleLabel/{n;n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui
     elif [ $type == "fg" ]; then
-        sed -i -e "/QDockWidget, /{n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui \
-               -e "/QTreeWidget,/{n;n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui \
-               -e "/QTreeWidget#uiTree/{n;n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui \
-               -e "/QTabBar::tab\ /{n;n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui \
-               -e "/QTextEdit#uiConsole/{n;n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui \
-               -e "/QTextEdit,\ /{n;n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui \
-               -e "/QLabel/{n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui \
-               -e "/QStatusBar/{n;n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui \
-               -e "/QRadioButton/{n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui \
+        sed -i -e "/QDockWidget, /{n;s/#[^;].*/"$color";/}" \
+               -e "/QTreeWidget,/{n;n;s/#[^;].*/"$color";/}" \
+               -e "/QTreeWidget#uiTree/{n;n;s/#[^;].*/"$color";/}" \
+               -e "/QTabBar::tab\ /{n;n;s/#[^;].*/"$color";/}" \
+               -e "/QTextEdit#uiConsole/{n;n;s/#[^;].*/"$color";/}" \
+               -e "/QTextEdit,\ /{n;n;s/#[^;].*/"$color";/}" \
+               -e "/QLabel/{n;s/#[^;].*/"$color";/}" \
+               -e "/QStatusBar/{n;n;s/#[^;].*/"$color";/}" \
+               -e "/QRadioButton/{n;s/#[^;].*/"$color";/}" \
                -e "/QMenu\ /{n;n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui
     elif [ $type == "fg2" ]; then
         sed -i -e "/QGroupBox\ /{n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui
     elif [ $type == "tbg" ]; then
-        sed -i -e "/QDockWidget::title/{n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui \
-               -e "/QToolBar/{n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui \
-               -e "/QStatusBar/{n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui \
+        sed -i -e "/QDockWidget::title/{n;s/#[^;].*/"$color";/}" \
+               -e "/QToolBar/{n;s/#[^;].*/"$color";/}" \
+               -e "/QStatusBar/{n;s/#[^;].*/"$color";/}" \
                -e "/QMainWindow::separator/{n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui
     elif [ $type == "sbg" ]; then
-        sed -i -e "/^QComboBox\ /{n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui \
-               -e "/QTreeWidget::item:hover/{n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui \
+        sed -i -e "/^QComboBox\ /{n;s/#[^;].*/"$color";/}" \
+               -e "/QTreeWidget::item:hover/{n;s/#[^;].*/"$color";/}" \
                -e "/QMenu::item:selected/{n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui
     elif [ $type == "sfg" ]; then
-        sed -i -e "/QTabBar::tab:selected/{n;n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui \
-               -e "/^QComboBox\ /{n;n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui \
-               -e "/QTreeWidget::item:hover/{n;n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui \
+        sed -i -e "/QTabBar::tab:selected/{n;n;s/#[^;].*/"$color";/}" \
+               -e "/^QComboBox\ /{n;n;s/#[^;].*/"$color";/}" \
+               -e "/QTreeWidget::item:hover/{n;n;s/#[^;].*/"$color";/}" \
                -e "/QMenu::item:selected/{n;n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui
     elif [ $type == "bbg" ]; then
-        sed -i -e "/QPushButton\ /{n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui \
-               -e "/QTabBar::tab:selected/{n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui \
+        sed -i -e "/QPushButton\ /{n;s/#[^;].*/"$color";/}" \
+               -e "/QTabBar::tab:selected/{n;s/#[^;].*/"$color";/}" \
                -e "/QToolButton\ /{n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui
     elif [ $type == "bfg" ]; then
-        sed -i -e "/^QPushButton/{n;n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui \
-               -e "/QTabBar::tab:selected/{n;n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui \
+        sed -i -e "/^QPushButton/{n;n;s/#[^;].*/"$color";/}" \
+               -e "/QTabBar::tab:selected/{n;n;s/#[^;].*/"$color";/}" \
                -e "/^QToolButton\ /{n;n;s/#[^;].*/"$color";/}" "$SRCDIR"/gns3/ui/*.ui
-    elif [ $type == "lc" ]; then
-        sed -i "s/\(self\.setPen.*Qt\.\).*\(,\ self\._pen_width,.*))\)/\1"$color"\2/" "$SRCDIR"/gns3/items/ethernet_link_item.py
     fi
+}
+_changevariable() {
+    var=$1;
+    type=$2;
+    if [ $type == "lw" ]; then
+        sed -i -e "s/\(self\._pen_width\ =\ \).*$/\1"$var"/" \
+               -e "s/\(self._point_size\ =\ \).*$/\18/" "$SRCDIR"/gns3/items/link_item.py
+    elif [ $type == "lc" ]; then
+        #possiblecolors: black, blue, cyan, green, gray, red, yellow, magenta, white, darkBlack, darkBlue, ....)
+        sed -i "s/\(self\.setPen.*Qt\.\).*\(,\ self\._pen_width,.*))\)/\1"$var"\2/" "$SRCDIR"/gns3/items/ethernet_link_item.py
+    elif [ $type == gs ]; then
+        sed -i -e "s/\(gridSize = \)[0-9]\+/\1$var/g" $SRCDIR/gns3/graphics_view.py \
+               -e "s/\(GRID_SIZE = \)[0-9]\+/\1$var/g" $SRCDIR/gns3/items/node_item.py
+    elif [ $type == "gc" ]; then
+        sed -i "s/\(painter\.setPen(QtGui.QPen(QtGui.QColor(\).*[0-9]\+,.*[0-9]\+,.*[0-9]\+\(.[^)]*\)/\1$var, $var, $var\2/g" $SRCDIR/gns3/graphics_view.py
+    fi
+    # fix zoom-in zoom-out step values
+    sed -i -e "s/\(factor_in = pow(2.0, \).[^///]*\(.[^)]*\)/\130 \2/g" \
+           -e "s/\(factor_out = pow(2.0, \).[^///]*\(.[^)]*\)/\1-30 \2/g" $SRCDIR/gns3/main_window.py
 }
 ui_files=(main.py 
         main_window.py
@@ -176,8 +211,6 @@ _gns3install () {
     cd $SRCDIR
     scripts/build_pyqt.py
     python3 setup.py install
-    echo 
-    echo "gns3-gui successfully changed ..."
     echo "gns3-gui Installation Finished ..."
     echo "Restart gns3 to apply changes ..."
 }
@@ -185,9 +218,8 @@ re_digit='^[0-9]{,2}\.[0-9]$'
 re_hexcolor='^#[0-9a-fA-F]{6}$'
 re_opacity='^0\.[0-9]{,2}$'
 
-SRCDIR=$(cd $(dirname $0) && cd gns3-gui-2.1.4 && 'pwd')
 flags=(false false false false false false false false false false false false false false)
-OPTS="$(getopt -o o:,t:,i,h --long bg:,bg2:,fg:,fg2:,tbg:,opacity:,sbg:,sfg:,bbg:,bfg:,lw:,lc:,theme:,help,install -n $0 -- "$@")"
+OPTS="$(getopt -o o:,s:,i,h --long bg:,bg2:,fg:,fg2:,tbg:,opacity:,sbg:,sfg:,bbg:,bfg:,lw:,lc:,scheme:,help,install -n $0 -- "$@")"
 if [ $? -ne 0 ]; then
     echo "Failed parsing options, see '$0 --help' for more info."
     exit 1
@@ -197,19 +229,16 @@ while [ $# -gt 0 ] && [ "$1" != "--" ]; do
         --bg)
             _isvalidcolor "$2"
             _changecolor "$2" "bg"
-            flags[0]=true
             shift 2
             ;;
         --bg2)
             _isvalidcolor "$2"
             _changecolor "$2" "bg2"
-            flags[1]=true
             shift 2
             ;;
         --fg)
             _isvalidcolor "$2"
             _changecolor "$2" "fg"
-            flags[2]=true
             shift 2
             ;;
         --fg2)
@@ -221,13 +250,11 @@ while [ $# -gt 0 ] && [ "$1" != "--" ]; do
         --tbg)
             _isvalidcolor "$2"
             _changecolor "$2" "tbg"
-            flags[4]=true
             shift 2
             ;;
         --sbg)
             _isvalidcolor "$2"
             _changecolor "$2" "sbg"
-            flags[5]=true
             shift 2
             ;;
         --sfg)
@@ -239,40 +266,28 @@ while [ $# -gt 0 ] && [ "$1" != "--" ]; do
         --bbg)
             _isvalidcolor $2
             _changecolor "$2" "bbg"
-            flags[7]=true
             shift 2
             ;;
         --bfg)
             _isvalidcolor $2
             _changecolor "$2" "bfg"
-            flags[8]=true
             shift 2
             ;;
         --lw)
-            sed -i -e "s/\(self\._pen_width\ =\ \).*$/\1"$2"/" "$SRCDIR"/gns3/items/link_item.py \
-                -e "s/\(self._point_size\ =\ \).*$/\18/" "$SRCDIR"/gns3/items/link_item.py
-            flags[9]=true
+			_changevariable $2 "lw"
             shift 2
             ;;
         --lc)
             _changecolor "$2" "lc"
-            flags[10]=true
             shift 2
             ;;
         -o|--opacity)
             _isvalidopacity "$2"
             _uitransparent "$2"
-            flags[11]=true
             shift 2
             ;;
-        -t|--theme)
-            if [ $# -gt 2 ]; then
-                echo "Too many arguments, '--theme' takes only 1 argument."
-                echo "Try '$0 --help' for more information."
-                exit 1
-            fi
-            _gns3themes $2
-            flags[12]=true
+        -s|--scheme)
+            _gns3scheme $2
             shift 2
             ;;
         -h|--help)
@@ -285,10 +300,8 @@ while [ $# -gt 0 ] && [ "$1" != "--" ]; do
             ;;
     esac
 done
-for flag in "${flags[@]}"; do
-    if [ $flag == true ]; then
-        _isroot
-        _gns3install
-        break
-    fi
-done
+if [ $iflag == true ]; then
+    _isroot
+    _gns3install
+fi
+exit 0
