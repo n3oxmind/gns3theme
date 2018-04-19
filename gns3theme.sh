@@ -5,7 +5,7 @@ if [ ! ./gns3hack.sh ]; then
     exit 1
 fi
 REPO_DIR=$(cd $(dirname $0) && 'pwd')
-SRCDIR=./gns3-gui-2.1.4
+SRCDIR=./gns3-gui-2.1.5
 USER=$(logname)
 gns3_gui_conf=/home/$USER/.config/GNS3/gns3_gui.conf
 [[ ! -f $gns3_gui_conf.bak ]] && cp $gns3_gui_conf ${gns3_gui_conf}.bak
@@ -107,7 +107,6 @@ _gns3scheme () {
         sed -i "s/\(\"style\": \).[^,]*/\1\"Charcoal\"/g" ${gns3_gui_conf}
     fi
     _changevariable 1.2 "lw"
-    _changevariable 35 "gs"
 }
 _changecolor() {
     local color=$1
@@ -176,9 +175,6 @@ _changevariable() {
     elif [ $type == "lc" ]; then
         #possiblecolors: black, blue, cyan, green, gray, red, yellow, magenta, white, darkBlack, darkBlue, ....)
         sed -i "s/\(self\.setPen.*Qt\.\).*\(,\ self\._pen_width,.*))\)/\1"$var"\2/" "$SRCDIR"/gns3/items/ethernet_link_item.py
-    elif [ $type == gs ]; then
-        sed -i -e "s/\(gridSize = \)[0-9]\+/\1$var/g" $SRCDIR/gns3/graphics_view.py \
-               -e "s/\(GRID_SIZE = \)[0-9]\+/\1$var/g" $SRCDIR/gns3/items/node_item.py
     elif [ $type == "gc" ]; then
         sed -i "s/\(painter\.setPen(QtGui.QPen(QtGui.QColor(\).*[0-9]\+,.*[0-9]\+,.*[0-9]\+\(.[^)]*\)/\1$var, $var, $var\2/g" $SRCDIR/gns3/graphics_view.py
     fi
