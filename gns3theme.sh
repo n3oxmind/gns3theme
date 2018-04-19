@@ -8,7 +8,7 @@ REPO_DIR=$(cd $(dirname $0) && 'pwd')
 SRCDIR=./gns3-gui-2.1.4
 USER=$(logname)
 gns3_gui_conf=/home/$USER/.config/GNS3/gns3_gui.conf
-[[ ! -f $gns3_gui_cof.bak ]] && cp $gns3_gui_conf ${gns3_gui_conf}.bak
+[[ ! -f $gns3_gui_conf.bak ]] && cp $gns3_gui_conf ${gns3_gui_conf}.bak
 
 _usage() {
     printf "%s\n" "Usage: $0 --scheme <scheme-name> [OPTIONS]"
