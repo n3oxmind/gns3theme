@@ -164,7 +164,7 @@ class PacketCapture:
             del self._capture_reader_process[link]
 
         # PCAP capture file path
-        command = command.replace("%c", '"' + capture_file_path + '"')
+        command = command.replace("%c", capture_file_path)
 
         # Add description
         description = "{} {} to {} {}".format(
