@@ -79,11 +79,11 @@ _isdigit () {
 }
 # List pre-defined color schemes
 _listschemes() {
-    sed -n '/scheme-template/,$p' $SRCDIR/../schemes.txt
+    sed -n '/scheme-template/,$p' $SRCDIR/../schemes
 }
 _gns3scheme () {
     local scheme_name=${1}
-    scheme=($(grep "^${scheme_name}:" $SRCDIR/../schemes.txt | cut -d: -f2))
+    scheme=($(grep "^${scheme_name}:" $SRCDIR/../schemes | cut -d: -f2))
     if [ -z ${scheme} ]; then
         echo "ERROR: Unsupported scheme '$1'."
         exit 1
