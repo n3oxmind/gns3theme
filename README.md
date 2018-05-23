@@ -50,10 +50,8 @@ gns3theme --scheme solarized-light --opacity 0.96    # --opacity is optional
 ![n30x-dark3](https://user-images.githubusercontent.com/10103340/40444874-68f21964-5e7f-11e8-829d-2075f5d18fc6.png)
 
 ### Install Other themes
-```
 **Note**: You can add your own schemes to `schemes` file, just follow the given format inside the file.
 You basically can theme gns3 of any theme of your choice.
 see `gns3theme --help` for more information
-```
 
 
