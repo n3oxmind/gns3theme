@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ProjectWelcomeDialog</class>
+ <widget class="QDialog" name="ProjectWelcomeDialog">
+  <property name="windowModality">
+   <enum>Qt::WindowModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>607</width>
+    <height>308</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Welcome</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget{
+	background-color: #fbf1c7;
+}
+QMenuBar::item{
+	background-color: #fbf1c7;
+}
+QDockWidget::title{
+	background: #d5c4a1;
+	padding-left: 5px;
+}
+QDockWidget, QMenuBar{
+    color: #282828;
+    font: bold 14px;
+}
+QTextEdit, QPlainTextEdit, QLineEdit, QSpinBox, QComboBox {
+  background-color: #d5c4a1;
+  color: #282828;
+}
+QTextEdit#uiConsoleTextEdit {
+  background-color: #fbf1c7;
+  color: #282828;
+  font: 13px;
+}
+QTabWidget {
+	font: 14px;
+	border-top: 2px;
+}
+QTabBar::tab {
+    background: #d5c4a1;
+    color: #282828;
+    min-width: 8ex;
+    padding: 2px;
+	border-top-right-radius: 6px;
+	border-top-left-radius: 6px;
+}
+QTabBar::tab:selected {
+    background: #458588;
+	color: #FFFFFF;
+}
+QGroupBox {
+    color: #076678;
+    font: 14px;
+    padding: 15px;
+    border-style: none;
+}
+QMainWindow::separator {
+	background: #d5c4a1;
+	width: 1px;
+	height: 1px;
+}
+QComboBox {
+	selection-background-color: #458588;
+	selection-color: #FFFFFF;
+}
+
+QToolBar{
+	background: #d5c4a1;
+	border: 0px;
+}
+QPushButton {
+	background-color: #d79921;
+    color: #FFFFFF;
+	font: 14px;
+}
+QToolButton {
+	background-color: #d79921;
+    color: #FFFFFF;
+	font: 14px;
+}
+QTreeWidget, QListWidget {
+	background-color: #fbf1c7;
+	color: #282828;
+    alternate-background-color: #d5c4a1; 
+	font: 14px;
+}
+QTreeWidget#uiTreeWidget {
+	background-color: #d5c4a1;
+	color: #282828;
+	font: bold 16px;
+}
+QTreeWidget::item:selected, QTreeWidget::item:hover, QMenu::item:selected,QToolButton::hover,QPushButton::hover,QTabBar::tab:hover {
+	background-color: #458588;
+	color: #FFFFFF;
+}
+QMenu {
+	background-color: #fbf1c7;
+    color: #282828;
+}
+QLabel {
+	color: #282828;
+	font: 14px;
+}
+QLabel#uiTitleLabel {
+	color: #282828;
+	font: bold 16px;
+}
+
+QAbstractScrollArea::corner {
+    background: #fbf1c7;
+}
+QScrollBar::handle:horizontal {
+    background: #d5c4a1;
+    min-width: 20px;
+}
+QScrollBar::handle:vertical {
+    background: #d5c4a1;
+    min-width: 20px;
+}
+QScrollBar:vertical {
+    width: 6px;
+}
+QScrollBar:horizontal {
+    height: 6px;
+}
+QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical, QScrollBar::down-arrow:horizontal, QScrollBar::up-arrow:horizontal { 
+	border: 0px;
+    height: 0px; 
+    width: 0px; 
+}
+         
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal, QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+  background: none
+}
+QStatusBar {
+	background-color: #d5c4a1;
+	color: #282828;
+}
+
+QRadioButton, QCheckBox {
+  color: #282828;
+}
+QRadioButton::disabled, QCheckBox::disabled {
+  color: gray;
+}
+
+
+</string>
+  </property>
+  <property name="modal">
+   <bool>true</bool>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="rightMargin">
+    <number>12</number>
+   </property>
+   <item>
+    <widget class="QLabel" name="label">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Loading.. Please wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="textFormat">
+      <enum>Qt::RichText</enum>
+     </property>
+     <property name="scaledContents">
+      <bool>false</bool>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QGridLayout" name="gridLayout"/>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <property name="spacing">
+      <number>20</number>
+     </property>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Expanding</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QDialogButtonBox" name="uiOkButton">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="standardButtons">
+        <set>QDialogButtonBox::Ok</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../../resources/resources.qrc"/>
+ </resources>
+ <connections/>
+</ui>
