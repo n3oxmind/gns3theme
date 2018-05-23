@@ -4,7 +4,7 @@
 gns3theme is a shell script that will apply a custom stylesheet to gns3-gui, all the ui files has been themed with stylesheet using QT Designer. This script will provide a way to change any color of the gns3-gui. Here is some features:
 - Change gns3 theme from a predefined schemes 
 - Change ethernet/serial link width and color
-- Change grid size and color (Smoother snap to grid) [this been adopted be gns3-gui-2.1.5 and above]
+- Change grid size and color (Smoother snap to grid) [this been adopted by gns3-gui-2.1.5 and above]
 - Apply full transparency to gns3-gui
 - Create a custom gns3-gui theme.
 
