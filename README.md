@@ -4,7 +4,7 @@
 gns3theme is a shell script that will apply a custom stylesheet to gns3-gui, all the ui files has been themed with stylesheet using QT Designer. This script will provide a way to change any color of the gns3-gui. Here is some features:
 - Change gns3 theme from a predefined schemes 
 - Change ethernet/serial link width and color
-- Change grid size and color (Smoother snap to grid) [this been adopted by gns3-gui-2.1.5 and above]
+- Change grid size and color (Smoother snap to grid) [this been adopted by gns3-gui-2.1.5 and later]
 - Apply full transparency to gns3-gui
 - Create a custom gns3-gui theme.
 
@@ -22,11 +22,17 @@ n30x-light:       #fafafa #eeeeee #424242 #03a9f4 #eeeeee #03a9f4 #ffffff #e91e6
 n30x-dark3:       #252525 #2a2a2a #939393 #b7855f #2d2d2d #323232 #b7855f #c2185b #1a1a1a dark
 ```
 
-### Install n30x-light theme
+### Install n30x-light theme (transparent version)
 ```
 ./gns3theme.sh --scheme tomorrow --opacity 0.91    # --opacity is optional 
 ```
 ![n30x-light](https://user-images.githubusercontent.com/10103340/40444984-abe11d10-5e7f-11e8-842d-e5a8d3e05966.png)
+
+### Install n30x-dark3 (transparent version)
+```
+./gns3theme.sh --scheme n30x-dark3 --opacity 0.91    # --opacity is optional 
+```
+![n30x-dark3-transparent](https://user-images.githubusercontent.com/10103340/40465556-24d7f56c-5ed6-11e8-8601-5f7c8a34eefd.png)
 
 ### Install tomorrow  theme
 ```
