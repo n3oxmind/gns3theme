@@ -46,7 +46,7 @@ $ ./gns3theme.sh --scheme tomorrow --opacity 0.95    # --opacity is optional
 $ gns3theme --scheme solarized-light
 $ gns3theme --scheme solarized-light --opacity 0.96    # --opacity is optional
 ```
-![solarized-light](https://user-images.githubusercontent.com/10103340/44069937-175501c8-9f36-11e8-8187-b70da3d19f12.png)
+![solarized-light](https://user-images.githubusercontent.com/10103340/44070067-9d04544a-9f36-11e8-9793-e73522e9002b.png)
 
 ### Install gruvbox-light theme
 ```sh
