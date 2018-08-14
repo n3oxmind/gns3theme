@@ -26,34 +26,34 @@ n30x-dark3:       #252525 #2a2a2a #939393 #b7855f #2d2d2d #323232 #b7855f #c2185
 ```
 ./gns3theme.sh --scheme tomorrow --opacity 0.91    # --opacity is optional 
 ```
-![n30x-light](https://user-images.githubusercontent.com/10103340/40444984-abe11d10-5e7f-11e8-842d-e5a8d3e05966.png)
+![n30x-light](https://user-images.githubusercontent.com/10103340/44069475-d54f28be-9f33-11e8-8a0e-f1fc3bf889c1.png)
 
 ### Install n30x-dark3 (transparent version)
 ```
 ./gns3theme.sh --scheme n30x-dark3 --opacity 0.91    # --opacity is optional 
 ```
-![n30x-dark3-transparent](https://user-images.githubusercontent.com/10103340/40465556-24d7f56c-5ed6-11e8-8601-5f7c8a34eefd.png)
+![n30x-dark3](https://user-images.githubusercontent.com/10103340/44069564-3681323a-9f34-11e8-9f6c-7d458b0298bf.png)
 
 ### Install tomorrow  theme
 ```
 ./gns3theme.sh --scheme tomorrow 
 ./gns3theme.sh --scheme tomorrow --opacity 0.95    # --opacity is optional
 ```
-![tomorrow](https://user-images.githubusercontent.com/10103340/40444837-4de4e99e-5e7f-11e8-8f3e-2122f0ec2813.png)
+![tomorrow-light](https://user-images.githubusercontent.com/10103340/44069498-f4c867aa-9f33-11e8-8ca1-82a26cca134e.png)
 
 ### Install solarized-light theme
 ```
 gns3theme --scheme solarized-light
 gns3theme --scheme solarized-light --opacity 0.96    # --opacity is optional
 ```
-![solarized-light](https://user-images.githubusercontent.com/10103340/40444850-596c16ca-5e7f-11e8-94dc-b0f72a3e3dde.png)
+![solarized-light](https://user-images.githubusercontent.com/10103340/44069486-e4ceb0c0-9f33-11e8-8d86-368be1eaa59a.png)
 
-### Install n30x-dark3 theme
+### Install gruvbox-light theme
 ```
-./gns3theme.sh --scheme n30x-dark3
-./gns3theme.sh --scheme n30x-dark3 --opacity 0.95    # --opacity is optional
+gns3theme --scheme gruvbox-light
+gns3theme --scheme gruvbox-light --opacity 0.96    # --opacity is optional
 ```
-![n30x-dark3](https://user-images.githubusercontent.com/10103340/40444874-68f21964-5e7f-11e8-829d-2075f5d18fc6.png)
+![gruvbox-light](https://user-images.githubusercontent.com/10103340/44069710-e9138df8-9f34-11e8-889b-f33b81c9c180.png)
 
 ### Install Other themes
 **Note**: You can add your own schemes to `schemes` file, just follow the given format inside the file.
