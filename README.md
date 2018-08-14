@@ -9,8 +9,8 @@ gns3theme is a shell script that will apply a custom stylesheet to gns3-gui, all
 - Create a custom gns3-gui theme.
 
 ### List all supported themes
-```
-./gns3theme.sh -l
+```sh
+$ ./gns3theme.sh -l
 scheme-template:  bg      bg2     fg      fg2     tbg     sbg     sfg     bbg     bfg     color
 solarized-light:  #fdf6e3 #eee8d5 #657b83 #0087ff #eee8d5 #0087ff #e4e4e4 #d70000 #1d2021 light
 solarized-dark:   #002b36 #073642 #839496 #0087ff #073642 #d75f00 #1c1c1c #8a8a8a #1d2021 dark
@@ -23,35 +23,35 @@ n30x-dark3:       #252525 #2a2a2a #939393 #b7855f #2d2d2d #323232 #b7855f #c2185
 ```
 
 ### Install n30x-light theme (transparent version)
-```
-./gns3theme.sh --scheme tomorrow --opacity 0.91    # --opacity is optional 
+```sh
+$ ./gns3theme.sh --scheme tomorrow --opacity 0.91    # --opacity is optional 
 ```
 ![n30x-light](https://user-images.githubusercontent.com/10103340/44069475-d54f28be-9f33-11e8-8a0e-f1fc3bf889c1.png)
 
 ### Install n30x-dark3 (transparent version)
-```
-./gns3theme.sh --scheme n30x-dark3 --opacity 0.91    # --opacity is optional 
+```sh
+$ ./gns3theme.sh --scheme n30x-dark3 --opacity 0.91    # --opacity is optional 
 ```
 ![n30x-dark3](https://user-images.githubusercontent.com/10103340/44069564-3681323a-9f34-11e8-9f6c-7d458b0298bf.png)
 
 ### Install tomorrow  theme
-```
-./gns3theme.sh --scheme tomorrow 
-./gns3theme.sh --scheme tomorrow --opacity 0.95    # --opacity is optional
+```sh
+$ ./gns3theme.sh --scheme tomorrow 
+$ ./gns3theme.sh --scheme tomorrow --opacity 0.95    # --opacity is optional
 ```
 ![tomorrow-light](https://user-images.githubusercontent.com/10103340/44069498-f4c867aa-9f33-11e8-8ca1-82a26cca134e.png)
 
 ### Install solarized-light theme
-```
-gns3theme --scheme solarized-light
-gns3theme --scheme solarized-light --opacity 0.96    # --opacity is optional
+```sh
+$ gns3theme --scheme solarized-light
+$ gns3theme --scheme solarized-light --opacity 0.96    # --opacity is optional
 ```
 ![solarized-light](https://user-images.githubusercontent.com/10103340/44069486-e4ceb0c0-9f33-11e8-8d86-368be1eaa59a.png)
 
 ### Install gruvbox-light theme
-```
-gns3theme --scheme gruvbox-light
-gns3theme --scheme gruvbox-light --opacity 0.96    # --opacity is optional
+```sh
+$ gns3theme --scheme gruvbox-light
+$ gns3theme --scheme gruvbox-light --opacity 0.96    # --opacity is optional
 ```
 ![gruvbox-light](https://user-images.githubusercontent.com/10103340/44069710-e9138df8-9f34-11e8-889b-f33b81c9c180.png)
 
@@ -59,5 +59,4 @@ gns3theme --scheme gruvbox-light --opacity 0.96    # --opacity is optional
 **Note**: You can add your own schemes to `schemes` file, just follow the given format inside the file.
 You basically can theme gns3 of any theme of your choice.
 see `gns3theme --help` for more information
-
 
