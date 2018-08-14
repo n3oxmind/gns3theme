@@ -28,7 +28,7 @@ $ ./gns3theme.sh --scheme tomorrow --opacity 0.91    # --opacity is optional
 ```
 ![n30x-light](https://user-images.githubusercontent.com/10103340/44069475-d54f28be-9f33-11e8-8a0e-f1fc3bf889c1.png)
 
-### Install n30x-dark3 (transparent version)
+### Install n30x-dark3
 ```sh
 $ ./gns3theme.sh --scheme n30x-dark3 --opacity 0.91    # --opacity is optional 
 ```
@@ -46,7 +46,7 @@ $ ./gns3theme.sh --scheme tomorrow --opacity 0.95    # --opacity is optional
 $ gns3theme --scheme solarized-light
 $ gns3theme --scheme solarized-light --opacity 0.96    # --opacity is optional
 ```
-![solarized-light](https://user-images.githubusercontent.com/10103340/44069486-e4ceb0c0-9f33-11e8-8d86-368be1eaa59a.png)
+![solarized-light](https://user-images.githubusercontent.com/10103340/44069937-175501c8-9f36-11e8-8187-b70da3d19f12.png)
 
 ### Install gruvbox-light theme
 ```sh
