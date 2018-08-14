@@ -27,6 +27,8 @@ _usage() {
     printf "  %s\t\t%s\n" "-o, --opacity" "Apply transparency to gns3 gui"
     printf "  %s\t\t%s\n" "-s, --scheme" "Change gns3 theme from predefined schemes"
     printf "  %s\t%s\n" "-l, --list-schemes" "List gns3 schemes"
+    printf "  %s\t\t%s\n" "-v, --version" "Display the version of this script"
+    printf "  %s\t\t%s\n" "-h, --help" "Display this help"
     printf "\n"
     printf "%s\n" "Install theme from predefined schemes"
     printf "  %s\t\t%s\n"  "./gns3theme.sh --scheme gruvbox-light" 
@@ -220,7 +222,7 @@ re_hexcolor='^#[0-9a-fA-F]{6}$'
 re_opacity='^0\.[0-9]{,2}$'
 
 flags=(false false false false false false false false false false false false false false)
-OPTS="$(getopt -o o:,s:,ihl --long bg:,bg2:,fg:,fg2:,tbg:,opacity:,sbg:,sfg:,bbg:,bfg:,lw:,lc:,scheme:,help,install -n $0 -- "$@")"
+OPTS="$(getopt -o o:,s:,ihlv --long bg:,bg2:,fg:,fg2:,tbg:,opacity:,sbg:,sfg:,bbg:,bfg:,lw:,lc:,scheme:,help,version,install -n $0 -- "$@")"
 if [ $? -ne 0 ]; then
     echo "Failed parsing options, see '$0 --help' for more info."
     exit 1
@@ -293,6 +295,10 @@ while [ $# -gt 0 ] && [ "$1" != "--" ]; do
             ;;
         -l|--list-schemes)
             _listschemes
+            exit 0
+            ;;
+        -v|--version)
+            echo "gns3theme v2.1.9"
             exit 0
             ;;
         -h|--help)
