@@ -5,7 +5,7 @@ if [ ! ./gns3hack.sh ]; then
     exit 1
 fi
 REPO_DIR=$(cd $(dirname $0) && 'pwd')
-SRCDIR=./gns3-gui-2.1.9
+SRCDIR=./gns3-gui-2.1.12
 USER=$(logname)
 gns3_gui_conf=/home/$USER/.config/GNS3/gns3_gui.conf
 [[ ! -f $gns3_gui_conf.bak ]] && cp $gns3_gui_conf ${gns3_gui_conf}.bak

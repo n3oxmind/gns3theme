@@ -1,0 +1,65 @@
+*.py[cod]
+
+# C extensions
+*.so
+
+# Packages
+*.egg
+*.egg-info
+dist
+build
+eggs
+parts
+bin
+var
+sdist
+develop-eggs
+.installed.cfg
+lib
+lib64
+
+# Installer logs
+pip-log.txt
+
+# Unit test / coverage reports
+.coverage
+.tox
+nosetests.xml
+
+# Translations
+*.mo
+
+# Mr Developer
+.mr.developer.cfg
+.project
+.pydevproject
+.settings
+
+# PyCharm
+.idea
+/.eggs
+
+# OSX
+.DS_Store
+
+# Testing output
+*_log.txt
+*.log
+
+# Gedit Temp Files
+*~
+
+# Qt creator
+*.autosave
+
+# Licence keys
+keys
+
+# Custom config
+/gns3_server.ini
+updates
+.cache
+__pycache__
+
+# Virtualenv
+env
