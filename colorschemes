@@ -26,5 +26,5 @@ gruvbox-dark:     #282828 #3c3836 #ebdbb2 #fe8019 #3c3836 #fb4934 #32302f #45858
 tomorrow:         #ffffff #f2f2f2 #4d4d4c #4271ae #cccccc #4271ae #ffffff #d6d6d6 #4271ae #4d4d4c 1.2 #e6e6e6   light
 tomorrow-night:   #2d2d2d #404040 #cccccc #b7855f #404040 #515151 #f2777a #f2777a #303030 #cccccc 1.2 #404040   dark 
 n30x-light:       #fafafa #eeeeee #424242 #03a9f4 #eeeeee #03a9f4 #ffffff #e91e63 #1a1a1a #424242 1.2 #e6e6e6   light
-n30x-grey:        #e0e0e0 #d9d9d9 #424242 #0288d1 #bfbfbf #0288d1 #ffffff #c4c4c4 #000000 #424242 1.2 #cccccc   light
+n30x-grey:        #e0e0e0 #d9d9d9 #424242 #0288d1 #b5b5c9 #0288d1 #ffffff #c4c4c4 #000000 #424242 1.2 #cccccc   light
 n30x-darkw:       #252525 #2a2a2a #00997a #b7855f #404040 #323232 #9575cd #c2185b #1a1a1a #939393 1.2 #323232   dark
