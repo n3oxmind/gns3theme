@@ -1,0 +1,2820 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="windowModality">
+   <enum>Qt::NonModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>986</width>
+    <height>716</height>
+   </rect>
+  </property>
+  <property name="contextMenuPolicy">
+   <enum>Qt::PreventContextMenu</enum>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget{
+	background-color: #fbf1c7;
+}
+QMenuBar::item{
+	background-color: #fbf1c7;
+}
+QDockWidget::title{
+	background: #d5c4a1;
+	padding-left: 5px;
+}
+QDockWidget, QMenuBar{
+    color: #282828;
+    font: bold 14px;
+}
+QTextEdit, QPlainTextEdit, QLineEdit, QSpinBox, QComboBox {
+  background-color: #d5c4a1;
+  color: #282828;
+}
+QTextEdit#uiConsoleTextEdit {
+  background-color: #fbf1c7;
+  color: #282828;
+  font: 13px;
+}
+QTabWidget {
+	font: 14px;
+	border-top: 2px;
+}
+QTabBar::tab {
+    background: #d5c4a1;
+    color: #282828;
+    min-width: 8ex;
+    padding: 2px;
+	border-top-right-radius: 6px;
+	border-top-left-radius: 6px;
+}
+QTabBar::tab:selected {
+    background: #458588;
+	color: #FFFFFF;
+}
+QGroupBox {
+    color: #076678;
+    font: 14px;
+    padding: 15px;
+    border-style: none;
+}
+QMainWindow::separator {
+	background: #d5c4a1;
+	width: 1px;
+	height: 1px;
+}
+QComboBox {
+	selection-background-color: #458588;
+	selection-color: #FFFFFF;
+}
+
+QToolBar{
+	background: #d5c4a1;
+	border: 0px;
+}
+QPushButton {
+	background-color: #d79921;
+    color: #FFFFFF;
+	font: 14px;
+}
+QToolButton {
+	background-color: #d79921;
+    color: #FFFFFF;
+	font: 14px;
+}
+QTreeWidget, QListWidget {
+	background-color: #fbf1c7;
+	color: #282828;
+    alternate-background-color: #d5c4a1; 
+	font: 14px;
+}
+QTreeWidget#uiTreeWidget {
+	background-color: #d5c4a1;
+	color: #282828;
+	font: bold 16px;
+}
+QTreeWidget::item:selected, QTreeWidget::item:hover, QMenu::item:selected,QToolButton::hover,QPushButton::hover,QTabBar::tab:hover {
+	background-color: #458588;
+	color: #FFFFFF;
+}
+QMenu {
+	background-color: #fbf1c7;
+    color: #282828;
+}
+QLabel {
+	color: #282828;
+	font: 14px;
+}
+QLabel#uiTitleLabel {
+	color: #282828;
+	font: bold 16px;
+}
+
+QAbstractScrollArea::corner {
+    background: #fbf1c7;
+}
+QScrollBar::handle:horizontal {
+    background: #d5c4a1;
+    min-width: 20px;
+}
+QScrollBar::handle:vertical {
+    background: #d5c4a1;
+    min-width: 20px;
+}
+QScrollBar:vertical {
+    width: 6px;
+}
+QScrollBar:horizontal {
+    height: 6px;
+}
+QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical, QScrollBar::down-arrow:horizontal, QScrollBar::up-arrow:horizontal { 
+	border: 0px;
+    height: 0px; 
+    width: 0px; 
+}
+         
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal, QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+  background: none
+}
+QStatusBar {
+	background-color: #d5c4a1;
+	color: #282828;
+}
+
+QRadioButton, QCheckBox {
+  color: #282828;
+}
+QRadioButton::disabled, QCheckBox::disabled {
+  color: gray;
+}
+
+
+</string>
+  </property>
+  <property name="dockOptions">
+   <set>QMainWindow::AllowTabbedDocks|QMainWindow::AnimatedDocks</set>
+  </property>
+  <widget class="QWidget" name="uiCentralWidget">
+   <property name="styleSheet">
+    <string notr="true">QWidget{
+	background-color: #fbf1c7;
+}
+QMenuBar::item{
+	background-color: #fbf1c7;
+}
+QDockWidget::title{
+	background: #d5c4a1;
+	padding-left: 5px;
+}
+QDockWidget, QMenuBar{
+    color: #282828;
+    font: bold 14px;
+}
+QTextEdit, QPlainTextEdit, QLineEdit, QSpinBox, QComboBox {
+  background-color: #d5c4a1;
+  color: #282828;
+}
+QTextEdit#uiConsoleTextEdit {
+  background-color: #fbf1c7;
+  color: #282828;
+  font: 13px;
+}
+QTabWidget {
+	font: 14px;
+	border-top: 2px;
+}
+QTabBar::tab {
+    background: #d5c4a1;
+    color: #282828;
+    min-width: 8ex;
+    padding: 2px;
+	border-top-right-radius: 6px;
+	border-top-left-radius: 6px;
+}
+QTabBar::tab:selected {
+    background: #458588;
+	color: #FFFFFF;
+}
+QGroupBox {
+    color: #076678;
+    font: 14px;
+    padding: 15px;
+    border-style: none;
+}
+QMainWindow::separator {
+	background: #d5c4a1;
+	width: 1px;
+	height: 1px;
+}
+QComboBox {
+	selection-background-color: #458588;
+	selection-color: #FFFFFF;
+}
+
+QToolBar{
+	background: #d5c4a1;
+	border: 0px;
+}
+QPushButton {
+	background-color: #d79921;
+    color: #FFFFFF;
+	font: 14px;
+}
+QToolButton {
+	background-color: #d79921;
+    color: #FFFFFF;
+	font: 14px;
+}
+QTreeWidget, QListWidget {
+	background-color: #fbf1c7;
+	color: #282828;
+    alternate-background-color: #d5c4a1; 
+	font: 14px;
+}
+QTreeWidget#uiTreeWidget {
+	background-color: #d5c4a1;
+	color: #282828;
+	font: bold 16px;
+}
+QTreeWidget::item:selected, QTreeWidget::item:hover, QMenu::item:selected,QToolButton::hover,QPushButton::hover,QTabBar::tab:hover {
+	background-color: #458588;
+	color: #FFFFFF;
+}
+QMenu {
+	background-color: #fbf1c7;
+    color: #282828;
+}
+QLabel {
+	color: #282828;
+	font: 14px;
+}
+QLabel#uiTitleLabel {
+	color: #282828;
+	font: bold 16px;
+}
+
+QAbstractScrollArea::corner {
+    background: #fbf1c7;
+}
+QScrollBar::handle:horizontal {
+    background: #d5c4a1;
+    min-width: 20px;
+}
+QScrollBar::handle:vertical {
+    background: #d5c4a1;
+    min-width: 20px;
+}
+QScrollBar:vertical {
+    width: 6px;
+}
+QScrollBar:horizontal {
+    height: 6px;
+}
+QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical, QScrollBar::down-arrow:horizontal, QScrollBar::up-arrow:horizontal { 
+	border: 0px;
+    height: 0px; 
+    width: 0px; 
+}
+         
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal, QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+  background: none
+}
+QStatusBar {
+	background-color: #d5c4a1;
+	color: #282828;
+}
+
+QRadioButton, QCheckBox {
+  color: #282828;
+}
+QRadioButton::disabled, QCheckBox::disabled {
+  color: gray;
+}
+
+
+</string>
+   </property>
+   <layout class="QGridLayout">
+    <property name="margin">
+     <number>0</number>
+    </property>
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <item row="0" column="0">
+     <widget class="GraphicsView" name="uiGraphicsView">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="uiMenuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>986</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QWidget{
+	background-color: #fbf1c7;
+}
+QMenuBar::item{
+	background-color: #fbf1c7;
+}
+QDockWidget::title{
+	background: #d5c4a1;
+	padding-left: 5px;
+}
+QDockWidget, QMenuBar{
+    color: #282828;
+    font: bold 14px;
+}
+QTextEdit, QPlainTextEdit, QLineEdit, QSpinBox, QComboBox {
+  background-color: #d5c4a1;
+  color: #282828;
+}
+QTextEdit#uiConsoleTextEdit {
+  background-color: #fbf1c7;
+  color: #282828;
+  font: 13px;
+}
+QTabWidget {
+	font: 14px;
+	border-top: 2px;
+}
+QTabBar::tab {
+    background: #d5c4a1;
+    color: #282828;
+    min-width: 8ex;
+    padding: 2px;
+	border-top-right-radius: 6px;
+	border-top-left-radius: 6px;
+}
+QTabBar::tab:selected {
+    background: #458588;
+	color: #FFFFFF;
+}
+QGroupBox {
+    color: #076678;
+    font: 14px;
+    padding: 15px;
+    border-style: none;
+}
+QMainWindow::separator {
+	background: #d5c4a1;
+	width: 1px;
+	height: 1px;
+}
+QComboBox {
+	selection-background-color: #458588;
+	selection-color: #FFFFFF;
+}
+
+QToolBar{
+	background: #d5c4a1;
+	border: 0px;
+}
+QPushButton {
+	background-color: #d79921;
+    color: #FFFFFF;
+	font: 14px;
+}
+QToolButton {
+	background-color: #d79921;
+    color: #FFFFFF;
+	font: 14px;
+}
+QTreeWidget, QListWidget {
+	background-color: #fbf1c7;
+	color: #282828;
+    alternate-background-color: #d5c4a1; 
+	font: 14px;
+}
+QTreeWidget#uiTreeWidget {
+	background-color: #d5c4a1;
+	color: #282828;
+	font: bold 16px;
+}
+QTreeWidget::item:selected, QTreeWidget::item:hover, QMenu::item:selected,QToolButton::hover,QPushButton::hover,QTabBar::tab:hover {
+	background-color: #458588;
+	color: #FFFFFF;
+}
+QMenu {
+	background-color: #fbf1c7;
+    color: #282828;
+}
+QLabel {
+	color: #282828;
+	font: 14px;
+}
+QLabel#uiTitleLabel {
+	color: #282828;
+	font: bold 16px;
+}
+
+QAbstractScrollArea::corner {
+    background: #fbf1c7;
+}
+QScrollBar::handle:horizontal {
+    background: #d5c4a1;
+    min-width: 20px;
+}
+QScrollBar::handle:vertical {
+    background: #d5c4a1;
+    min-width: 20px;
+}
+QScrollBar:vertical {
+    width: 6px;
+}
+QScrollBar:horizontal {
+    height: 6px;
+}
+QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical, QScrollBar::down-arrow:horizontal, QScrollBar::up-arrow:horizontal { 
+	border: 0px;
+    height: 0px; 
+    width: 0px; 
+}
+         
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal, QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+  background: none
+}
+QStatusBar {
+	background-color: #d5c4a1;
+	color: #282828;
+}
+
+QRadioButton, QCheckBox {
+  color: #282828;
+}
+QRadioButton::disabled, QCheckBox::disabled {
+  color: gray;
+}
+
+
+</string>
+   </property>
+   <widget class="QMenu" name="uiEditMenu">
+    <property name="title">
+     <string>&amp;Edit</string>
+    </property>
+    <addaction name="uiSelectAllAction"/>
+    <addaction name="uiSelectNoneAction"/>
+    <addaction name="separator"/>
+    <addaction name="uiSnapshotAction"/>
+    <addaction name="uiPreferencesAction"/>
+   </widget>
+   <widget class="QMenu" name="uiFileMenu">
+    <property name="title">
+     <string>&amp;File</string>
+    </property>
+    <addaction name="uiNewProjectAction"/>
+    <addaction name="uiOpenProjectAction"/>
+    <addaction name="uiSaveProjectAsAction"/>
+    <addaction name="uiEditProjectAction"/>
+    <addaction name="uiDeleteProjectAction"/>
+    <addaction name="separator"/>
+    <addaction name="uiExportProjectAction"/>
+    <addaction name="uiImportProjectAction"/>
+    <addaction name="separator"/>
+    <addaction name="uiOpenApplianceAction"/>
+    <addaction name="uiNewTemplateAction"/>
+    <addaction name="separator"/>
+    <addaction name="uiQuitAction"/>
+   </widget>
+   <widget class="QMenu" name="uiHelpMenu">
+    <property name="title">
+     <string>&amp;Help</string>
+    </property>
+    <addaction name="uiOnlineHelpAction"/>
+    <addaction name="uiCheckForUpdateAction"/>
+    <addaction name="uiSetupWizard"/>
+    <addaction name="uiAcademyAction"/>
+    <addaction name="uiDoctorAction"/>
+    <addaction name="uiExportDebugInformationAction"/>
+    <addaction name="uiAboutQtAction"/>
+    <addaction name="uiAboutAction"/>
+   </widget>
+   <widget class="QMenu" name="uiViewMenu">
+    <property name="title">
+     <string>&amp;View</string>
+    </property>
+    <widget class="QMenu" name="uiDocksMenu">
+     <property name="title">
+      <string>Docks</string>
+     </property>
+    </widget>
+    <addaction name="uiActionFullscreen"/>
+    <addaction name="separator"/>
+    <addaction name="uiZoomInAction"/>
+    <addaction name="uiZoomOutAction"/>
+    <addaction name="uiZoomResetAction"/>
+    <addaction name="uiFitInViewAction"/>
+    <addaction name="separator"/>
+    <addaction name="uiShowLayersAction"/>
+    <addaction name="uiSnapToGridAction"/>
+    <addaction name="uiShowGridAction"/>
+    <addaction name="uiResetPortLabelsAction"/>
+    <addaction name="uiShowPortNamesAction"/>
+    <addaction name="uiLockAllAction"/>
+    <addaction name="separator"/>
+    <addaction name="uiDocksMenu"/>
+   </widget>
+   <widget class="QMenu" name="uiControlMenu">
+    <property name="title">
+     <string>Control</string>
+    </property>
+    <addaction name="uiStartAllAction"/>
+    <addaction name="uiSuspendAllAction"/>
+    <addaction name="uiStopAllAction"/>
+    <addaction name="uiReloadAllAction"/>
+    <addaction name="uiAuxConsoleAllAction"/>
+    <addaction name="uiConsoleAllAction"/>
+   </widget>
+   <widget class="QMenu" name="uiAnnotateMenu">
+    <property name="title">
+     <string>Annotate</string>
+    </property>
+    <addaction name="uiAddNoteAction"/>
+    <addaction name="uiInsertImageAction"/>
+    <addaction name="uiDrawRectangleAction"/>
+    <addaction name="uiDrawEllipseAction"/>
+    <addaction name="uiDrawLineAction"/>
+   </widget>
+   <widget class="QMenu" name="uiDeviceMenu">
+    <property name="title">
+     <string>Node</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="uiToolsMenu">
+    <property name="title">
+     <string>&amp;Tools</string>
+    </property>
+    <addaction name="uiScreenshotAction"/>
+    <addaction name="uiImportExportConfigsAction"/>
+    <addaction name="uiWebInterfaceAction"/>
+    <addaction name="uiWebUIAction"/>
+   </widget>
+   <addaction name="uiFileMenu"/>
+   <addaction name="uiEditMenu"/>
+   <addaction name="uiViewMenu"/>
+   <addaction name="uiControlMenu"/>
+   <addaction name="uiDeviceMenu"/>
+   <addaction name="uiAnnotateMenu"/>
+   <addaction name="uiToolsMenu"/>
+   <addaction name="uiHelpMenu"/>
+  </widget>
+  <widget class="StatusBar" name="uiStatusBar"/>
+  <widget class="QToolBar" name="uiGeneralToolBar">
+   <property name="windowTitle">
+    <string>General</string>
+   </property>
+   <property name="toolTip">
+    <string/>
+   </property>
+   <property name="statusTip">
+    <string/>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QWidget{
+	background-color: #fbf1c7;
+}
+QMenuBar::item{
+	background-color: #fbf1c7;
+}
+QDockWidget::title{
+	background: #d5c4a1;
+	padding-left: 5px;
+}
+QDockWidget, QMenuBar{
+    color: #282828;
+    font: bold 14px;
+}
+QTextEdit, QPlainTextEdit, QLineEdit, QSpinBox, QComboBox {
+  background-color: #d5c4a1;
+  color: #282828;
+}
+QTextEdit#uiConsoleTextEdit {
+  background-color: #fbf1c7;
+  color: #282828;
+  font: 13px;
+}
+QTabWidget {
+	font: 14px;
+	border-top: 2px;
+}
+QTabBar::tab {
+    background: #d5c4a1;
+    color: #282828;
+    min-width: 8ex;
+    padding: 2px;
+	border-top-right-radius: 6px;
+	border-top-left-radius: 6px;
+}
+QTabBar::tab:selected {
+    background: #458588;
+	color: #FFFFFF;
+}
+QGroupBox {
+    color: #076678;
+    font: 14px;
+    padding: 15px;
+    border-style: none;
+}
+QMainWindow::separator {
+	background: #d5c4a1;
+	width: 1px;
+	height: 1px;
+}
+QComboBox {
+	selection-background-color: #458588;
+	selection-color: #FFFFFF;
+}
+
+QToolBar{
+	background: #d5c4a1;
+	border: 0px;
+}
+QPushButton {
+	background-color: #d79921;
+    color: #FFFFFF;
+	font: 14px;
+}
+QToolButton {
+	background-color: #d79921;
+    color: #FFFFFF;
+	font: 14px;
+}
+QTreeWidget, QListWidget {
+	background-color: #fbf1c7;
+	color: #282828;
+    alternate-background-color: #d5c4a1; 
+	font: 14px;
+}
+QTreeWidget#uiTreeWidget {
+	background-color: #d5c4a1;
+	color: #282828;
+	font: bold 16px;
+}
+QTreeWidget::item:selected, QTreeWidget::item:hover, QMenu::item:selected,QToolButton::hover,QPushButton::hover,QTabBar::tab:hover {
+	background-color: #458588;
+	color: #FFFFFF;
+}
+QMenu {
+	background-color: #fbf1c7;
+    color: #282828;
+}
+QLabel {
+	color: #282828;
+	font: 14px;
+}
+QLabel#uiTitleLabel {
+	color: #282828;
+	font: bold 16px;
+}
+
+QAbstractScrollArea::corner {
+    background: #fbf1c7;
+}
+QScrollBar::handle:horizontal {
+    background: #d5c4a1;
+    min-width: 20px;
+}
+QScrollBar::handle:vertical {
+    background: #d5c4a1;
+    min-width: 20px;
+}
+QScrollBar:vertical {
+    width: 6px;
+}
+QScrollBar:horizontal {
+    height: 6px;
+}
+QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical, QScrollBar::down-arrow:horizontal, QScrollBar::up-arrow:horizontal { 
+	border: 0px;
+    height: 0px; 
+    width: 0px; 
+}
+         
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal, QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+  background: none
+}
+QStatusBar {
+	background-color: #d5c4a1;
+	color: #282828;
+}
+
+QRadioButton, QCheckBox {
+  color: #282828;
+}
+QRadioButton::disabled, QCheckBox::disabled {
+  color: gray;
+}
+
+
+</string>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>32</width>
+     <height>32</height>
+    </size>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="uiNewProjectAction"/>
+   <addaction name="uiOpenProjectAction"/>
+  </widget>
+  <widget class="NodesDockWidget" name="uiNodesDockWidget">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="visible">
+    <bool>true</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QWidget{
+	background-color: #fbf1c7;
+}
+QMenuBar::item{
+	background-color: #fbf1c7;
+}
+QDockWidget::title{
+	background: #d5c4a1;
+	padding-left: 5px;
+}
+QDockWidget, QMenuBar{
+    color: #282828;
+    font: bold 14px;
+}
+QTextEdit, QPlainTextEdit, QLineEdit, QSpinBox, QComboBox {
+  background-color: #d5c4a1;
+  color: #282828;
+}
+QTextEdit#uiConsoleTextEdit {
+  background-color: #fbf1c7;
+  color: #282828;
+  font: 13px;
+}
+QTabWidget {
+	font: 14px;
+	border-top: 2px;
+}
+QTabBar::tab {
+    background: #d5c4a1;
+    color: #282828;
+    min-width: 8ex;
+    padding: 2px;
+	border-top-right-radius: 6px;
+	border-top-left-radius: 6px;
+}
+QTabBar::tab:selected {
+    background: #458588;
+	color: #FFFFFF;
+}
+QGroupBox {
+    color: #076678;
+    font: 14px;
+    padding: 15px;
+    border-style: none;
+}
+QMainWindow::separator {
+	background: #d5c4a1;
+	width: 1px;
+	height: 1px;
+}
+QComboBox {
+	selection-background-color: #458588;
+	selection-color: #FFFFFF;
+}
+
+QToolBar{
+	background: #d5c4a1;
+	border: 0px;
+}
+QPushButton {
+	background-color: #d79921;
+    color: #FFFFFF;
+	font: 14px;
+}
+QToolButton {
+	background-color: #d79921;
+    color: #FFFFFF;
+	font: 14px;
+}
+QTreeWidget, QListWidget {
+	background-color: #fbf1c7;
+	color: #282828;
+    alternate-background-color: #d5c4a1; 
+	font: 14px;
+}
+QTreeWidget#uiTreeWidget {
+	background-color: #d5c4a1;
+	color: #282828;
+	font: bold 16px;
+}
+QTreeWidget::item:selected, QTreeWidget::item:hover, QMenu::item:selected,QToolButton::hover,QPushButton::hover,QTabBar::tab:hover {
+	background-color: #458588;
+	color: #FFFFFF;
+}
+QMenu {
+	background-color: #fbf1c7;
+    color: #282828;
+}
+QLabel {
+	color: #282828;
+	font: 14px;
+}
+QLabel#uiTitleLabel {
+	color: #282828;
+	font: bold 16px;
+}
+
+QAbstractScrollArea::corner {
+    background: #fbf1c7;
+}
+QScrollBar::handle:horizontal {
+    background: #d5c4a1;
+    min-width: 20px;
+}
+QScrollBar::handle:vertical {
+    background: #d5c4a1;
+    min-width: 20px;
+}
+QScrollBar:vertical {
+    width: 6px;
+}
+QScrollBar:horizontal {
+    height: 6px;
+}
+QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical, QScrollBar::down-arrow:horizontal, QScrollBar::up-arrow:horizontal { 
+	border: 0px;
+    height: 0px; 
+    width: 0px; 
+}
+         
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal, QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+  background: none
+}
+QStatusBar {
+	background-color: #d5c4a1;
+	color: #282828;
+}
+
+QRadioButton, QCheckBox {
+  color: #282828;
+}
+QRadioButton::disabled, QCheckBox::disabled {
+  color: gray;
+}
+
+
+</string>
+   </property>
+   <property name="floating">
+    <bool>false</bool>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea</set>
+   </property>
+   <property name="windowTitle">
+    <string>All templates</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="uiNodesDockWidgetContents">
+    <layout class="QVBoxLayout">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <property name="margin">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QLineEdit" name="uiNodesFilterLineEdit">
+       <property name="placeholderText">
+        <string>Filter</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="NodesView" name="uiNodesView">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="toolTip">
+        <string>Drag a node to the workspace (Press SHIFT while dragging to add multiple identical nodes).</string>
+       </property>
+       <property name="dragEnabled">
+        <bool>false</bool>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>32</width>
+         <height>32</height>
+        </size>
+       </property>
+       <property name="rootIsDecorated">
+        <bool>false</bool>
+       </property>
+       <attribute name="headerVisible">
+        <bool>false</bool>
+       </attribute>
+       <column>
+        <property name="text">
+         <string>1</string>
+        </property>
+       </column>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="uiNewTemplatePushButton">
+       <property name="text">
+        <string>New template</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../../resources/resources.qrc">
+         <normaloff>:/icons/plus.svg</normaloff>:/icons/plus.svg</iconset>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QToolBar" name="uiBrowsersToolBar">
+   <property name="windowTitle">
+    <string>Devices</string>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QWidget{
+	background-color: #fbf1c7;
+}
+QMenuBar::item{
+	background-color: #fbf1c7;
+}
+QDockWidget::title{
+	background: #d5c4a1;
+	padding-left: 5px;
+}
+QDockWidget, QMenuBar{
+    color: #282828;
+    font: bold 14px;
+}
+QTextEdit, QPlainTextEdit, QLineEdit, QSpinBox, QComboBox {
+  background-color: #d5c4a1;
+  color: #282828;
+}
+QTextEdit#uiConsoleTextEdit {
+  background-color: #fbf1c7;
+  color: #282828;
+  font: 13px;
+}
+QTabWidget {
+	font: 14px;
+	border-top: 2px;
+}
+QTabBar::tab {
+    background: #d5c4a1;
+    color: #282828;
+    min-width: 8ex;
+    padding: 2px;
+	border-top-right-radius: 6px;
+	border-top-left-radius: 6px;
+}
+QTabBar::tab:selected {
+    background: #458588;
+	color: #FFFFFF;
+}
+QGroupBox {
+    color: #076678;
+    font: 14px;
+    padding: 15px;
+    border-style: none;
+}
+QMainWindow::separator {
+	background: #d5c4a1;
+	width: 1px;
+	height: 1px;
+}
+QComboBox {
+	selection-background-color: #458588;
+	selection-color: #FFFFFF;
+}
+
+QToolBar{
+	background: #d5c4a1;
+	border: 0px;
+}
+QPushButton {
+	background-color: #d79921;
+    color: #FFFFFF;
+	font: 14px;
+}
+QToolButton {
+	background-color: #d79921;
+    color: #FFFFFF;
+	font: 14px;
+}
+QTreeWidget, QListWidget {
+	background-color: #fbf1c7;
+	color: #282828;
+    alternate-background-color: #d5c4a1; 
+	font: 14px;
+}
+QTreeWidget#uiTreeWidget {
+	background-color: #d5c4a1;
+	color: #282828;
+	font: bold 16px;
+}
+QTreeWidget::item:selected, QTreeWidget::item:hover, QMenu::item:selected,QToolButton::hover,QPushButton::hover,QTabBar::tab:hover {
+	background-color: #458588;
+	color: #FFFFFF;
+}
+QMenu {
+	background-color: #fbf1c7;
+    color: #282828;
+}
+QLabel {
+	color: #282828;
+	font: 14px;
+}
+QLabel#uiTitleLabel {
+	color: #282828;
+	font: bold 16px;
+}
+
+QAbstractScrollArea::corner {
+    background: #fbf1c7;
+}
+QScrollBar::handle:horizontal {
+    background: #d5c4a1;
+    min-width: 20px;
+}
+QScrollBar::handle:vertical {
+    background: #d5c4a1;
+    min-width: 20px;
+}
+QScrollBar:vertical {
+    width: 6px;
+}
+QScrollBar:horizontal {
+    height: 6px;
+}
+QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical, QScrollBar::down-arrow:horizontal, QScrollBar::up-arrow:horizontal { 
+	border: 0px;
+    height: 0px; 
+    width: 0px; 
+}
+         
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal, QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+  background: none
+}
+QStatusBar {
+	background-color: #d5c4a1;
+	color: #282828;
+}
+
+QRadioButton, QCheckBox {
+  color: #282828;
+}
+QRadioButton::disabled, QCheckBox::disabled {
+  color: gray;
+}
+
+
+</string>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>48</width>
+     <height>48</height>
+    </size>
+   </property>
+   <property name="toolButtonStyle">
+    <enum>Qt::ToolButtonIconOnly</enum>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>LeftToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="uiBrowseRoutersAction"/>
+   <addaction name="separator"/>
+   <addaction name="uiBrowseSwitchesAction"/>
+   <addaction name="separator"/>
+   <addaction name="uiBrowseEndDevicesAction"/>
+   <addaction name="separator"/>
+   <addaction name="uiBrowseSecurityDevicesAction"/>
+   <addaction name="separator"/>
+   <addaction name="uiBrowseAllDevicesAction"/>
+   <addaction name="separator"/>
+   <addaction name="uiAddLinkAction"/>
+   <addaction name="separator"/>
+  </widget>
+  <widget class="QToolBar" name="uiControlToolBar">
+   <property name="windowTitle">
+    <string>Emulation</string>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QWidget{
+	background-color: #fbf1c7;
+}
+QMenuBar::item{
+	background-color: #fbf1c7;
+}
+QDockWidget::title{
+	background: #d5c4a1;
+	padding-left: 5px;
+}
+QDockWidget, QMenuBar{
+    color: #282828;
+    font: bold 14px;
+}
+QTextEdit, QPlainTextEdit, QLineEdit, QSpinBox, QComboBox {
+  background-color: #d5c4a1;
+  color: #282828;
+}
+QTextEdit#uiConsoleTextEdit {
+  background-color: #fbf1c7;
+  color: #282828;
+  font: 13px;
+}
+QTabWidget {
+	font: 14px;
+	border-top: 2px;
+}
+QTabBar::tab {
+    background: #d5c4a1;
+    color: #282828;
+    min-width: 8ex;
+    padding: 2px;
+	border-top-right-radius: 6px;
+	border-top-left-radius: 6px;
+}
+QTabBar::tab:selected {
+    background: #458588;
+	color: #FFFFFF;
+}
+QGroupBox {
+    color: #076678;
+    font: 14px;
+    padding: 15px;
+    border-style: none;
+}
+QMainWindow::separator {
+	background: #d5c4a1;
+	width: 1px;
+	height: 1px;
+}
+QComboBox {
+	selection-background-color: #458588;
+	selection-color: #FFFFFF;
+}
+
+QToolBar{
+	background: #d5c4a1;
+	border: 0px;
+}
+QPushButton {
+	background-color: #d79921;
+    color: #FFFFFF;
+	font: 14px;
+}
+QToolButton {
+	background-color: #d79921;
+    color: #FFFFFF;
+	font: 14px;
+}
+QTreeWidget, QListWidget {
+	background-color: #fbf1c7;
+	color: #282828;
+    alternate-background-color: #d5c4a1; 
+	font: 14px;
+}
+QTreeWidget#uiTreeWidget {
+	background-color: #d5c4a1;
+	color: #282828;
+	font: bold 16px;
+}
+QTreeWidget::item:selected, QTreeWidget::item:hover, QMenu::item:selected,QToolButton::hover,QPushButton::hover,QTabBar::tab:hover {
+	background-color: #458588;
+	color: #FFFFFF;
+}
+QMenu {
+	background-color: #fbf1c7;
+    color: #282828;
+}
+QLabel {
+	color: #282828;
+	font: 14px;
+}
+QLabel#uiTitleLabel {
+	color: #282828;
+	font: bold 16px;
+}
+
+QAbstractScrollArea::corner {
+    background: #fbf1c7;
+}
+QScrollBar::handle:horizontal {
+    background: #d5c4a1;
+    min-width: 20px;
+}
+QScrollBar::handle:vertical {
+    background: #d5c4a1;
+    min-width: 20px;
+}
+QScrollBar:vertical {
+    width: 6px;
+}
+QScrollBar:horizontal {
+    height: 6px;
+}
+QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical, QScrollBar::down-arrow:horizontal, QScrollBar::up-arrow:horizontal { 
+	border: 0px;
+    height: 0px; 
+    width: 0px; 
+}
+         
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal, QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+  background: none
+}
+QStatusBar {
+	background-color: #d5c4a1;
+	color: #282828;
+}
+
+QRadioButton, QCheckBox {
+  color: #282828;
+}
+QRadioButton::disabled, QCheckBox::disabled {
+  color: gray;
+}
+
+
+</string>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>32</width>
+     <height>32</height>
+    </size>
+   </property>
+   <property name="toolButtonStyle">
+    <enum>Qt::ToolButtonIconOnly</enum>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="uiSnapshotAction"/>
+   <addaction name="uiShowPortNamesAction"/>
+   <addaction name="separator"/>
+   <addaction name="uiConsoleAllAction"/>
+   <addaction name="uiStartAllAction"/>
+   <addaction name="uiSuspendAllAction"/>
+   <addaction name="uiStopAllAction"/>
+   <addaction name="uiReloadAllAction"/>
+  </widget>
+  <widget class="QDockWidget" name="uiConsoleDockWidget">
+   <property name="maximumSize">
+    <size>
+     <width>524287</width>
+     <height>524287</height>
+    </size>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QWidget{
+	background-color: #fbf1c7;
+}
+QMenuBar::item{
+	background-color: #fbf1c7;
+}
+QDockWidget::title{
+	background: #d5c4a1;
+	padding-left: 5px;
+}
+QDockWidget, QMenuBar{
+    color: #282828;
+    font: bold 14px;
+}
+QTextEdit, QPlainTextEdit, QLineEdit, QSpinBox, QComboBox {
+  background-color: #d5c4a1;
+  color: #282828;
+}
+QTextEdit#uiConsoleTextEdit {
+  background-color: #fbf1c7;
+  color: #282828;
+  font: 13px;
+}
+QTabWidget {
+	font: 14px;
+	border-top: 2px;
+}
+QTabBar::tab {
+    background: #d5c4a1;
+    color: #282828;
+    min-width: 8ex;
+    padding: 2px;
+	border-top-right-radius: 6px;
+	border-top-left-radius: 6px;
+}
+QTabBar::tab:selected {
+    background: #458588;
+	color: #FFFFFF;
+}
+QGroupBox {
+    color: #076678;
+    font: 14px;
+    padding: 15px;
+    border-style: none;
+}
+QMainWindow::separator {
+	background: #d5c4a1;
+	width: 1px;
+	height: 1px;
+}
+QComboBox {
+	selection-background-color: #458588;
+	selection-color: #FFFFFF;
+}
+
+QToolBar{
+	background: #d5c4a1;
+	border: 0px;
+}
+QPushButton {
+	background-color: #d79921;
+    color: #FFFFFF;
+	font: 14px;
+}
+QToolButton {
+	background-color: #d79921;
+    color: #FFFFFF;
+	font: 14px;
+}
+QTreeWidget, QListWidget {
+	background-color: #fbf1c7;
+	color: #282828;
+    alternate-background-color: #d5c4a1; 
+	font: 14px;
+}
+QTreeWidget#uiTreeWidget {
+	background-color: #d5c4a1;
+	color: #282828;
+	font: bold 16px;
+}
+QTreeWidget::item:selected, QTreeWidget::item:hover, QMenu::item:selected,QToolButton::hover,QPushButton::hover,QTabBar::tab:hover {
+	background-color: #458588;
+	color: #FFFFFF;
+}
+QMenu {
+	background-color: #fbf1c7;
+    color: #282828;
+}
+QLabel {
+	color: #282828;
+	font: 14px;
+}
+QLabel#uiTitleLabel {
+	color: #282828;
+	font: bold 16px;
+}
+
+QAbstractScrollArea::corner {
+    background: #fbf1c7;
+}
+QScrollBar::handle:horizontal {
+    background: #d5c4a1;
+    min-width: 20px;
+}
+QScrollBar::handle:vertical {
+    background: #d5c4a1;
+    min-width: 20px;
+}
+QScrollBar:vertical {
+    width: 6px;
+}
+QScrollBar:horizontal {
+    height: 6px;
+}
+QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical, QScrollBar::down-arrow:horizontal, QScrollBar::up-arrow:horizontal { 
+	border: 0px;
+    height: 0px; 
+    width: 0px; 
+}
+         
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal, QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+  background: none
+}
+QStatusBar {
+	background-color: #d5c4a1;
+	color: #282828;
+}
+
+QRadioButton, QCheckBox {
+  color: #282828;
+}
+QRadioButton::disabled, QCheckBox::disabled {
+  color: gray;
+}
+
+
+</string>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::AllDockWidgetAreas</set>
+   </property>
+   <property name="windowTitle">
+    <string>Console</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>8</number>
+   </attribute>
+   <widget class="QWidget" name="uiConsoleDockWidgetContents">
+    <layout class="QVBoxLayout">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <property name="margin">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="ConsoleView" name="uiConsoleTextEdit">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QToolBar" name="uiAnnotationToolBar">
+   <property name="windowTitle">
+    <string>Drawing</string>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QWidget{
+	background-color: #fbf1c7;
+}
+QMenuBar::item{
+	background-color: #fbf1c7;
+}
+QDockWidget::title{
+	background: #d5c4a1;
+	padding-left: 5px;
+}
+QDockWidget, QMenuBar{
+    color: #282828;
+    font: bold 14px;
+}
+QTextEdit, QPlainTextEdit, QLineEdit, QSpinBox, QComboBox {
+  background-color: #d5c4a1;
+  color: #282828;
+}
+QTextEdit#uiConsoleTextEdit {
+  background-color: #fbf1c7;
+  color: #282828;
+  font: 13px;
+}
+QTabWidget {
+	font: 14px;
+	border-top: 2px;
+}
+QTabBar::tab {
+    background: #d5c4a1;
+    color: #282828;
+    min-width: 8ex;
+    padding: 2px;
+	border-top-right-radius: 6px;
+	border-top-left-radius: 6px;
+}
+QTabBar::tab:selected {
+    background: #458588;
+	color: #FFFFFF;
+}
+QGroupBox {
+    color: #076678;
+    font: 14px;
+    padding: 15px;
+    border-style: none;
+}
+QMainWindow::separator {
+	background: #d5c4a1;
+	width: 1px;
+	height: 1px;
+}
+QComboBox {
+	selection-background-color: #458588;
+	selection-color: #FFFFFF;
+}
+
+QToolBar{
+	background: #d5c4a1;
+	border: 0px;
+}
+QPushButton {
+	background-color: #d79921;
+    color: #FFFFFF;
+	font: 14px;
+}
+QToolButton {
+	background-color: #d79921;
+    color: #FFFFFF;
+	font: 14px;
+}
+QTreeWidget, QListWidget {
+	background-color: #fbf1c7;
+	color: #282828;
+    alternate-background-color: #d5c4a1; 
+	font: 14px;
+}
+QTreeWidget#uiTreeWidget {
+	background-color: #d5c4a1;
+	color: #282828;
+	font: bold 16px;
+}
+QTreeWidget::item:selected, QTreeWidget::item:hover, QMenu::item:selected,QToolButton::hover,QPushButton::hover,QTabBar::tab:hover {
+	background-color: #458588;
+	color: #FFFFFF;
+}
+QMenu {
+	background-color: #fbf1c7;
+    color: #282828;
+}
+QLabel {
+	color: #282828;
+	font: 14px;
+}
+QLabel#uiTitleLabel {
+	color: #282828;
+	font: bold 16px;
+}
+
+QAbstractScrollArea::corner {
+    background: #fbf1c7;
+}
+QScrollBar::handle:horizontal {
+    background: #d5c4a1;
+    min-width: 20px;
+}
+QScrollBar::handle:vertical {
+    background: #d5c4a1;
+    min-width: 20px;
+}
+QScrollBar:vertical {
+    width: 6px;
+}
+QScrollBar:horizontal {
+    height: 6px;
+}
+QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical, QScrollBar::down-arrow:horizontal, QScrollBar::up-arrow:horizontal { 
+	border: 0px;
+    height: 0px; 
+    width: 0px; 
+}
+         
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal, QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+  background: none
+}
+QStatusBar {
+	background-color: #d5c4a1;
+	color: #282828;
+}
+
+QRadioButton, QCheckBox {
+  color: #282828;
+}
+QRadioButton::disabled, QCheckBox::disabled {
+  color: gray;
+}
+
+
+</string>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>32</width>
+     <height>32</height>
+    </size>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="uiAddNoteAction"/>
+   <addaction name="uiInsertImageAction"/>
+   <addaction name="uiDrawRectangleAction"/>
+   <addaction name="uiDrawEllipseAction"/>
+   <addaction name="uiDrawLineAction"/>
+   <addaction name="uiLockAllAction"/>
+   <addaction name="uiZoomInAction"/>
+   <addaction name="uiZoomOutAction"/>
+   <addaction name="uiScreenshotAction"/>
+  </widget>
+  <widget class="QDockWidget" name="uiTopologySummaryDockWidget">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QWidget{
+	background-color: #fbf1c7;
+}
+QMenuBar::item{
+	background-color: #fbf1c7;
+}
+QDockWidget::title{
+	background: #d5c4a1;
+	padding-left: 5px;
+}
+QDockWidget, QMenuBar{
+    color: #282828;
+    font: bold 14px;
+}
+QTextEdit, QPlainTextEdit, QLineEdit, QSpinBox, QComboBox {
+  background-color: #d5c4a1;
+  color: #282828;
+}
+QTextEdit#uiConsoleTextEdit {
+  background-color: #fbf1c7;
+  color: #282828;
+  font: 13px;
+}
+QTabWidget {
+	font: 14px;
+	border-top: 2px;
+}
+QTabBar::tab {
+    background: #d5c4a1;
+    color: #282828;
+    min-width: 8ex;
+    padding: 2px;
+	border-top-right-radius: 6px;
+	border-top-left-radius: 6px;
+}
+QTabBar::tab:selected {
+    background: #458588;
+	color: #FFFFFF;
+}
+QGroupBox {
+    color: #076678;
+    font: 14px;
+    padding: 15px;
+    border-style: none;
+}
+QMainWindow::separator {
+	background: #d5c4a1;
+	width: 1px;
+	height: 1px;
+}
+QComboBox {
+	selection-background-color: #458588;
+	selection-color: #FFFFFF;
+}
+
+QToolBar{
+	background: #d5c4a1;
+	border: 0px;
+}
+QPushButton {
+	background-color: #d79921;
+    color: #FFFFFF;
+	font: 14px;
+}
+QToolButton {
+	background-color: #d79921;
+    color: #FFFFFF;
+	font: 14px;
+}
+QTreeWidget, QListWidget {
+	background-color: #fbf1c7;
+	color: #282828;
+    alternate-background-color: #d5c4a1; 
+	font: 14px;
+}
+QTreeWidget#uiTreeWidget {
+	background-color: #d5c4a1;
+	color: #282828;
+	font: bold 16px;
+}
+QTreeWidget::item:selected, QTreeWidget::item:hover, QMenu::item:selected,QToolButton::hover,QPushButton::hover,QTabBar::tab:hover {
+	background-color: #458588;
+	color: #FFFFFF;
+}
+QMenu {
+	background-color: #fbf1c7;
+    color: #282828;
+}
+QLabel {
+	color: #282828;
+	font: 14px;
+}
+QLabel#uiTitleLabel {
+	color: #282828;
+	font: bold 16px;
+}
+
+QAbstractScrollArea::corner {
+    background: #fbf1c7;
+}
+QScrollBar::handle:horizontal {
+    background: #d5c4a1;
+    min-width: 20px;
+}
+QScrollBar::handle:vertical {
+    background: #d5c4a1;
+    min-width: 20px;
+}
+QScrollBar:vertical {
+    width: 6px;
+}
+QScrollBar:horizontal {
+    height: 6px;
+}
+QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical, QScrollBar::down-arrow:horizontal, QScrollBar::up-arrow:horizontal { 
+	border: 0px;
+    height: 0px; 
+    width: 0px; 
+}
+         
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal, QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+  background: none
+}
+QStatusBar {
+	background-color: #d5c4a1;
+	color: #282828;
+}
+
+QRadioButton, QCheckBox {
+  color: #282828;
+}
+QRadioButton::disabled, QCheckBox::disabled {
+  color: gray;
+}
+
+
+</string>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::AllDockWidgetAreas</set>
+   </property>
+   <property name="windowTitle">
+    <string>Topology Summary</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QWidget" name="uiTopologySummaryDockWidgetContents">
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <layout class="QGridLayout">
+     <property name="margin">
+      <number>0</number>
+     </property>
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <item row="0" column="0">
+      <widget class="TopologySummaryView" name="uiTopologySummaryTreeWidget">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <attribute name="headerVisible">
+        <bool>true</bool>
+       </attribute>
+       <column>
+        <property name="text">
+         <string>Node</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Console</string>
+        </property>
+       </column>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QDockWidget" name="uiComputeSummaryDockWidget">
+   <property name="styleSheet">
+    <string notr="true">QWidget{
+	background-color: #fbf1c7;
+}
+QMenuBar::item{
+	background-color: #fbf1c7;
+}
+QDockWidget::title{
+	background: #d5c4a1;
+	padding-left: 5px;
+}
+QDockWidget, QMenuBar{
+    color: #282828;
+    font: bold 14px;
+}
+QTextEdit, QPlainTextEdit, QLineEdit, QSpinBox, QComboBox {
+  background-color: #d5c4a1;
+  color: #282828;
+}
+QTextEdit#uiConsoleTextEdit {
+  background-color: #fbf1c7;
+  color: #282828;
+  font: 13px;
+}
+QTabWidget {
+	font: 14px;
+	border-top: 2px;
+}
+QTabBar::tab {
+    background: #d5c4a1;
+    color: #282828;
+    min-width: 8ex;
+    padding: 2px;
+	border-top-right-radius: 6px;
+	border-top-left-radius: 6px;
+}
+QTabBar::tab:selected {
+    background: #458588;
+	color: #FFFFFF;
+}
+QGroupBox {
+    color: #076678;
+    font: 14px;
+    padding: 15px;
+    border-style: none;
+}
+QMainWindow::separator {
+	background: #d5c4a1;
+	width: 1px;
+	height: 1px;
+}
+QComboBox {
+	selection-background-color: #458588;
+	selection-color: #FFFFFF;
+}
+
+QToolBar{
+	background: #d5c4a1;
+	border: 0px;
+}
+QPushButton {
+	background-color: #d79921;
+    color: #FFFFFF;
+	font: 14px;
+}
+QToolButton {
+	background-color: #d79921;
+    color: #FFFFFF;
+	font: 14px;
+}
+QTreeWidget, QListWidget {
+	background-color: #fbf1c7;
+	color: #282828;
+    alternate-background-color: #d5c4a1; 
+	font: 14px;
+}
+QTreeWidget#uiTreeWidget {
+	background-color: #d5c4a1;
+	color: #282828;
+	font: bold 16px;
+}
+QTreeWidget::item:selected, QTreeWidget::item:hover, QMenu::item:selected,QToolButton::hover,QPushButton::hover,QTabBar::tab:hover {
+	background-color: #458588;
+	color: #FFFFFF;
+}
+QMenu {
+	background-color: #fbf1c7;
+    color: #282828;
+}
+QLabel {
+	color: #282828;
+	font: 14px;
+}
+QLabel#uiTitleLabel {
+	color: #282828;
+	font: bold 16px;
+}
+
+QAbstractScrollArea::corner {
+    background: #fbf1c7;
+}
+QScrollBar::handle:horizontal {
+    background: #d5c4a1;
+    min-width: 20px;
+}
+QScrollBar::handle:vertical {
+    background: #d5c4a1;
+    min-width: 20px;
+}
+QScrollBar:vertical {
+    width: 6px;
+}
+QScrollBar:horizontal {
+    height: 6px;
+}
+QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical, QScrollBar::down-arrow:horizontal, QScrollBar::up-arrow:horizontal { 
+	border: 0px;
+    height: 0px; 
+    width: 0px; 
+}
+         
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal, QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+  background: none
+}
+QStatusBar {
+	background-color: #d5c4a1;
+	color: #282828;
+}
+
+QRadioButton, QCheckBox {
+  color: #282828;
+}
+QRadioButton::disabled, QCheckBox::disabled {
+  color: gray;
+}
+
+
+</string>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::AllDockWidgetAreas</set>
+   </property>
+   <property name="windowTitle">
+    <string>Servers Summary</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents">
+    <layout class="QGridLayout" name="gridLayout">
+     <property name="margin">
+      <number>0</number>
+     </property>
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <item row="0" column="0">
+      <widget class="ComputeSummaryView" name="uiComputeSummaryTreeWidget">
+       <attribute name="headerVisible">
+        <bool>false</bool>
+       </attribute>
+       <column>
+        <property name="text">
+         <string notr="true">1</string>
+        </property>
+       </column>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <action name="uiAboutAction">
+   <property name="text">
+    <string>&amp;About</string>
+   </property>
+   <property name="statusTip">
+    <string>About</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::AboutRole</enum>
+   </property>
+  </action>
+  <action name="uiQuitAction">
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/icons/quit.svg</normaloff>:/icons/quit.svg</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Quit</string>
+   </property>
+   <property name="statusTip">
+    <string>Quit</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="uiOpenProjectAction">
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/icons/open.svg</normaloff>:/icons/open.svg</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Open project</string>
+   </property>
+   <property name="toolTip">
+    <string>Open project</string>
+   </property>
+   <property name="statusTip">
+    <string>Open project</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="uiOnlineHelpAction">
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/icons/help.svg</normaloff>:/icons/help.svg</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Online help</string>
+   </property>
+   <property name="toolTip">
+    <string>Online help</string>
+   </property>
+   <property name="statusTip">
+    <string>Online Help</string>
+   </property>
+  </action>
+  <action name="uiScreenshotAction">
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/icons/camera-photo.svg</normaloff>
+     <activeoff>:/icons/camera-photo-hover.svg</activeoff>:/icons/camera-photo.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Take a screenshot</string>
+   </property>
+   <property name="toolTip">
+    <string>Take a screenshot</string>
+   </property>
+   <property name="statusTip">
+    <string>Take a screenshot</string>
+   </property>
+  </action>
+  <action name="uiStartAllAction">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/icons/start.svg</normaloff>
+     <activeoff>:/icons/start-hover.svg</activeoff>:/icons/start.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Start/Resume all nodes</string>
+   </property>
+   <property name="toolTip">
+    <string>Start/Resume all nodes</string>
+   </property>
+   <property name="statusTip">
+    <string>Start/Resume all devices</string>
+   </property>
+  </action>
+  <action name="uiStopAllAction">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/icons/stop.svg</normaloff>
+     <activeoff>:/icons/stop-hover.svg</activeoff>:/icons/stop.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Stop all nodes</string>
+   </property>
+   <property name="toolTip">
+    <string>Stop all nodes</string>
+   </property>
+   <property name="statusTip">
+    <string>Stop all devices</string>
+   </property>
+  </action>
+  <action name="uiConsoleAllAction">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/icons/console.svg</normaloff>:/icons/console.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Console connect to all nodes</string>
+   </property>
+   <property name="toolTip">
+    <string>Console connect to all nodes</string>
+   </property>
+   <property name="statusTip">
+    <string>Console to all devices</string>
+   </property>
+  </action>
+  <action name="uiAboutQtAction">
+   <property name="text">
+    <string>About &amp;Qt</string>
+   </property>
+   <property name="statusTip">
+    <string>About Qt</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::AboutQtRole</enum>
+   </property>
+  </action>
+  <action name="uiZoomInAction">
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/icons/zoom-in.png</normaloff>
+     <activeoff>:/icons/zoom-in-hover.png</activeoff>:/icons/zoom-in.png</iconset>
+   </property>
+   <property name="text">
+    <string>Zoom in</string>
+   </property>
+   <property name="toolTip">
+    <string>Zoom in</string>
+   </property>
+   <property name="statusTip">
+    <string>Zoom in</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl++</string>
+   </property>
+  </action>
+  <action name="uiZoomOutAction">
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/icons/zoom-out.png</normaloff>
+     <activeoff>:/icons/zoom-out-hover.png</activeoff>:/icons/zoom-out.png</iconset>
+   </property>
+   <property name="text">
+    <string>Zoom out</string>
+   </property>
+   <property name="toolTip">
+    <string>Zoom out</string>
+   </property>
+   <property name="statusTip">
+    <string>Zoom out</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+-</string>
+   </property>
+  </action>
+  <action name="uiZoomResetAction">
+   <property name="text">
+    <string>Zoom reset</string>
+   </property>
+   <property name="statusTip">
+    <string>Zoom reset</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+0</string>
+   </property>
+  </action>
+  <action name="uiSelectAllAction">
+   <property name="text">
+    <string>Select &amp;all</string>
+   </property>
+   <property name="statusTip">
+    <string>Select All</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+A</string>
+   </property>
+  </action>
+  <action name="uiSelectNoneAction">
+   <property name="text">
+    <string>Select &amp;none</string>
+   </property>
+   <property name="statusTip">
+    <string>Select None</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+A</string>
+   </property>
+  </action>
+  <action name="uiPreferencesAction">
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/icons/applications.svg</normaloff>:/icons/applications.svg</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Preferences...</string>
+   </property>
+   <property name="statusTip">
+    <string>Preferences</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+P</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::PreferencesRole</enum>
+   </property>
+  </action>
+  <action name="uiSuspendAllAction">
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/icons/pause.svg</normaloff>
+     <activeoff>:/icons/pause-hover.svg</activeoff>:/icons/pause.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Suspend all nodes</string>
+   </property>
+   <property name="toolTip">
+    <string>Suspend all nodes</string>
+   </property>
+   <property name="statusTip">
+    <string>Suspend all devices</string>
+   </property>
+  </action>
+  <action name="uiAddNoteAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/icons/add-note.svg</normaloff>:/icons/add-note.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Add note</string>
+   </property>
+   <property name="toolTip">
+    <string>Add a note</string>
+   </property>
+   <property name="statusTip">
+    <string>Add a note</string>
+   </property>
+  </action>
+  <action name="uiNewProjectAction">
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/icons/new-project.svg</normaloff>:/icons/new-project.svg</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;New blank project</string>
+   </property>
+   <property name="iconText">
+    <string>New Project</string>
+   </property>
+   <property name="toolTip">
+    <string>New blank project</string>
+   </property>
+   <property name="statusTip">
+    <string>New blank project</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="uiImportExportConfigsAction">
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/icons/import_export_configs.svg</normaloff>:/icons/import_export_configs.svg</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Import/Export node configs</string>
+   </property>
+   <property name="toolTip">
+    <string>Import/Export node configs</string>
+   </property>
+   <property name="statusTip">
+    <string>Import/Export device configs</string>
+   </property>
+  </action>
+  <action name="uiInsertImageAction">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/icons/image.svg</normaloff>:/icons/image.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Insert picture</string>
+   </property>
+   <property name="toolTip">
+    <string>Insert a picture</string>
+   </property>
+   <property name="statusTip">
+    <string>Insert a picture</string>
+   </property>
+  </action>
+  <action name="uiDrawRectangleAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/icons/rectangle.svg</normaloff>
+     <activeoff>:/icons/rectangle-hover.svg</activeoff>:/icons/rectangle.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Draw rectangle</string>
+   </property>
+   <property name="toolTip">
+    <string>Draw a rectangle</string>
+   </property>
+   <property name="statusTip">
+    <string>Draw a rectangle</string>
+   </property>
+  </action>
+  <action name="uiDrawEllipseAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/icons/ellipse.svg</normaloff>
+     <activeoff>:/icons/ellipse-hover.svg</activeoff>:/icons/ellipse.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Draw ellipse</string>
+   </property>
+   <property name="toolTip">
+    <string>Draw an ellipse</string>
+   </property>
+   <property name="statusTip">
+    <string>Draw an ellipse</string>
+   </property>
+  </action>
+  <action name="uiShowPortNamesAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/icons/show-interface-names.svg</normaloff>:/icons/show-interface-names.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Show/Hide interface labels</string>
+   </property>
+   <property name="toolTip">
+    <string>Show/Hide interface labels</string>
+   </property>
+   <property name="statusTip">
+    <string>Show/Hide interface labels</string>
+   </property>
+  </action>
+  <action name="uiSnapshotAction">
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/icons/snapshot.svg</normaloff>:/icons/snapshot.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Manage snapshots</string>
+   </property>
+   <property name="toolTip">
+    <string>Manage snapshots</string>
+   </property>
+   <property name="statusTip">
+    <string>Manage snapshots</string>
+   </property>
+  </action>
+  <action name="uiShowLayersAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show layers</string>
+   </property>
+   <property name="statusTip">
+    <string>Show layers</string>
+   </property>
+  </action>
+  <action name="uiSnapToGridAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Snap to grid</string>
+   </property>
+   <property name="statusTip">
+    <string>Snap To Grid</string>
+   </property>
+  </action>
+  <action name="uiSaveProjectAsAction">
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/icons/save-as-project.svg</normaloff>:/icons/save-as-project.svg</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Save project as...</string>
+   </property>
+   <property name="toolTip">
+    <string>Save project as...</string>
+   </property>
+   <property name="statusTip">
+    <string>Save project as...</string>
+   </property>
+  </action>
+  <action name="uiReloadAllAction">
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/icons/reload.svg</normaloff>:/icons/reload.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Reload all nodes</string>
+   </property>
+   <property name="toolTip">
+    <string>Reload all nodes</string>
+   </property>
+   <property name="statusTip">
+    <string>Reload all devices</string>
+   </property>
+  </action>
+  <action name="uiAuxConsoleAllAction">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/icons/aux-console.svg</normaloff>:/icons/aux-console.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Console connect via AUX to all nodes</string>
+   </property>
+   <property name="toolTip">
+    <string>Console connect via AUX to all nodes</string>
+   </property>
+   <property name="statusTip">
+    <string>Console AUX to all devices</string>
+   </property>
+  </action>
+  <action name="uiResetPortLabelsAction">
+   <property name="text">
+    <string>Reset interface labels</string>
+   </property>
+   <property name="toolTip">
+    <string>Reset interface labels</string>
+   </property>
+   <property name="statusTip">
+    <string>Reset Interface Labels</string>
+   </property>
+  </action>
+  <action name="uiCheckForUpdateAction">
+   <property name="text">
+    <string>Check for &amp;Update</string>
+   </property>
+   <property name="statusTip">
+    <string>Check for Update</string>
+   </property>
+  </action>
+  <action name="uiBrowseRoutersAction">
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/icons/router.png</normaloff>
+     <activeoff>:/icons/router-hover.png</activeoff>:/icons/router.png</iconset>
+   </property>
+   <property name="text">
+    <string>Browse Routers</string>
+   </property>
+   <property name="iconText">
+    <string>Browse Routers</string>
+   </property>
+   <property name="toolTip">
+    <string>Browse Routers</string>
+   </property>
+   <property name="statusTip">
+    <string>Browse Routers</string>
+   </property>
+  </action>
+  <action name="uiBrowseSwitchesAction">
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/icons/switch.png</normaloff>
+     <activeoff>:/icons/switch-hover.png</activeoff>:/icons/switch.png</iconset>
+   </property>
+   <property name="text">
+    <string>Browse Switches</string>
+   </property>
+   <property name="iconText">
+    <string>Browse Switches</string>
+   </property>
+   <property name="toolTip">
+    <string>Browse Switches</string>
+   </property>
+   <property name="statusTip">
+    <string>Browse Switches</string>
+   </property>
+  </action>
+  <action name="uiBrowseEndDevicesAction">
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/icons/PC.png</normaloff>
+     <activeoff>:/icons/PC-hover.png</activeoff>:/icons/PC.png</iconset>
+   </property>
+   <property name="text">
+    <string>Browse End Devices</string>
+   </property>
+   <property name="iconText">
+    <string>Browse End Devices</string>
+   </property>
+   <property name="toolTip">
+    <string>Browse End Devices</string>
+   </property>
+   <property name="statusTip">
+    <string>Browse End Devices</string>
+   </property>
+  </action>
+  <action name="uiBrowseSecurityDevicesAction">
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/icons/firewall.png</normaloff>
+     <activeoff>:/icons/firewall-hover.png</activeoff>:/icons/firewall.png</iconset>
+   </property>
+   <property name="text">
+    <string>Browse Security Devices</string>
+   </property>
+   <property name="iconText">
+    <string>Browse Security Devices</string>
+   </property>
+   <property name="toolTip">
+    <string>Browse Security Devices</string>
+   </property>
+   <property name="statusTip">
+    <string>Browse Security Devices</string>
+   </property>
+  </action>
+  <action name="uiBrowseAllDevicesAction">
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/icons/browse-all-icons.png</normaloff>
+     <activeoff>:/icons/browse-all-icons-hover.png</activeoff>:/icons/browse-all-icons.png</iconset>
+   </property>
+   <property name="text">
+    <string>Browse all devices</string>
+   </property>
+   <property name="toolTip">
+    <string>Browse all devices</string>
+   </property>
+   <property name="statusTip">
+    <string>Browse all devices</string>
+   </property>
+  </action>
+  <action name="uiAddLinkAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/icons/connection-new.svg</normaloff>
+     <normalon>:/icons/cancel-connection.svg</normalon>
+     <activeoff>:/icons/connection-new-hover.svg</activeoff>
+     <activeon>:/icons/cancel-connection.svg</activeon>:/icons/connection-new.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Add a link</string>
+   </property>
+   <property name="toolTip">
+    <string>Add a link</string>
+   </property>
+   <property name="statusTip">
+    <string>Add a link</string>
+   </property>
+  </action>
+  <action name="uiFitInViewAction">
+   <property name="text">
+    <string>Fit in view</string>
+   </property>
+  </action>
+  <action name="uiActionFullscreen">
+   <property name="text">
+    <string>Fullscreen</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+F</string>
+   </property>
+  </action>
+  <action name="uiSetupWizard">
+   <property name="text">
+    <string>&amp;Setup Wizard</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
+  </action>
+  <action name="uiOpenApplianceAction">
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/icons/open.svg</normaloff>:/icons/open.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Import appliance</string>
+   </property>
+  </action>
+  <action name="uiExportDebugInformationAction">
+   <property name="text">
+    <string>Export debug information</string>
+   </property>
+   <property name="toolTip">
+    <string>&amp;Export debug information</string>
+   </property>
+  </action>
+  <action name="uiDoctorAction">
+   <property name="text">
+    <string>GNS3 &amp;Doctor</string>
+   </property>
+  </action>
+  <action name="uiExportProjectAction">
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/icons/export.svg</normaloff>:/icons/export.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Export portable project</string>
+   </property>
+  </action>
+  <action name="uiImportProjectAction">
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/icons/import.svg</normaloff>:/icons/import.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Import portable project</string>
+   </property>
+  </action>
+  <action name="uiAcademyAction">
+   <property name="text">
+    <string>GNS3 &amp;Academy</string>
+   </property>
+  </action>
+  <action name="uiDeleteProjectAction">
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/icons/delete.svg</normaloff>:/icons/delete.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Delete project</string>
+   </property>
+  </action>
+  <action name="uiShowGridAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show the grid</string>
+   </property>
+  </action>
+  <action name="uiEditProjectAction">
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/icons/edit.svg</normaloff>:/icons/edit.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Edit project</string>
+   </property>
+  </action>
+  <action name="uiWebInterfaceAction">
+   <property name="text">
+    <string>Light Web interface</string>
+   </property>
+  </action>
+  <action name="uiDrawLineAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/icons/vertically.svg</normaloff>:/icons/vertically.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Drawn line</string>
+   </property>
+  </action>
+  <action name="uiLockAllAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/icons/unlock.svg</normaloff>
+     <normalon>:/icons/lock.svg</normalon>
+     <activeoff>:/icons/unlock.svg</activeoff>
+     <activeon>:/icons/lock.svg</activeon>:/icons/unlock.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Lock or unlock all items</string>
+   </property>
+   <property name="toolTip">
+    <string>Lock or unlock all items</string>
+   </property>
+  </action>
+  <action name="uiWebUIAction">
+   <property name="text">
+    <string>WebUI - topology preview</string>
+   </property>
+  </action>
+  <action name="uiNewTemplateAction">
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/icons/plus.svg</normaloff>:/icons/plus.svg</iconset>
+   </property>
+   <property name="text">
+    <string>New template</string>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>GraphicsView</class>
+   <extends>QGraphicsView</extends>
+   <header>..graphics_view.h</header>
+  </customwidget>
+  <customwidget>
+   <class>NodesDockWidget</class>
+   <extends>QDockWidget</extends>
+   <header>..nodes_dock_widget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>StatusBar</class>
+   <extends>QStatusBar</extends>
+   <header>..status_bar.h</header>
+  </customwidget>
+  <customwidget>
+   <class>NodesView</class>
+   <extends>QTreeWidget</extends>
+   <header>..nodes_view.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ConsoleView</class>
+   <extends>QTextEdit</extends>
+   <header>..console_view.h</header>
+  </customwidget>
+  <customwidget>
+   <class>TopologySummaryView</class>
+   <extends>QTreeWidget</extends>
+   <header>..topology_summary_view.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ComputeSummaryView</class>
+   <extends>QTreeWidget</extends>
+   <header>..compute_summary_view.h</header>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>uiGraphicsView</tabstop>
+  <tabstop>uiNodesView</tabstop>
+  <tabstop>uiConsoleTextEdit</tabstop>
+  <tabstop>uiTopologySummaryTreeWidget</tabstop>
+ </tabstops>
+ <resources>
+  <include location="../../resources/resources.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>uiQuitAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>398</x>
+     <y>302</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

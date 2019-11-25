@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>VMwareVMWizard</class>
+ <widget class="QWizard" name="VMwareVMWizard">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>755</width>
+    <height>453</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>New VMware VM template</string>
+  </property>
+  <property name="modal">
+   <bool>true</bool>
+  </property>
+  <widget class="QWizardPage" name="uiServerWizardPage">
+   <property name="title">
+    <string>Server</string>
+   </property>
+   <property name="subTitle">
+    <string>Please choose a server type to run the VMware VM (Workstation, Player or Fusion).</string>
+   </property>
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="0" column="0">
+     <widget class="QGroupBox" name="uiServerTypeGroupBox">
+      <property name="title">
+       <string>Server type</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QRadioButton" name="uiRemoteRadioButton">
+         <property name="text">
+          <string>Run this VMware VM on a remote GNS3 computer</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="uiLocalRadioButton">
+         <property name="text">
+          <string>Run this VMware VM on my local computer</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QGroupBox" name="uiRemoteServersGroupBox">
+      <property name="title">
+       <string>Remote servers</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_8">
+       <item row="0" column="1">
+        <widget class="QComboBox" name="uiRemoteServersComboBox">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="uiRemoteServersLabel">
+         <property name="text">
+          <string>Run on server:</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWizardPage" name="uiVMwareWizardPage">
+   <property name="title">
+    <string>VMware Virtual Machine</string>
+   </property>
+   <property name="subTitle">
+    <string>Please choose a VMware virtual machine from the list.</string>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QLabel" name="uiVMListLabel">
+      <property name="text">
+       <string>VM list:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QComboBox" name="uiVMListComboBox">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0" colspan="2">
+     <widget class="QCheckBox" name="uiBaseVMCheckBox">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="text">
+       <string>Use as a linked base VM (experimental)</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <tabstops>
+  <tabstop>uiVMListComboBox</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>
