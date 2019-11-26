@@ -16,145 +16,6 @@
   <property name="contextMenuPolicy">
    <enum>Qt::PreventContextMenu</enum>
   </property>
-  <property name="styleSheet">
-   <string notr="true">QWidget{
-	background-color: #fbf1c7;
-}
-QMenuBar::item{
-	background-color: #fbf1c7;
-}
-QDockWidget::title{
-	background: #d5c4a1;
-	padding-left: 5px;
-}
-QDockWidget, QMenuBar{
-    color: #282828;
-    font: bold 14px;
-}
-QTextEdit, QPlainTextEdit, QLineEdit, QSpinBox, QComboBox {
-  background-color: #d5c4a1;
-  color: #282828;
-}
-QTextEdit#uiConsoleTextEdit {
-  background-color: #fbf1c7;
-  color: #282828;
-  font: 13px;
-}
-QTabWidget {
-	font: 14px;
-	border-top: 2px;
-}
-QTabBar::tab {
-    background: #d5c4a1;
-    color: #282828;
-    min-width: 8ex;
-    padding: 2px;
-	border-top-right-radius: 6px;
-	border-top-left-radius: 6px;
-}
-QTabBar::tab:selected {
-    background: #458588;
-	color: #FFFFFF;
-}
-QGroupBox {
-    color: #076678;
-    font: 14px;
-    padding: 15px;
-    border-style: none;
-}
-QMainWindow::separator {
-	background: #d5c4a1;
-	width: 1px;
-	height: 1px;
-}
-QComboBox {
-	selection-background-color: #458588;
-	selection-color: #FFFFFF;
-}
-
-QToolBar{
-	background: #d5c4a1;
-	border: 0px;
-}
-QPushButton {
-	background-color: #d79921;
-    color: #FFFFFF;
-	font: 14px;
-}
-QToolButton {
-	background-color: #d79921;
-    color: #FFFFFF;
-	font: 14px;
-}
-QTreeWidget, QListWidget {
-	background-color: #fbf1c7;
-	color: #282828;
-    alternate-background-color: #d5c4a1; 
-	font: 14px;
-}
-QTreeWidget#uiTreeWidget {
-	background-color: #d5c4a1;
-	color: #282828;
-	font: bold 16px;
-}
-QTreeWidget::item:selected, QTreeWidget::item:hover, QMenu::item:selected,QToolButton::hover,QPushButton::hover,QTabBar::tab:hover {
-	background-color: #458588;
-	color: #FFFFFF;
-}
-QMenu {
-	background-color: #fbf1c7;
-    color: #282828;
-}
-QLabel {
-	color: #282828;
-	font: 14px;
-}
-QLabel#uiTitleLabel {
-	color: #282828;
-	font: bold 16px;
-}
-
-QAbstractScrollArea::corner {
-    background: #fbf1c7;
-}
-QScrollBar::handle:horizontal {
-    background: #d5c4a1;
-    min-width: 20px;
-}
-QScrollBar::handle:vertical {
-    background: #d5c4a1;
-    min-width: 20px;
-}
-QScrollBar:vertical {
-    width: 6px;
-}
-QScrollBar:horizontal {
-    height: 6px;
-}
-QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical, QScrollBar::down-arrow:horizontal, QScrollBar::up-arrow:horizontal { 
-	border: 0px;
-    height: 0px; 
-    width: 0px; 
-}
-         
-QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal, QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
-  background: none
-}
-QStatusBar {
-	background-color: #d5c4a1;
-	color: #282828;
-}
-
-QRadioButton, QCheckBox {
-  color: #282828;
-}
-QRadioButton::disabled, QCheckBox::disabled {
-  color: gray;
-}
-
-
-</string>
-  </property>
   <property name="dockOptions">
    <set>QMainWindow::AllowTabbedDocks|QMainWindow::AnimatedDocks</set>
   </property>
@@ -217,11 +78,11 @@ QComboBox {
 
 QToolBar{
 	background: #d5c4a1;
-	border: 0px;
+	border: none;
 }
 QPushButton {
 	background-color: #d79921;
-    color: #FFFFFF;
+        color: #FFFFFF;
 	font: 14px;
 }
 QToolButton {
@@ -275,13 +136,13 @@ QScrollBar:horizontal {
     height: 6px;
 }
 QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical, QScrollBar::down-arrow:horizontal, QScrollBar::up-arrow:horizontal { 
-	border: 0px;
+	border: none;
     height: 0px; 
     width: 0px; 
 }
          
 QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal, QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
-  background: none
+  background: none;
 }
 QStatusBar {
 	background-color: #d5c4a1;
@@ -295,6 +156,10 @@ QRadioButton::disabled, QCheckBox::disabled {
   color: gray;
 }
 
+QHeaderView {
+	background-color: #242424;
+	color: #ffffff;
+}
 
 </string>
    </property>
@@ -384,11 +249,11 @@ QComboBox {
 
 QToolBar{
 	background: #d5c4a1;
-	border: 0px;
+	border: none;
 }
 QPushButton {
 	background-color: #d79921;
-    color: #FFFFFF;
+        color: #FFFFFF;
 	font: 14px;
 }
 QToolButton {
@@ -442,13 +307,13 @@ QScrollBar:horizontal {
     height: 6px;
 }
 QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical, QScrollBar::down-arrow:horizontal, QScrollBar::up-arrow:horizontal { 
-	border: 0px;
+	border: none;
     height: 0px; 
     width: 0px; 
 }
          
 QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal, QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
-  background: none
+  background: none;
 }
 QStatusBar {
 	background-color: #d5c4a1;
@@ -575,7 +440,147 @@ QRadioButton::disabled, QCheckBox::disabled {
    <addaction name="uiToolsMenu"/>
    <addaction name="uiHelpMenu"/>
   </widget>
-  <widget class="StatusBar" name="uiStatusBar"/>
+  <widget class="StatusBar" name="uiStatusBar">
+   <property name="styleSheet">
+    <string notr="true">QWidget{
+	background-color: #fbf1c7;
+}
+QMenuBar::item{
+	background-color: #fbf1c7;
+}
+QDockWidget::title{
+	background: #d5c4a1;
+	padding-left: 5px;
+}
+QDockWidget, QMenuBar{
+    color: #282828;
+    font: bold 14px;
+}
+QTextEdit, QPlainTextEdit, QLineEdit, QSpinBox, QComboBox {
+  background-color: #d5c4a1;
+  color: #282828;
+}
+QTextEdit#uiConsoleTextEdit {
+  background-color: #fbf1c7;
+  color: #282828;
+  font: 13px;
+}
+QTabWidget {
+	font: 14px;
+	border-top: 2px;
+}
+QTabBar::tab {
+    background: #d5c4a1;
+    color: #282828;
+    min-width: 8ex;
+    padding: 2px;
+	border-top-right-radius: 6px;
+	border-top-left-radius: 6px;
+}
+QTabBar::tab:selected {
+    background: #458588;
+	color: #FFFFFF;
+}
+QGroupBox {
+    color: #076678;
+    font: 14px;
+    padding: 15px;
+    border-style: none;
+}
+QMainWindow::separator {
+	background: #d5c4a1;
+	width: 1px;
+	height: 1px;
+}
+QComboBox {
+	selection-background-color: #458588;
+	selection-color: #FFFFFF;
+}
+
+QToolBar{
+	background: #d5c4a1;
+	border: none;
+}
+QPushButton {
+	background-color: #d79921;
+        color: #FFFFFF;
+	font: 14px;
+}
+QToolButton {
+	background-color: #d79921;
+    color: #FFFFFF;
+	font: 14px;
+}
+QTreeWidget, QListWidget {
+	background-color: #fbf1c7;
+	color: #282828;
+    alternate-background-color: #d5c4a1; 
+	font: 14px;
+}
+QTreeWidget#uiTreeWidget {
+	background-color: #d5c4a1;
+	color: #282828;
+	font: bold 16px;
+}
+QTreeWidget::item:selected, QTreeWidget::item:hover, QMenu::item:selected,QToolButton::hover,QPushButton::hover,QTabBar::tab:hover {
+	background-color: #458588;
+	color: #FFFFFF;
+}
+QMenu {
+	background-color: #fbf1c7;
+    color: #282828;
+}
+QLabel {
+	color: #282828;
+	font: 14px;
+}
+QLabel#uiTitleLabel {
+	color: #282828;
+	font: bold 16px;
+}
+
+QAbstractScrollArea::corner {
+    background: #fbf1c7;
+}
+QScrollBar::handle:horizontal {
+    background: #d5c4a1;
+    min-width: 20px;
+}
+QScrollBar::handle:vertical {
+    background: #d5c4a1;
+    min-width: 20px;
+}
+QScrollBar:vertical {
+    width: 6px;
+}
+QScrollBar:horizontal {
+    height: 6px;
+}
+QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical, QScrollBar::down-arrow:horizontal, QScrollBar::up-arrow:horizontal { 
+	border: none;
+    height: 0px; 
+    width: 0px; 
+}
+         
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal, QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+  background: none;
+}
+QStatusBar {
+	background-color: #d5c4a1;
+	color: #282828;
+}
+
+QRadioButton, QCheckBox {
+  color: #282828;
+}
+QRadioButton::disabled, QCheckBox::disabled {
+  color: gray;
+}
+
+
+</string>
+   </property>
+  </widget>
   <widget class="QToolBar" name="uiGeneralToolBar">
    <property name="windowTitle">
     <string>General</string>
@@ -644,11 +649,11 @@ QComboBox {
 
 QToolBar{
 	background: #d5c4a1;
-	border: 0px;
+	border: none;
 }
 QPushButton {
 	background-color: #d79921;
-    color: #FFFFFF;
+        color: #FFFFFF;
 	font: 14px;
 }
 QToolButton {
@@ -702,13 +707,13 @@ QScrollBar:horizontal {
     height: 6px;
 }
 QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical, QScrollBar::down-arrow:horizontal, QScrollBar::up-arrow:horizontal { 
-	border: 0px;
+	border: none;
     height: 0px; 
     width: 0px; 
 }
          
 QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal, QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
-  background: none
+  background: none;
 }
 QStatusBar {
 	background-color: #d5c4a1;
@@ -722,6 +727,10 @@ QRadioButton::disabled, QCheckBox::disabled {
   color: gray;
 }
 
+QHeaderView {
+	background-color: #242424;
+	color: #ffffff;
+}
 
 </string>
    </property>
@@ -808,11 +817,11 @@ QComboBox {
 
 QToolBar{
 	background: #d5c4a1;
-	border: 0px;
+	border: none;
 }
 QPushButton {
 	background-color: #d79921;
-    color: #FFFFFF;
+        color: #FFFFFF;
 	font: 14px;
 }
 QToolButton {
@@ -866,13 +875,13 @@ QScrollBar:horizontal {
     height: 6px;
 }
 QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical, QScrollBar::down-arrow:horizontal, QScrollBar::up-arrow:horizontal { 
-	border: 0px;
+	border: none;
     height: 0px; 
     width: 0px; 
 }
          
 QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal, QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
-  background: none
+  background: none;
 }
 QStatusBar {
 	background-color: #d5c4a1;
@@ -886,6 +895,10 @@ QRadioButton::disabled, QCheckBox::disabled {
   color: gray;
 }
 
+QHeaderView {
+	background-color: #242424;
+	color: #ffffff;
+}
 
 </string>
    </property>
@@ -1031,11 +1044,11 @@ QComboBox {
 
 QToolBar{
 	background: #d5c4a1;
-	border: 0px;
+	border: none;
 }
 QPushButton {
 	background-color: #d79921;
-    color: #FFFFFF;
+        color: #FFFFFF;
 	font: 14px;
 }
 QToolButton {
@@ -1089,13 +1102,13 @@ QScrollBar:horizontal {
     height: 6px;
 }
 QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical, QScrollBar::down-arrow:horizontal, QScrollBar::up-arrow:horizontal { 
-	border: 0px;
+	border: none;
     height: 0px; 
     width: 0px; 
 }
          
 QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal, QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
-  background: none
+  background: none;
 }
 QStatusBar {
 	background-color: #d5c4a1;
@@ -1109,6 +1122,10 @@ QRadioButton::disabled, QCheckBox::disabled {
   color: gray;
 }
 
+QHeaderView {
+	background-color: #242424;
+	color: #ffffff;
+}
 
 </string>
    </property>
@@ -1202,11 +1219,11 @@ QComboBox {
 
 QToolBar{
 	background: #d5c4a1;
-	border: 0px;
+	border: none;
 }
 QPushButton {
 	background-color: #d79921;
-    color: #FFFFFF;
+        color: #FFFFFF;
 	font: 14px;
 }
 QToolButton {
@@ -1260,13 +1277,13 @@ QScrollBar:horizontal {
     height: 6px;
 }
 QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical, QScrollBar::down-arrow:horizontal, QScrollBar::up-arrow:horizontal { 
-	border: 0px;
+	border: none;
     height: 0px; 
     width: 0px; 
 }
          
 QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal, QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
-  background: none
+  background: none;
 }
 QStatusBar {
 	background-color: #d5c4a1;
@@ -1280,6 +1297,10 @@ QRadioButton::disabled, QCheckBox::disabled {
   color: gray;
 }
 
+QHeaderView {
+	background-color: #242424;
+	color: #ffffff;
+}
 
 </string>
    </property>
@@ -1372,11 +1393,11 @@ QComboBox {
 
 QToolBar{
 	background: #d5c4a1;
-	border: 0px;
+	border: none;
 }
 QPushButton {
 	background-color: #d79921;
-    color: #FFFFFF;
+        color: #FFFFFF;
 	font: 14px;
 }
 QToolButton {
@@ -1430,13 +1451,13 @@ QScrollBar:horizontal {
     height: 6px;
 }
 QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical, QScrollBar::down-arrow:horizontal, QScrollBar::up-arrow:horizontal { 
-	border: 0px;
+	border: none;
     height: 0px; 
     width: 0px; 
 }
          
 QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal, QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
-  background: none
+  background: none;
 }
 QStatusBar {
 	background-color: #d5c4a1;
@@ -1450,6 +1471,10 @@ QRadioButton::disabled, QCheckBox::disabled {
   color: gray;
 }
 
+QHeaderView {
+	background-color: #242424;
+	color: #ffffff;
+}
 
 </string>
    </property>
@@ -1545,11 +1570,11 @@ QComboBox {
 
 QToolBar{
 	background: #d5c4a1;
-	border: 0px;
+	border: none;
 }
 QPushButton {
 	background-color: #d79921;
-    color: #FFFFFF;
+        color: #FFFFFF;
 	font: 14px;
 }
 QToolButton {
@@ -1603,13 +1628,13 @@ QScrollBar:horizontal {
     height: 6px;
 }
 QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical, QScrollBar::down-arrow:horizontal, QScrollBar::up-arrow:horizontal { 
-	border: 0px;
+	border: none;
     height: 0px; 
     width: 0px; 
 }
          
 QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal, QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
-  background: none
+  background: none;
 }
 QStatusBar {
 	background-color: #d5c4a1;
@@ -1623,6 +1648,10 @@ QRadioButton::disabled, QCheckBox::disabled {
   color: gray;
 }
 
+QHeaderView {
+	background-color: #242424;
+	color: #ffffff;
+}
 
 </string>
    </property>
@@ -1713,11 +1742,11 @@ QComboBox {
 
 QToolBar{
 	background: #d5c4a1;
-	border: 0px;
+	border: none;
 }
 QPushButton {
 	background-color: #d79921;
-    color: #FFFFFF;
+        color: #FFFFFF;
 	font: 14px;
 }
 QToolButton {
@@ -1771,13 +1800,13 @@ QScrollBar:horizontal {
     height: 6px;
 }
 QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical, QScrollBar::down-arrow:horizontal, QScrollBar::up-arrow:horizontal { 
-	border: 0px;
+	border: none;
     height: 0px; 
     width: 0px; 
 }
          
 QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal, QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
-  background: none
+  background: none;
 }
 QStatusBar {
 	background-color: #d5c4a1;
@@ -1791,6 +1820,10 @@ QRadioButton::disabled, QCheckBox::disabled {
   color: gray;
 }
 
+QHeaderView {
+	background-color: #242424;
+	color: #ffffff;
+}
 
 </string>
    </property>
@@ -1902,11 +1935,11 @@ QComboBox {
 
 QToolBar{
 	background: #d5c4a1;
-	border: 0px;
+	border: none;
 }
 QPushButton {
 	background-color: #d79921;
-    color: #FFFFFF;
+        color: #FFFFFF;
 	font: 14px;
 }
 QToolButton {
@@ -1960,13 +1993,13 @@ QScrollBar:horizontal {
     height: 6px;
 }
 QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical, QScrollBar::down-arrow:horizontal, QScrollBar::up-arrow:horizontal { 
-	border: 0px;
+	border: none;
     height: 0px; 
     width: 0px; 
 }
          
 QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal, QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
-  background: none
+  background: none;
 }
 QStatusBar {
 	background-color: #d5c4a1;
@@ -1980,6 +2013,10 @@ QRadioButton::disabled, QCheckBox::disabled {
   color: gray;
 }
 
+QHeaderView {
+	background-color: #242424;
+	color: #ffffff;
+}
 
 </string>
    </property>
@@ -2793,7 +2830,6 @@ QRadioButton::disabled, QCheckBox::disabled {
  <tabstops>
   <tabstop>uiGraphicsView</tabstop>
   <tabstop>uiNodesView</tabstop>
-  <tabstop>uiConsoleTextEdit</tabstop>
   <tabstop>uiTopologySummaryTreeWidget</tabstop>
  </tabstops>
  <resources>
