@@ -1,0 +1,627 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ProjectDialog</class>
+ <widget class="QDialog" name="ProjectDialog">
+  <property name="windowModality">
+   <enum>Qt::ApplicationModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>520</width>
+    <height>308</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Project</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget{
+	background-color: #fbf1c7;
+}
+QMenuBar::item{
+	background-color: #fbf1c7;
+}
+QDockWidget::title{
+	background: #d5c4a1;
+	padding-left: 5px;
+}
+QDockWidget, QMenuBar{
+    color: #282828;
+    font: bold 14px;
+}
+QTextEdit, QPlainTextEdit, QLineEdit, QSpinBox, QComboBox {
+  background-color: #d5c4a1;
+  color: #282828;
+}
+QTextEdit#uiConsoleTextEdit {
+  background-color: #fbf1c7;
+  color: #282828;
+  font: 13px;
+}
+QTabWidget {
+	font: 14px;
+	border-top: 2px;
+}
+QTabBar::tab {
+    background: #d5c4a1;
+    color: #282828;
+    min-width: 8ex;
+    padding: 2px;
+	border-top-right-radius: 6px;
+	border-top-left-radius: 6px;
+}
+QTabBar::tab:selected {
+    background: #458588;
+	color: #FFFFFF;
+}
+QGroupBox {
+    color: #076678;
+    font: 14px;
+    padding: 15px;
+    border-style: none;
+}
+QMainWindow::separator {
+	background: #d5c4a1;
+	width: 1px;
+	height: 1px;
+}
+QComboBox {
+	selection-background-color: #458588;
+	selection-color: #FFFFFF;
+}
+
+QToolBar{
+	background: #d5c4a1;
+	border: 0px;
+}
+QPushButton {
+	background-color: #d79921;
+    color: #FFFFFF;
+	font: 14px;
+}
+QToolButton {
+	background-color: #d79921;
+    color: #FFFFFF;
+	font: 14px;
+}
+QTreeWidget, QListWidget {
+	background-color: #fbf1c7;
+	color: #282828;
+    alternate-background-color: #d5c4a1; 
+	font: 14px;
+}
+QTreeWidget#uiTreeWidget {
+	background-color: #d5c4a1;
+	color: #282828;
+	font: bold 16px;
+}
+QTreeWidget::item:selected, QTreeWidget::item:hover, QMenu::item:selected,QToolButton::hover,QPushButton::hover,QTabBar::tab:hover {
+	background-color: #458588;
+	color: #FFFFFF;
+}
+QMenu {
+	background-color: #fbf1c7;
+    color: #282828;
+}
+QLabel {
+	color: #282828;
+	font: 14px;
+}
+QLabel#uiTitleLabel {
+	color: #282828;
+	font: bold 16px;
+}
+
+QAbstractScrollArea::corner {
+    background: #fbf1c7;
+}
+QScrollBar::handle:horizontal {
+    background: #d5c4a1;
+    min-width: 20px;
+}
+QScrollBar::handle:vertical {
+    background: #d5c4a1;
+    min-width: 20px;
+}
+QScrollBar:vertical {
+    width: 6px;
+}
+QScrollBar:horizontal {
+    height: 6px;
+}
+QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical, QScrollBar::down-arrow:horizontal, QScrollBar::up-arrow:horizontal { 
+	border: 0px;
+    height: 0px; 
+    width: 0px; 
+}
+         
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal, QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+  background: none
+}
+QStatusBar {
+	background-color: #d5c4a1;
+	color: #282828;
+}
+
+QRadioButton, QCheckBox {
+  color: #282828;
+}
+QRadioButton::disabled, QCheckBox::disabled {
+  color: gray;
+}
+
+
+</string>
+  </property>
+  <property name="modal">
+   <bool>true</bool>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QTabWidget" name="uiProjectTabWidget">
+     <property name="styleSheet">
+      <string notr="true">QWidget{
+	background-color: #fbf1c7;
+}
+QMenuBar::item{
+	background-color: #fbf1c7;
+}
+QDockWidget::title{
+	background: #d5c4a1;
+	padding-left: 5px;
+}
+QDockWidget, QMenuBar{
+    color: #282828;
+    font: bold 14px;
+}
+QTextEdit, QPlainTextEdit, QLineEdit, QSpinBox, QComboBox {
+  background-color: #d5c4a1;
+  color: #282828;
+}
+QTextEdit#uiConsoleTextEdit {
+  background-color: #fbf1c7;
+  color: #282828;
+  font: 13px;
+}
+QTabWidget {
+	font: 14px;
+	border-top: 2px;
+}
+QTabBar::tab {
+    background: #d5c4a1;
+    color: #282828;
+    min-width: 8ex;
+    padding: 2px;
+	border-top-right-radius: 6px;
+	border-top-left-radius: 6px;
+}
+QTabBar::tab:selected {
+    background: #458588;
+	color: #FFFFFF;
+}
+QGroupBox {
+    color: #076678;
+    font: 14px;
+    padding: 15px;
+    border-style: none;
+}
+QMainWindow::separator {
+	background: #d5c4a1;
+	width: 1px;
+	height: 1px;
+}
+QComboBox {
+	selection-background-color: #458588;
+	selection-color: #FFFFFF;
+}
+
+QToolBar{
+	background: #d5c4a1;
+	border: 0px;
+}
+QPushButton {
+	background-color: #d79921;
+    color: #FFFFFF;
+	font: 14px;
+}
+QToolButton {
+	background-color: #d79921;
+    color: #FFFFFF;
+	font: 14px;
+}
+QTreeWidget, QListWidget {
+	background-color: #fbf1c7;
+	color: #282828;
+    alternate-background-color: #d5c4a1; 
+	font: 14px;
+}
+QTreeWidget#uiTreeWidget {
+	background-color: #d5c4a1;
+	color: #282828;
+	font: bold 16px;
+}
+QTreeWidget::item:selected, QTreeWidget::item:hover, QMenu::item:selected,QToolButton::hover,QPushButton::hover,QTabBar::tab:hover {
+	background-color: #458588;
+	color: #FFFFFF;
+}
+QMenu {
+	background-color: #fbf1c7;
+    color: #282828;
+}
+QLabel {
+	color: #282828;
+	font: 14px;
+}
+QLabel#uiTitleLabel {
+	color: #282828;
+	font: bold 16px;
+}
+
+QAbstractScrollArea::corner {
+    background: #fbf1c7;
+}
+QScrollBar::handle:horizontal {
+    background: #d5c4a1;
+    min-width: 20px;
+}
+QScrollBar::handle:vertical {
+    background: #d5c4a1;
+    min-width: 20px;
+}
+QScrollBar:vertical {
+    width: 6px;
+}
+QScrollBar:horizontal {
+    height: 6px;
+}
+QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical, QScrollBar::down-arrow:horizontal, QScrollBar::up-arrow:horizontal { 
+	border: 0px;
+    height: 0px; 
+    width: 0px; 
+}
+         
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal, QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+  background: none
+}
+QStatusBar {
+	background-color: #d5c4a1;
+	color: #282828;
+}
+
+QRadioButton, QCheckBox {
+  color: #282828;
+}
+QRadioButton::disabled, QCheckBox::disabled {
+  color: gray;
+}
+
+
+</string>
+     </property>
+     <property name="tabPosition">
+      <enum>QTabWidget::North</enum>
+     </property>
+     <property name="tabShape">
+      <enum>QTabWidget::Rounded</enum>
+     </property>
+     <property name="currentIndex">
+      <number>1</number>
+     </property>
+     <widget class="QWidget" name="uiNewProjectTab">
+      <attribute name="title">
+       <string>New project</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <property name="margin">
+        <number>10</number>
+       </property>
+       <item>
+        <widget class="QGroupBox" name="groupBox">
+         <property name="title">
+          <string>New project</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="1" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayout_3">
+            <item>
+             <widget class="QLineEdit" name="uiLocationLineEdit"/>
+            </item>
+            <item>
+             <widget class="QToolButton" name="uiLocationBrowserToolButton">
+              <property name="text">
+               <string>Browse...</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="uiNameLabel">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Name:</string>
+            </property>
+            <property name="textFormat">
+             <enum>Qt::AutoText</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="uiNameLineEdit"/>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="uiLocationLabel">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Location:</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="uiOpenProjectGroupBox">
+         <property name="title">
+          <string>Open project</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_2">
+          <item row="0" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <item>
+             <widget class="QPushButton" name="uiOpenProjectPushButton">
+              <property name="text">
+               <string>&amp;Open a project from disk</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="uiRecentProjectsPushButton">
+              <property name="text">
+               <string>&amp;Recent projects...</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_2">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>239</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="0">
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>5</width>
+              <height>5</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="uiProjectsLibraryTab">
+      <attribute name="title">
+       <string>Projects library</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <property name="margin">
+        <number>10</number>
+       </property>
+       <item>
+        <widget class="QTreeWidget" name="uiProjectsTreeWidget">
+         <property name="alternatingRowColors">
+          <bool>true</bool>
+         </property>
+         <property name="selectionMode">
+          <enum>QAbstractItemView::ExtendedSelection</enum>
+         </property>
+         <property name="sortingEnabled">
+          <bool>true</bool>
+         </property>
+         <attribute name="headerShowSortIndicator" stdset="0">
+          <bool>true</bool>
+         </attribute>
+         <column>
+          <property name="text">
+           <string>Name</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Status</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Path</string>
+          </property>
+         </column>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <item>
+          <widget class="QPushButton" name="uiDeleteProjectButton">
+           <property name="text">
+            <string>Delete</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="uiDuplicateProjectPushButton">
+           <property name="text">
+            <string>Duplicate</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="uiRefreshProjectsPushButton">
+           <property name="text">
+            <string>Refresh list</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QPushButton" name="uiSettingsPushButton">
+       <property name="text">
+        <string>Settings</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QDialogButtonBox" name="uiButtonBox">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="standardButtons">
+        <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>uiProjectTabWidget</tabstop>
+  <tabstop>uiNameLineEdit</tabstop>
+  <tabstop>uiLocationLineEdit</tabstop>
+  <tabstop>uiLocationBrowserToolButton</tabstop>
+  <tabstop>uiOpenProjectPushButton</tabstop>
+  <tabstop>uiRecentProjectsPushButton</tabstop>
+  <tabstop>uiSettingsPushButton</tabstop>
+  <tabstop>uiProjectsTreeWidget</tabstop>
+  <tabstop>uiDeleteProjectButton</tabstop>
+  <tabstop>uiDuplicateProjectPushButton</tabstop>
+  <tabstop>uiRefreshProjectsPushButton</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>uiButtonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>ProjectDialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>uiButtonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>ProjectDialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>uiNameLineEdit</sender>
+   <signal>returnPressed()</signal>
+   <receiver>ProjectDialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>321</x>
+     <y>56</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>288</x>
+     <y>93</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>uiLocationLineEdit</sender>
+   <signal>returnPressed()</signal>
+   <receiver>ProjectDialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>285</x>
+     <y>100</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>288</x>
+     <y>93</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

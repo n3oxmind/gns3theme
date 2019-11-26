@@ -21,12 +21,20 @@ tomorrow-night:   #2d2d2d #404040 #cccccc #b7855f #404040 #515151 #f2777a #f2777
 n30x-light:       #fafafa #eeeeee #424242 #03a9f4 #eeeeee #03a9f4 #ffffff #e91e63 #1a1a1a #424242 1.2 #e6e6e6   light
 n30x-grey:        #e0e0e0 #d9d9d9 #424242 #0288d1 #bfbfbf #0288d1 #ffffff #c4c4c4 #000000 #424242 1.2 #cccccc   light
 n30x-darkw:       #252525 #2a2a2a #00997a #b7855f #404040 #323232 #9575cd #c2185b #1a1a1a #939393 1.2 #323232   dark
+n30x-darker:      #0d0d0d #141414 #008066 #2979FF #181818 #000000 #BA4551 #161616 #b3b3b3 #008066 1.2 #181818   dark
+n30x-darkblue:    #28283e #26263e #00997a #934806 #20203a #22223e #c46008 #24243e #00997a #939393 1.2 #32324e   dark
 ```
 ### Installation
 1. Download/Clone ![gns3theme](https://github.com/n3oxmind/gns3theme/tree/master)
 2. Extract gns3theme
 3. cd to gns3theme directory
 4. Run `./gns3theme.sh  --help` for installation examples
+
+### Restore original gns3-gui and conf files
+```sh
+$ ./gns3theme.sh --restore-config
+$ pip3 install gns3-gui==2.2.3
+```
 
 ### Install n30x-dark3
 ```sh
