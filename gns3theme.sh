@@ -5,9 +5,10 @@ if [ ! ./gns3hack.sh ]; then
     exit 1
 fi
 REPO_DIR=$(cd $(dirname $0) && 'pwd')
-SRCDIR=./gns3-gui-2.1.14
+SRCDIR=./gns3-gui-2.2.3
 USER=$(logname)
-gns3_gui_conf=/home/$USER/.config/GNS3/gns3_gui.conf
+gns3_gui_conf=/home/$USER/.config/GNS3/2.2/gns3_gui.conf
+gns3_gui_conf_bak=/home/$USER/.config/GNS3/2.2/gns3_gui.conf.bak
 gns3_projects_dir=/home/$USER/GNS3/projects
 colorscheme=( "default" "default" "default" "default" "default" \
               "default" "default" "default" "default" "default" \
@@ -32,6 +33,7 @@ _usage() {
     printf "  %s\t\t%s\n" "-o, --opacity" "Apply transparency to gns3 gui"
     printf "  %s\t\t%s\n" "-s, --scheme" "Change gns3 theme from predefined schemes"
     printf "  %s\t%s\n" "-l, --list-schemes" "List gns3 schemes"
+    printf "  %s\t%s\n" "-r, --restore-config" "Restore Nagios config files"
     printf "\n"
     printf "%s\n" "Install theme from predefined schemes"
     printf "  %s\t\t%s\n"  "./gns3theme.sh --scheme gruvbox-light" 
@@ -41,6 +43,10 @@ _usage() {
     printf "%s\n" "Install custom scheme"
     printf "  %s\t\t%s\n"  "./gns3theme.sh --bg 282828 --bg2 323232 --fg FFFFFF --tbg 303030 .." 
     printf "  %s\t\t%s\n"  "./gns3theme.sh --bg 282828 --bg2 323232 --fg FFFFFF --tbg 303030 -o 0.95 .." 
+    printf "%s\n" "Restore Nagios Config Files"
+    printf "  %s\t\t%s\n"  "./gns3theme.sh --restore-config" 
+    printf "%s\n" "Restore gns3-gui"
+    printf "  %s\t\t%s\n"  "pip3 install gns3-gui=2.2.3"
 }
 tmpdir=$(mktemp -d -t)
 cp -af ${REPO_DIR}/* ${tmpdir}
@@ -57,7 +63,17 @@ _backup() {
         find $gns3_projects_dir -type f -name '*.gns3' -exec \
             $SHELL -c '[[ ! -f "{}".bak ]] && cp -a "{}" "{}".bak' \;
     fi
-        
+}
+
+_restore_config() {
+    if [ "${1}" == "gns3_gui_conf_bak" ]; then
+        if [ -f ${gns3_gui_conf_bak} ]; then
+            cp -af ${gns3_gui_conf_bak} ${gns3_gui_conf}
+        else
+            echo "No backup exist"
+            exit 1
+        fi
+    fi
 }
 if [ $# -lt 1 ]; then
     echo "$0: missing option"
@@ -118,7 +134,7 @@ _gns3scheme() {
     # this function will change the default gns3-gui interface colors
     _hex2rgb ${colorscheme[11]}
     _changecolor 
-    #_changesymbols
+    _changesymbols
     _fixissues
 }
 _prettyproject() {
@@ -128,11 +144,11 @@ _prettyproject() {
     # set note font color to a different color than appliance or default
     # set any bold color that been set manually on the project to a different color than regular note and appliance
     _backup "gns3_project_files"
-    newfontfamily='DejaVu Sans Mono'
-    newafontfamily='DejaVu Sans Mono'
+    newfontfamily='DejaVuSansMono Nerd Font Mono'
+    newafontfamily='DejaVuSansMono Nerd Font Mono'
     newfontcolor="${colorscheme[2]}"
     newafontcolor="${colorscheme[3]}"
-    boldfontcolor="${colorscheme[7]}"
+    boldfontcolor="${colorscheme[6]}"
     newafontsize=11
     find "${gns3_projects_dir}" -name "*.gns3" -type f -exec sed -i \
         -e "s:\(font-family=..\).[^\\\]*:\1$newfontfamily:g" \
@@ -188,6 +204,7 @@ _changecolor() {
     fi
     if [ "${colorscheme[1]}" != "default" ]; then
         sed -i -e "/QTextEdit, /{n;s/#[^;].*/"${colorscheme[1]}";/}" \
+               -e "/QHeaderView/{n;s/#[^;].*/"${colorscheme[1]}";/}" \
                -e "/QTreeWidget#uiTree/{n;s/#[^;].*/"${colorscheme[1]}";/}" \
                -e "/QTabBar::tab\ /{n;s/#[^;].*/"${colorscheme[1]}";/}" \
                -e "/QScrollBar::handle/{n;s/#[^;].*/"${colorscheme[1]}";/}" \
@@ -197,6 +214,7 @@ _changecolor() {
     if [ "${colorscheme[2]}" != "default" ]; then
         sed -i -e "/QDockWidget, /{n;s/#[^;].*/"${colorscheme[2]}";/}" \
                -e "/QTreeWidget,/{n;n;s/#[^;].*/"${colorscheme[2]}";/}" \
+               -e "/QHeaderView/{n;n;s/#[^;].*/"${colorscheme[2]}";/}" \
                -e "/QTreeWidget#uiTree/{n;n;s/#[^;].*/"${colorscheme[2]}";/}" \
                -e "/QTabBar::tab\ /{n;n;s/#[^;].*/"${colorscheme[2]}";/}" \
                -e "/QTextEdit#uiConsole/{n;n;s/#[^;].*/"${colorscheme[2]}";/}" \
@@ -213,6 +231,7 @@ _changecolor() {
         sed -i -e "/QDockWidget::title/{n;s/#[^;].*/"${colorscheme[4]}";/}" \
                -e "/QToolBar/{n;s/#[^;].*/"${colorscheme[4]}";/}" \
                -e "/QStatusBar/{n;s/#[^;].*/"${colorscheme[4]}";/}" \
+               -e "/QToolButton\ /{n;s/#[^;].*/"${colorscheme[4]}";/}"\
                -e "/QMainWindow::separator/{n;s/#[^;].*/"${colorscheme[4]}";/}" "$SRCDIR"/gns3/ui/*.ui
     fi
     if [ "${colorscheme[5]}" != "default" ]; then
@@ -228,8 +247,7 @@ _changecolor() {
     fi
     if [ "${colorscheme[7]}" != "default" ]; then
         sed -i -e "/QPushButton\ /{n;s/#[^;].*/"${colorscheme[7]}";/}" \
-               -e "/QTabBar::tab:selected/{n;s/#[^;].*/"${colorscheme[7]}";/}" \
-               -e "/QToolButton\ /{n;s/#[^;].*/"${colorscheme[7]}";/}" "$SRCDIR"/gns3/ui/*.ui
+               -e "/QTabBar::tab:selected/{n;s/#[^;].*/"${colorscheme[7]}";/}" "$SRCDIR"/gns3/ui/*.ui
     fi
     if [ "${colorscheme[8]}" != "default" ]; then
         sed -i -e "/^QPushButton/{n;n;s/#[^;].*/"${colorscheme[8]}";/}" \
@@ -306,7 +324,7 @@ opacityFlag=false
 prettyFlag=false
 schemeFlag=false
 
-OPTS="$(getopt -o o:,s:,p:,ihlv --long bg:,bg2:,fg:,fg2:,tbg:,opacity:,sbg:,sfg:,bbg:,bfg:,lw:,lc:,gc:,scheme:,pretty:,version,help,install -n $0 -- "$@")"
+OPTS="$(getopt -o o:,s:,p:,ihlvr --long bg:,bg2:,fg:,fg2:,tbg:,opacity:,sbg:,sfg:,bbg:,bfg:,lw:,lc:,gc:,scheme:,pretty:,version,help,install,restore-config -n $0 -- "$@")"
 if [ $? -ne 0 ]; then
     echo "Failed parsing options, see '$0 --help' for more info."
     exit 1
@@ -378,6 +396,10 @@ while [ $# -gt 0 ] && [ "$1" != "--" ]; do
             opacityFlag=true
             shift 2
             ;;
+        -r|--restore-config)
+            _restore_config "gns3_gui_conf_bak"
+            exit 0
+            ;;
         -s|--scheme)
             _isvalidscheme "${2}"
             _gns3scheme "${2}" 
@@ -394,7 +416,7 @@ while [ $# -gt 0 ] && [ "$1" != "--" ]; do
             exit 0
             ;;
         -v|--version)
-            echo "$0 version 2.1.14"
+            echo "$0 version 2.2.3"
             exit 0
             ;;
         -h|--help)
@@ -429,7 +451,7 @@ fi
 if [ "${prettyFlag}" == "true" ]; then
     if [ "${schemeFlag}" == false ]; then
         _isvalidscheme ${prettyscheme}
-        #_changesymbols 
+        _changesymbols
     fi
     _prettyproject
     echo "Finished prettifying project(s)..."
