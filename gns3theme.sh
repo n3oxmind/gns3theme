@@ -28,6 +28,7 @@ _usage() {
     printf "  %s\t\t\t%s\n" "--sfg" "Change selelction foreground color"
     printf "  %s\t\t\t%s\n" "--btn" "Change button background color"
     printf "  %s\t\t\t%s\n" "--lc" "Change ethernet link color"
+    printf "  %s\t\t\t%s\n" "--gc" "Change grid color"
     printf "  %s\t\t\t%s\n" "--lw" "Change ethernet and serial links width"
     printf "  %s\t\t%s\n" "-p, --pretty" "Change project(s) fonts from a predefined colorscheme and symbols if exist"
     printf "  %s\t\t%s\n" "-o, --opacity" "Apply transparency to gns3 gui"
@@ -133,7 +134,7 @@ _hex2rgb() {
 _gns3scheme() {
     # this function will change the default gns3-gui interface colors
     _hex2rgb ${colorscheme[11]}
-    _changecolor 
+    _changecolor
     _changesymbols
     _fixissues
 }
@@ -263,7 +264,8 @@ _changecolor() {
                -e "s/\(self._point_size\ =\ \).*$/\18/" "$SRCDIR"/gns3/items/link_item.py
     fi
     if [ "${colorscheme[11]}" != "default" ]; then
-        sed -i "s/\(painter\.setPen(QtGui.QPen(QtGui.QColor(\).*[0-9]\+,.*[0-9]\+,.*[0-9]\+\(.[^)]*\)/\1${rgbcolor}\2/" $SRCDIR/gns3/graphics_view.py
+        #sed -i "s/\(painter\.setPen(QtGui.QPen(QtGui.QColor(\).*[0-9]\+,.*[0-9]\+,.*[0-9]\+\(.[^)]*\)/\1${rgbcolor}\2/" $SRCDIR/gns3/graphics_view.py
+        sed -i "s/\(QtGui.QColor(\)[0-9]\+,.*[0-9]\+,.*[0-9]\+\(.[^)]*)\)/\1${rgbcolor}\2/" $SRCDIR/gns3/graphics_view.py
     fi
     # change style
     if [ "${colorscheme[12]}" != "default" ]; then
@@ -311,8 +313,8 @@ _gns3install () {
     cd $SRCDIR
     scripts/build_pyqt.py
     python3 setup.py install
-    echo "gns3-gui Installation Finished ..."
-    echo "Restart gns3 to apply changes ..."
+    echo -e "\033[1;92mSuccessfully finished installing gns3-gui"
+    echo -e "\033[1;92mRestart gns3 to apply changes"
 }
 re_digit='^[0-9]{,2}\.[0-9]$'
 re_hexcolor='^#[0-9a-fA-F]{6}$'
