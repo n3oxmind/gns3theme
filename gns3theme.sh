@@ -33,13 +33,14 @@ usage() {
     printf "  %s\t\t\t%s\n" "--btn" "Change button background color"
     printf "  %s\t\t\t%s\n" "--lc" "Change ethernet link color. Required reinstall gns3-gui"
     printf "  %s\t\t\t%s\n" "--gc" "Change grid color. Required reinstall"
+    printf "  %s\t\t\t%s\n" "--src" "Path to gns3-gui source files directory"
     printf "  %s\t\t\t%s\n" "--lw" "Change ethernet and serial links width, Required reinstall gns3-gui"
     printf "  %s\t\t%s\n" "-o, --opacity" "Apply transparency to gns3 gui. Required reinstall gns3-gui"
     printf "  %s\t\t%s\n" "-s, --scheme" "Change gns3 theme from predefined schemes"
     printf "  %s\t%s\n" "-l, --list-schemes" "List gns3 schemes"
     printf "\n"
     printf "%s\n" "Run this command only once as a root"
-    printf "  %s\t\t%s\n"  "sudo ./gns3theme.sh --install --src /path/to/gns3-gui-version" 
+    printf "  %s\t\t%s\n"  "sudo ./gns3theme.sh --install --src /path/to/gns3-gui-source-dir" 
     printf "%s\n" "Install theme from predefined schemes"
     printf "  %s\t\t%s\n"  "./gns3theme.sh --scheme gruvbox-light" 
     printf "  %s\t\t%s\n"  "./gns3theme.sh --scheme solarized-light" 
@@ -395,7 +396,7 @@ while [ $# -gt 0 ] && [ "$1" != "--" ]; do
             exit 0
             ;;
         -v|--version)
-            echo "$0 version 3.0"
+            echo "$0 version 3.0.0"
             exit 0
             ;;
         -h|--help)
