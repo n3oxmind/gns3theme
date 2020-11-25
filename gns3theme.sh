@@ -1,41 +1,45 @@
 #!/bin/env bash
 set -eo errexit
-if [ ! ./gns3hack.sh ]; then
-    echo "Failed to locate src dir."
-    exit 1
-fi
-REPO_DIR=$(cd $(dirname $0) && 'pwd')
-SRCDIR=./gns3-gui-2.2.3
+
+SRCDIR=""
+tmpdir=""
 USER=$(logname)
-gns3_gui_conf=/home/$USER/.config/GNS3/2.2/gns3_gui.conf
-gns3_gui_conf_bak=/home/$USER/.config/GNS3/2.2/gns3_gui.conf.bak
-gns3_projects_dir=/home/$USER/GNS3/projects
 colorscheme=( "default" "default" "default" "default" "default" \
               "default" "default" "default" "default" "default" \
               "default" "default" "default" )  
-_usage() {
+
+custom_css="QWidget{\n\tbackground-color: #fbf1c7;\n}\nQMenuBar::item{\n\tbackground-color: #fbf1c7;\n}\nQDockWidget::title{\n\tbackground: #d5c4a1;\n\tpadding-left: 5px;\n}\nQDockWidget, QMenuBar{\n\tcolor: #282828;\n\tfont: bold 14px;\n}\nQTextEdit, QPlainTextEdit, QLineEdit, QSpinBox, QComboBox{\n\tbackground-color: #d5c4a1;\n\tcolor: #282828;\n}\nQTextEdit#uiConsoleTextEdit{\n\tbackground-color: #fbf1c7;\n\tcolor: #282828;\n\tfont: 13px;\n}\nQTabWidget{\n\tfont: 14px;\n\tborder-top: 2px;\n}\nQTabBar::tab{\n\tbackground: #d5c4a1;\n\tcolor: #282828;\n\tmin-width: 8ex;\n\tpadding: 2px;\n\tborder-top-right-radius: 6px;\n\tborder-top-left-radius: 6px;\n}\nQTabBar::tab:selected{\n\tbackground: #458588;\n\tcolor: #FFFFFF;\n}\nQGroupBox{\n\tcolor: #076678;\n\tfont: 14px;\n\tpadding: 15px;\n\tborder-style: none;\n}\nQMainWindow::separator{\n\tbackground: #d5c4a1;\n\twidth: 1px;\n\theight: 1px;\n}\nQComboBox{\n\tselection-background-color: #458588;\n\tselection-color: #FFFFFF;\n}\nQToolBar{\n\tbackground: #d5c4a1;\n\tborder: 0px;\n}\nQPushButton{\n\tbackground-color: #d79921;\n\tcolor: #181818;\n\tfont: 14px;\n}\nQToolButton{\n\tbackground-color: #d5c4a1;\n\tcolor: #181818;\n\tfont: 14px;\n}\nQTreeWidget, QListWidget{\n\tbackground-color: #fbf1c7;\n\tcolor: #282828;\n\talternate-background-color: #d5c4a1; \n\tfont: 14px;\n}\nQTreeWidget#uiTreeWidget{\n\tbackground-color: #d5c4a1;\n\tcolor: #282828;\n\tfont: bold 16px;\n}\nQTreeWidget::item:selected, QTreeWidget::item:hover, QMenu::item:selected,QToolButton::hover,QPushButton::hover,QTabBar::tab:hover{\n\tbackground-color: #458588;\n\tcolor: #fafafa;\n}\nQMenu{\n\tbackground-color: #fbf1c7;\n\tcolor: #282828;\n}\nQLabel{\n\tcolor: #282828;\n\tfont: 14px;\n}\nQLabel#uiTitleLabel{\n\tcolor: #282828;\n\tfont: bold 16px;\n}\nQAbstractScrollArea::corner{\n\tbackground: #fbf1c7;\n}\nQScrollBar::handle:horizontal{\n\tbackground: #d5c4a1;\n\tmin-width: 20px;\n}\nQScrollBar::handle:vertical{\n\tbackground: #d5c4a1;\n\tmin-width: 20px;\n}\nQScrollBar:vertical{\n\twidth: 6px;\n}\nQScrollBar:horizontal{\n\theight: 6px;\n}\nQScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical, QScrollBar::down-arrow:horizontal, QScrollBar::up-arrow:horizontal{ \n\tborder: 0px;\n\theight: 0px; \n\twidth: 0px; \n}\nQScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal, QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical{\n\tbackground: none\n}\nQStatusBar{\n\tbackground-color: #d5c4a1;\n\tcolor: #282828;\n}\nQRadioButton, QCheckBox{\n\tcolor: #282828;\n}\nQRadioButton::disabled, QCheckBox::disabled{\n\tcolor: gray;\n}"
+
+THEME_TEMPLATE="/home/$USER/.config/gns3theme/custom.css"
+if [ ! -f "${THEME_TEMPLATE}" ]; then
+    mkdir -p ${THEME_TEMPLATE%/*}
+    echo -e ${custom_css} > ${THEME_TEMPLATE}
+    chown ${USER}:${USER} ${THEME_TEMPLATE}
+    chmod 755 ${THEME_TEMPLATE}
+fi
+#
+usage() {
     printf "%s\n" "Usage: $0 --scheme <scheme-name> [OPTIONS]"
-    printf "%s\n" "   or: $0 --scheme <scheme-name> [OPTIONS] --pretty <scheme-name>"
-    printf "%s\n" "   or: $0 --scheme <scheme-name> [OPTIONS] --pretty <scheme-name> --opacity <num>"
+    printf "%s\n" "   or: $0 --scheme <scheme-name> [OPTIONS] --opacity <num>"
     printf "%s\n" "   or: $0 [OPTION].. "
     printf "%s\n" "OPTIONS:"
     printf "  %s\t\t\t%s\n" "--bg"  "Change primary background color"
     printf "  %s\t\t\t%s\n" "--bg2" "Change secondary background color"
     printf "  %s\t\t\t%s\n" "--fg"  "Change primary foreground color"
     printf "  %s\t\t\t%s\n" "--fg2" "Change secondary foreground color"
-    printf "  %s\t\t\t%s\n" "--tbg"   "Change toolbar background color"
+    printf "  %s\t\t\t%s\n" "--tbg" "Change toolbar background color"
     printf "  %s\t\t\t%s\n" "--sbg" "Change selection background color"
     printf "  %s\t\t\t%s\n" "--sfg" "Change selelction foreground color"
     printf "  %s\t\t\t%s\n" "--btn" "Change button background color"
-    printf "  %s\t\t\t%s\n" "--lc" "Change ethernet link color"
-    printf "  %s\t\t\t%s\n" "--gc" "Change grid color"
-    printf "  %s\t\t\t%s\n" "--lw" "Change ethernet and serial links width"
-    printf "  %s\t\t%s\n" "-p, --pretty" "Change project(s) fonts from a predefined colorscheme and symbols if exist"
-    printf "  %s\t\t%s\n" "-o, --opacity" "Apply transparency to gns3 gui"
+    printf "  %s\t\t\t%s\n" "--lc" "Change ethernet link color. Required reinstall gns3-gui"
+    printf "  %s\t\t\t%s\n" "--gc" "Change grid color. Required reinstall"
+    printf "  %s\t\t\t%s\n" "--lw" "Change ethernet and serial links width, Required reinstall gns3-gui"
+    printf "  %s\t\t%s\n" "-o, --opacity" "Apply transparency to gns3 gui. Required reinstall gns3-gui"
     printf "  %s\t\t%s\n" "-s, --scheme" "Change gns3 theme from predefined schemes"
     printf "  %s\t%s\n" "-l, --list-schemes" "List gns3 schemes"
-    printf "  %s\t%s\n" "-r, --restore-config" "Restore Nagios config files"
     printf "\n"
+    printf "%s\n" "Run this command only once as a root"
+    printf "  %s\t\t%s\n"  "sudo ./gns3theme.sh --install --src /path/to/gns3-gui-version" 
     printf "%s\n" "Install theme from predefined schemes"
     printf "  %s\t\t%s\n"  "./gns3theme.sh --scheme gruvbox-light" 
     printf "  %s\t\t%s\n"  "./gns3theme.sh --scheme solarized-light" 
@@ -44,86 +48,57 @@ _usage() {
     printf "%s\n" "Install custom scheme"
     printf "  %s\t\t%s\n"  "./gns3theme.sh --bg 282828 --bg2 323232 --fg FFFFFF --tbg 303030 .." 
     printf "  %s\t\t%s\n"  "./gns3theme.sh --bg 282828 --bg2 323232 --fg FFFFFF --tbg 303030 -o 0.95 .." 
-    printf "%s\n" "Restore Nagios Config Files"
-    printf "  %s\t\t%s\n"  "./gns3theme.sh --restore-config" 
-    printf "%s\n" "Restore gns3-gui"
-    printf "  %s\t\t%s\n"  "pip3 install gns3-gui=2.2.3"
 }
-tmpdir=$(mktemp -d -t)
-cp -af ${REPO_DIR}/* ${tmpdir}
-cd $tmpdir
+
 trap clean_up 0 1 2 15
 clean_up() {
     rm -rf ${tmpdir}
     #echo "Finished cleaning."
 }
-_backup() {
-    if [ "${1}" == "gns3_gui_conf" ]; then
-        [[ ! -f ${gns3_gui_conf}.bak ]] && cp -a ${gns3_gui_conf} ${gns3_gui_conf}.bak || true
-    elif [ "${1}" == "gns3_project_files" ]; then
-        find $gns3_projects_dir -type f -name '*.gns3' -exec \
-            $SHELL -c '[[ ! -f "{}".bak ]] && cp -a "{}" "{}".bak' \;
-    fi
-}
 
-_restore_config() {
-    if [ "${1}" == "gns3_gui_conf_bak" ]; then
-        if [ -f ${gns3_gui_conf_bak} ]; then
-            cp -af ${gns3_gui_conf_bak} ${gns3_gui_conf}
-        else
-            echo "No backup exist"
-            exit 1
-        fi
-    fi
-}
-if [ $# -lt 1 ]; then
-    echo "$0: missing option"
-    echo "Try '$0 --help' for more information."
-    exit 1
-fi
-# Validate the color
-_isvalidcolor () {
+# Validate color
+is_valid_color () {
     if [[ ! "$1" =~ $re_hexcolor ]]; then
         echo "ERROR: Color must be in hex format or names e.g. "2d2d2d". "
         exit 1
     fi
 }
-# Validate the opacity
-_isvalidopacity () {
+
+# Validate gns3-gui opacity
+is_valid_opacity () {
     if [[ ! "$1" =~ $re_opacity ]] && [ "$1" != "1.0" ] ; then
         echo "ERROR: Window opacity must be between 0.0 and 1.0"
         exit 1
     fi
 }
 # Check if the script running as root
-_isroot () {
+is_root () {
     if [ "$(whoami)" != "root" ]; then
         echo "Please, run as root"
         exit 1
     fi
 }
-_isdigit () {
-    if [[ ! $1 =~ $re_digit ]];then
-        echo "ERROR: Font-size must be in this format dd.d(12.5)"
-        exit 1
-    fi
-}
+
 # List pre-defined color schemes
-_listschemes() {
-    sed -n '/scheme-template/,$p' $SRCDIR/../colorschemes
+print_colorschemes() {
+    sed -n '/scheme-template/,$p' ./colorschemes
 }
-_isvalidscheme() {
-    colorscheme=($(grep "^${1}:" $SRCDIR/../colorschemes | cut -d: -f2))
+
+# Validate colorscheme
+is_valid_scheme() {
+    colorscheme=($(grep "^${1}:" ./colorschemes | cut -d: -f2))
     if [ -z ${colorscheme} ]; then
         echo "ERROR: Unsupported scheme '$1'."
         exit 1
     fi
     for v in "${colorscheme[@]:0:10}"; do
-        _isvalidcolor ${v}
+        is_valid_color ${v}
     done
 }
-_hex2rgb() {
-    _isvalidcolor "${1}"
+
+# change color format to RBG 
+hex_to_rbg () {
+    is_valid_color "${1}"
     local hexcolor="${1:1}"
     r=${hexcolor:0:2}
     g=${hexcolor:2:2}
@@ -131,159 +106,103 @@ _hex2rgb() {
     rgb="$(( 0x$r )) $(( 0x$g  )) $(( 0x$b ))"
     rgbcolor="$(echo $rgb | tr ' ' ,)"
 }
-_gns3scheme() {
-    # this function will change the default gns3-gui interface colors
-    _hex2rgb ${colorscheme[11]}
-    _changecolor
-    _changesymbols
-    _fixissues
-}
-_prettyproject() {
-    # change project(s) default fonts, separate devices font from text (note) fonts 
-    # this function will set 3 different colors for bold, appliance and note fonts:
-    # set appliance (routers, switches, pc, ...,etc) a separate font color
-    # set note font color to a different color than appliance or default
-    # set any bold color that been set manually on the project to a different color than regular note and appliance
-    _backup "gns3_project_files"
-    newfontfamily='DejaVuSansMono Nerd Font Mono'
-    newafontfamily='DejaVuSansMono Nerd Font Mono'
-    newfontcolor="${colorscheme[2]}"
-    newafontcolor="${colorscheme[3]}"
-    boldfontcolor="${colorscheme[6]}"
-    newafontsize=11
-    find "${gns3_projects_dir}" -name "*.gns3" -type f -exec sed -i \
-        -e "s:\(font-family=..\).[^\\\]*:\1$newfontfamily:g" \
-        -e "s:\(text fill=..\).[^\\\]*:\1$newfontcolor:g" \
-        -e "/bold/s:\(fill=..\).......:\1$boldfontcolor:g" \
-        -e "/compute_id/{n;n;n;n;n;n;n;/style/{s/\(font-family:\).[^;]*/\1 $newafontfamily/" \
-        -e "s/\(font-size:\).[^;]*/\1 $newafontsize/" \
-        -e "s/\(fill:\).[^;]*/\1 $newafontcolor/" \
-        -e "/font-weight/!s/\(font-size.[^;]*\)/\1;font-weight: bold/}}" "{}" \+
-    # change default label font and color
-    sed -i -e "s/\(\"default_label_color\": \).[^,]*/\1\"$newfontcolor\"/g" \
-           -e "s/\(\"default_label_font\": \"\).[^,]*/\1$newfontfamily/g" ${gns3_gui_conf}
-}
-# change projects symbols (icons) according to theme color
-_changesymbols() {
-    # this function will change symbols already used by an existing project(s)
-    # set the custom symbols that will be used for your light theme
-    # set the custom symbols that will be used for your dark theme
-    # detect the theme variant and change the symbols accordingly
-    _backup "gns3_projects_dir"
-    if [ "${colorscheme[12]}" == "light" ]; then
-        find ${gns3_projects_dir} -name "*.gns3" -type f -exec sed -i \
-            -e "s:multilayer_switch1:multilayer_switch4:g" \
-            -e "s:router2:router5:g" \
-            -e "s:cloud1:cloud2:g" \
-            -e "s:monitoring2:monitoring5:g" \
-            -e "s:router_switch_processor1:router_switch_processor4:g" \
-            -e "s:PC3\|PC5\|PC2:PC1:g" \
-            -e "s:Server4:Server3:g" "{}" \;
-    else
-        find ${gns3_projects_dir} -name "*.gns3" -type f -exec sed -i \
-            -e "s:multilayer_switch4:multilayer_switch1:g" \
-            -e "s:router5:router2:g" \
-            -e "s:cloud2:cloud1:g" \
-            -e "s:monitoring5:monitoring2:g" \
-            -e "s:router_switch_processor4:router_switch_processor1:g" \
-            -e "s:PC2\|PC1\|PC5:PC3:g" \
-            -e "s:Server3:Server4:g" "{}" \;
+
+# Change the default gns3-gui colorscheme
+gns3_colorscheme() {
+    if [ ! "${colorscheme[11]}" == "default" ]; then
+        hex_to_rbg  ${colorscheme[11]}
     fi
-    echo "Finished changing project(s) symbols..."
+    change_colorscheme 
 }
-_changecolor() {
+
+# Change colorscheme. gns3-gui restart is not required
+change_colorscheme() {
     if [ "${colorscheme[0]}" != "default" ]; then
         sed -i -e "/QWidget/{n;s/#[^;].*/"${colorscheme[0]}";/}" \
                -e "/QMenuBar::item/{n;s/#[^;].*/"${colorscheme[0]}";/}" \
                -e "/QTextEdit#uiConsole/{n;s/#[^;].*/"${colorscheme[0]}";/}" \
                -e "/QTreeWidget,/{n;s/#[^;].*/"${colorscheme[0]}";/}" \
-               -e "/QMenu\ /{n;s/#[^;].*/"${colorscheme[0]}";/}" \
+               -e "/QMenu{/{n;s/#[^;].*/"${colorscheme[0]}";/}" \
                -e "/QScrollBar:vertical/{n;s/#[^;].*/"${colorscheme[0]}";/}" \
                -e "/QScrollBar:horizontal/{n;s/#[^;].*/"${colorscheme[0]}";/}" \
                -e "/QScrollBar::up/{n;n;s/#[^;].*/"${colorscheme[0]}";/}" \
-               -e "/QAbstractScrollArea/{n;s/#[^;].*/"${colorscheme[0]}";/}" "$SRCDIR"/gns3/ui/*.ui 
+               -e "/QAbstractScrollArea/{n;s/#[^;].*/"${colorscheme[0]}";/}" ${THEME_TEMPLATE} 
     fi
     if [ "${colorscheme[1]}" != "default" ]; then
-        sed -i -e "/QTextEdit, /{n;s/#[^;].*/"${colorscheme[1]}";/}" \
+        sed -i -e "/QTextEdit,/{n;s/#[^;].*/"${colorscheme[1]}";/}" \
                -e "/QHeaderView/{n;s/#[^;].*/"${colorscheme[1]}";/}" \
                -e "/QTreeWidget#uiTree/{n;s/#[^;].*/"${colorscheme[1]}";/}" \
-               -e "/QTabBar::tab\ /{n;s/#[^;].*/"${colorscheme[1]}";/}" \
+               -e "/QTabBar::tab{/{n;s/#[^;].*/"${colorscheme[1]}";/}" \
                -e "/QScrollBar::handle/{n;s/#[^;].*/"${colorscheme[1]}";/}" \
-               -e "/QTreeWidget,\ /{n;n;n;s/#[^;].*/"${colorscheme[1]}";/}" \
-               -e "/QLabel#uiTitleLabel/{n;n;s/#[^;].*/"${colorscheme[1]}";/}" "$SRCDIR"/gns3/ui/*.ui
+               -e "/QTreeWidget,/{n;n;n;s/#[^;].*/"${colorscheme[1]}";/}" \
+               -e "/QLabel#uiTitleLabel/{n;n;s/#[^;].*/"${colorscheme[1]}";/}" ${THEME_TEMPLATE}
     fi
     if [ "${colorscheme[2]}" != "default" ]; then
-        sed -i -e "/QDockWidget, /{n;s/#[^;].*/"${colorscheme[2]}";/}" \
+        sed -i -e "/QDockWidget,/{n;s/#[^;].*/"${colorscheme[2]}";/}" \
                -e "/QTreeWidget,/{n;n;s/#[^;].*/"${colorscheme[2]}";/}" \
                -e "/QHeaderView/{n;n;s/#[^;].*/"${colorscheme[2]}";/}" \
                -e "/QTreeWidget#uiTree/{n;n;s/#[^;].*/"${colorscheme[2]}";/}" \
-               -e "/QTabBar::tab\ /{n;n;s/#[^;].*/"${colorscheme[2]}";/}" \
+               -e "/QTabBar::tab{/{n;n;s/#[^;].*/"${colorscheme[2]}";/}" \
                -e "/QTextEdit#uiConsole/{n;n;s/#[^;].*/"${colorscheme[2]}";/}" \
-               -e "/QTextEdit,\ /{n;n;s/#[^;].*/"${colorscheme[2]}";/}" \
+               -e "/QTextEdit,/{n;n;s/#[^;].*/"${colorscheme[2]}";/}" \
                -e "/QLabel/{n;s/#[^;].*/"${colorscheme[2]}";/}" \
                -e "/QStatusBar/{n;n;s/#[^;].*/"${colorscheme[2]}";/}" \
                -e "/QRadioButton/{n;s/#[^;].*/"${colorscheme[2]}";/}" \
-               -e "/QMenu\ /{n;n;s/#[^;].*/"${colorscheme[2]}";/}" "$SRCDIR"/gns3/ui/*.ui
+               -e "/QMenu{/{n;n;s/#[^;].*/"${colorscheme[2]}";/}" ${THEME_TEMPLATE}
     fi
     if [ "${colorscheme[3]}" != "default" ]; then
-        sed -i -e "/QGroupBox\ /{n;s/#[^;].*/"${colorscheme[3]}";/}" "$SRCDIR"/gns3/ui/*.ui
+        sed -i -e "/QGroupBox/{n;s/#[^;].*/"${colorscheme[3]}";/}" ${THEME_TEMPLATE}
     fi
     if [ "${colorscheme[4]}" != "default" ]; then
         sed -i -e "/QDockWidget::title/{n;s/#[^;].*/"${colorscheme[4]}";/}" \
                -e "/QToolBar/{n;s/#[^;].*/"${colorscheme[4]}";/}" \
                -e "/QStatusBar/{n;s/#[^;].*/"${colorscheme[4]}";/}" \
-               -e "/QToolButton\ /{n;s/#[^;].*/"${colorscheme[4]}";/}"\
-               -e "/QMainWindow::separator/{n;s/#[^;].*/"${colorscheme[4]}";/}" "$SRCDIR"/gns3/ui/*.ui
+               -e "/^QToolButton/{n;s/#[^;].*/"${colorscheme[4]}";/}"\
+               -e "/QMainWindow::separator/{n;s/#[^;].*/"${colorscheme[4]}";/}" ${THEME_TEMPLATE}
     fi
     if [ "${colorscheme[5]}" != "default" ]; then
-        sed -i -e "/^QComboBox\ /{n;s/#[^;].*/"${colorscheme[5]}";/}" \
+        sed -i -e "/^QComboBox/{n;s/#[^;].*/"${colorscheme[5]}";/}" \
                -e "/QTreeWidget::item:hover/{n;s/#[^;].*/"${colorscheme[5]}";/}" \
-               -e "/QMenu::item:selected/{n;s/#[^;].*/"${colorscheme[5]}";/}" "$SRCDIR"/gns3/ui/*.ui
+               -e "/QMenu::item:selected/{n;s/#[^;].*/"${colorscheme[5]}";/}" ${THEME_TEMPLATE}
     fi
     if [ "${colorscheme[6]}" != "default" ]; then
         sed -i -e "/QTabBar::tab:selected/{n;n;s/#[^;].*/"${colorscheme[6]}";/}" \
-               -e "/^QComboBox\ /{n;n;s/#[^;].*/"${colorscheme[6]}";/}" \
+               -e "/^QComboBox/{n;n;s/#[^;].*/"${colorscheme[6]}";/}" \
                -e "/QTreeWidget::item:hover/{n;n;s/#[^;].*/"${colorscheme[6]}";/}" \
-               -e "/QMenu::item:selected/{n;n;s/#[^;].*/"${colorscheme[6]}";/}" "$SRCDIR"/gns3/ui/*.ui
+               -e "/QMenu::item:selected/{n;n;s/#[^;].*/"${colorscheme[6]}";/}" ${THEME_TEMPLATE}
     fi
     if [ "${colorscheme[7]}" != "default" ]; then
-        sed -i -e "/QPushButton\ /{n;s/#[^;].*/"${colorscheme[7]}";/}" \
-               -e "/QTabBar::tab:selected/{n;s/#[^;].*/"${colorscheme[7]}";/}" "$SRCDIR"/gns3/ui/*.ui
+        sed -i -e "/^QPushButton/{n;s/#[^;].*/"${colorscheme[7]}";/}" \
+               -e "/QTabBar::tab:selected/{n;s/#[^;].*/"${colorscheme[7]}";/}" ${THEME_TEMPLATE}
     fi
     if [ "${colorscheme[8]}" != "default" ]; then
         sed -i -e "/^QPushButton/{n;n;s/#[^;].*/"${colorscheme[8]}";/}" \
                -e "/QTabBar::tab:selected/{n;n;s/#[^;].*/"${colorscheme[8]}";/}" \
-               -e "/^QToolButton\ /{n;n;s/#[^;].*/"${colorscheme[8]}";/}" "$SRCDIR"/gns3/ui/*.ui
+               -e "/^QToolButton/{n;n;s/#[^;].*/"${colorscheme[8]}";/}" ${THEME_TEMPLATE}
     fi
+
+}
+
+# Change grid color. gns3-gui reinstall required
+change_grid_color() {
+    if [ "${colorscheme[11]}" != "default" ]; then
+        sed -i "s/\(QtGui.QColor(\)[0-9]\+,.*[0-9]\+,.*[0-9]\+\(.[^)]*)\)/\1${rgbcolor}\2/" "${tmpdir}"/gns3/graphics_view.py
+    fi
+}
+
+# Change grid color. gns3-gui reinstall required
+change_link_color() {
     if [ "${colorscheme[9]}" != "default" ]; then
-        sed -i "s/\(self\.setPen(QtGui.QPen(\).*black\(,\ self\._pen_width,.*))\)/\1QtGui.QColor(\"${colorscheme[9]}\")\2/" "$SRCDIR"/gns3/items/ethernet_link_item.py
+        sed -i "s/\(self\.setPen(QtGui.QPen(\).*black\(,\ self\._pen_width,.*))\)/\1QtGui.QColor(\"${colorscheme[9]}\")\2/" "${tmpdir}"/gns3/items/ethernet_link_item.py
     fi
 
     if [ "${colorscheme[10]}" != "default" ]; then
         sed -i -e "s/\(self\._pen_width\ =\ \).*$/\1"${colorscheme[10]}"/" \
-               -e "s/\(self._point_size\ =\ \).*$/\18/" "$SRCDIR"/gns3/items/link_item.py
-    fi
-    if [ "${colorscheme[11]}" != "default" ]; then
-        #sed -i "s/\(painter\.setPen(QtGui.QPen(QtGui.QColor(\).*[0-9]\+,.*[0-9]\+,.*[0-9]\+\(.[^)]*\)/\1${rgbcolor}\2/" $SRCDIR/gns3/graphics_view.py
-        sed -i "s/\(QtGui.QColor(\)[0-9]\+,.*[0-9]\+,.*[0-9]\+\(.[^)]*)\)/\1${rgbcolor}\2/" $SRCDIR/gns3/graphics_view.py
-    fi
-    # change style
-    if [ "${colorscheme[12]}" != "default" ]; then
-        _backup gns3_gui_conf
-        if [ "${colorscheme[12]}" == "light" ]; then
-            sed -i "s/\(\"style\": \).[^,]*/\1\"Classic\"/" ${gns3_gui_conf}
-        elif [ "${colorscheme[12]}" == "dark" ]; then
-            sed -i "s/\(\"style\": \).[^,]*/\1\"Charcoal\"/" ${gns3_gui_conf}
-        fi
+               -e "s/\(self._point_size\ =\ \).*$/\18/" "${tmpdir}"/gns3/items/link_item.py
     fi
 }
-# These issues might be solved in future releases of gns3-gui
-_fixissues() {
-    # grid size already been solved [checked]
-    # fix zoom-in zoom-out step values
-    sed -i -e "s/\(factor_in = pow(2.0, \).[^///]*\(.[^)]*\)/\130 \2/g" \
-           -e "s/\(factor_out = pow(2.0, \).[^///]*\(.[^)]*\)/\1-30 \2/g" $SRCDIR/gns3/main_window.py
-}
+
+# these files will be modifed if one of these options is present [-o, --lc, --lw, --gc]
 uifiles=(main.py 
         main_window.py
         graphics_view.py
@@ -298,19 +217,72 @@ uifiles=(main.py
         modules/builtin/pages/ethernet_switch_preferences_page.py
         modules/builtin/pages/ethernet_hub_preferences_page.py
         )
-_uitransparent() {
+
+# apply full transparency to gns3-gui elements
+apply_transparency() {
     for file in "${uifiles[@]}"; do
         sed -i -e '/.*\.setWindowOpacity.*/d' \
-               -e "s/\(^\ *\)\(.*\)\(\.show()$\)/\1\2.setWindowOpacity\($opacityvalue\)\n\1\2\3/g" $SRCDIR/gns3/$file
+               -e "s/\(^\ *\)\(.*\)\(\.show()$\)/\1\2.setWindowOpacity\($opacityvalue\)\n\1\2\3/g" "${tmpdir}"/gns3/$file
     done 
 }
+# generate custom stylesheet
+_custom_style_patch() {
+    local tmpdir=${1}
+    #settings.py
+    sed -i 's/\(^STYLES\s\+=.*\)]$/\1, "CustomLight", "CustomDark"]/' ${tmpdir}/gns3/settings.py
+    # main_window.py
+    sed -i '/style\.setClassicStyle()/a\
+        elif style_name == "CustomLight":\
+            style.setCustomLightStyle()\
+        elif style_name == "CustomDark":\
+            style.setCustomDarkStyle()' ${tmpdir}/gns3/main_window.py
+    #style.py
+    # dark theme
+    sed -n '/\s\+def\s\+setCharcoalStyle/,$p' "${tmpdir}"/gns3/style.py > new_style_dark
+    sed -i 's/setCharcoalStyle/setCustomDarkStyle/' ./new_style_dark
+    sed -i "s:\:/styles/charcoal.css:${THEME_TEMPLATE}:" ./new_style_dark
+    echo -e "\n"  >> ${tmpdir}/gns3/style.py
+    cat ./new_style_dark >> ${tmpdir}/gns3/style.py
+
+    # light theme
+    sed -i 's/setCustomDarkStyle/setCustomLightStyle/' ./new_style_dark
+    sed -i 's/charcoal_icons/classic_icons/' ./new_style_dark
+    sed -i 's/-1//' ./new_style_dark
+    echo -e "\n"  >> ${tmpdir}/gns3/style.py
+    cat ./new_style_dark >> ${tmpdir}/gns3/style.py
+}
+
 # Install gns3-gui
-_gns3install () {
-    # perform Cleanup
+gns3_gui_install () {
+    # perform clean up
     find /usr/lib \( -name "gns3" -o -name "gns3_gui-*.egg" -o -name "gns3_gui-*.egg-info" \) -type d -prune -exec rm -rf "{}" \+
     find /usr/local/lib \( -name "gns3" -o -name "gns3_gui-*.egg" -o -name "gns3_gui-*.egg-info" \) -type d -prune -exec rm -rf "{}" \+
+    # copy src to temp
+    tmpdir=$(mktemp -d -t)
+    cp -af ${SRCDIR}/* ${tmpdir}
+    cd $tmpdir
+    # patch gns3-gui for custom theme
+    _custom_style_patch $tmpdir
+
+    # apply full opacity to gns3-gui
+    if [ "${opacityFlag}" == true ]; then
+        apply_transparency
+    fi
+
+    if [ "${schemeFlag}" == true ]; then
+        gns3_colorscheme
+    fi
+    # change link color/width
+    if [ "${linkFlag}" == true ]; then
+        change_link_color
+        echo "Finished Changing Grid color"
+    fi
+    # change grid color
+    if [ "${gridFlag}" == true ]; then
+        change_grid_color
+        echo "Finished Changing link color"
+    fi
     # apply changes and install 
-    cd $SRCDIR
     scripts/build_pyqt.py
     python3 setup.py install
     echo -e "\033[1;92mSuccessfully finished installing gns3-gui"
@@ -325,104 +297,109 @@ installFlag=false
 opacityFlag=false
 prettyFlag=false
 schemeFlag=false
+linkFlag=false
+gridFlag=false
 
-OPTS="$(getopt -o o:,s:,p:,ihlvr --long bg:,bg2:,fg:,fg2:,tbg:,opacity:,sbg:,sfg:,bbg:,bfg:,lw:,lc:,gc:,scheme:,pretty:,version,help,install,restore-config -n $0 -- "$@")"
+OPTS="$(getopt -o o:,s:,p:,d:,ihlv --long src:,bg:,bg2:,fg:,fg2:,tbg:,opacity:,sbg:,sfg:,bbg:,bfg:,lw:,lc:,gc:,scheme:,version,help,install -n $0 -- "$@")"
 if [ $? -ne 0 ]; then
     echo "Failed parsing options, see '$0 --help' for more info."
     exit 1
 fi
 while [ $# -gt 0 ] && [ "$1" != "--" ]; do 
     case "$1" in
+        -d|--src)
+            SRCDIR="${2}"
+            shift 2
+            ;;
         --bg)
-            _isvalidcolor "#${2}"
+            is_valid_color "#${2}"
             colorscheme[0]="#${2}"
             shift 2
             ;;
         --bg2)
-            _isvalidcolor "#${2}"
+            is_valid_color "#${2}"
             colorscheme[1]="#${2}"
             shift 2
             ;;
         --fg)
-            _isvalidcolor "#${2}"
+            is_valid_color "#${2}"
             colorscheme[2]="#${2}"
             shift 2
             ;;
         --fg2)
-            _isvalidcolor "#${2}"
+            is_valid_color "#${2}"
             colorscheme[3]="#${2}"
             shift 2
             ;;
         --tbg)
-            _isvalidcolor "#${2}"
+            is_valid_color "#${2}"
             colorscheme[4]="#${2}"
             shift 2
             ;;
         --sbg)
-            _isvalidcolor "#${2}"
+            is_valid_color "#${2}"
             colorscheme[5]="#${2}"
             shift 2
             ;;
         --sfg)
-            _isvalidcolor "#${2}"
+            is_valid_color "#${2}"
             colorscheme[6]="#${2}"
             shift 2
             ;;
         --bbg)
-            _isvalidcolor "#${2}"
+            is_valid_color "#${2}"
             colorscheme[7]="#${2}"
             shift 2
             ;;
         --bfg)
-            _isvalidcolor "#${2}"
+            is_valid_color "#${2}"
             colorscheme[8]="#${2}"
             shift 2
             ;;
         --lc)
-            _isvalidcolor "#${2}"
+            linkFlag=true
+            is_valid_color "#${2}"
             colorscheme[9]="#${2}"
             shift 2
             ;;
         --lw)
+            linkFlag=true
             colorscheme[10]="#${2}"
             shift 2
             ;;
         --gc)
-            _isvalidcolor "#${2}"
-            colorscheme[11]="#${2}"
+            gridFlag=true
+            if [ ! ${2} == "default" ]; then
+                is_valid_color "#${2}"
+                colorscheme[11]="#${2}"
+            fi
             shift 2
             ;;
         -o|--opacity)
-            _isvalidopacity "${2}"
+            is_valid_opacity "${2}"
             opacityvalue="${2:-1}"
             opacityFlag=true
             shift 2
             ;;
-        -r|--restore-config)
-            _restore_config "gns3_gui_conf_bak"
-            exit 0
-            ;;
         -s|--scheme)
-            _isvalidscheme "${2}"
-            _gns3scheme "${2}" 
+            is_valid_scheme "${2}"
             schemeFlag=true
             shift 2
             ;;
-        -p|--pretty)
-            prettyscheme="${2}"
-            prettyFlag=true
-            shift 2
+        -i|--install)
+            installFlag=true
+            shift 1
             ;;
         -l|--list-schemes)
-            _listschemes
+            print_colorschemes
             exit 0
             ;;
         -v|--version)
-            echo "$0 version 2.2.3"
+            echo "$0 version 3.0"
             exit 0
             ;;
         -h|--help)
-            _usage
+            usage
             exit 0
             ;;
         *) 
@@ -431,31 +408,31 @@ while [ $# -gt 0 ] && [ "$1" != "--" ]; do
             ;;
     esac
 done
-#check for any color(s) change(s)
+
+#check for any colorscheme changes
 for i in "${colorscheme[@]}"; do
     if [ "${i}" != "default" ]; then
-        installFlag=true
+        schemeFlag=true
         break
     fi
 done
-# apply full opacity to gns3-gui
-if [ "${opacityFlag}" == true ]; then
-    _uitransparent
-    #echo "Finished applying opacity..."
+
+# applying colorscheme
+if [ "${schemeFlag}" == true ] && [ ! "${installFlag}" == true ]; then
+    gns3_colorscheme
+    echo "Finished applying colorscheme"
 fi
-# change and install gns3-gui theme
+
+# install gns3-gui with custom theme capability
 if [ "${installFlag}" == true ]; then
-    _isroot
-    _changecolor
-    _gns3install
-fi
-# apply separate font color for appliance and note
-if [ "${prettyFlag}" == "true" ]; then
-    if [ "${schemeFlag}" == false ]; then
-        _isvalidscheme ${prettyscheme}
-        _changesymbols
+    if [ "${SRCDIR}" == "" ]; then
+        echo "Please specify 'gns3-gui-version' source directory, use --src"
+        exit 1
+    elif [ ! -d "${SRCDIR}" ]; then
+        echo "Directory does not exist '${SRCDIR}'" 
+        exit 1
     fi
-    _prettyproject
-    echo "Finished prettifying project(s)..."
+    is_root
+    gns3_gui_install
 fi
 exit 0
