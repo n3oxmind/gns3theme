@@ -27,11 +27,11 @@ n30x-darkblue:    #28283e #26263e #00997a #934806 #20203a #22223e #c46008 #24243
 1. Download/Clone ![gns3theme](https://github.com/n3oxmind/gns3theme/tree/master)
 2. Extract gns3theme
 3. cd to gns3theme directory
-4. Run as root `./gns3theme.sh  --install --src /path/to/gns3-gui-version`. For transparent theme add -o option.
+4. Run as root `./gns3theme.sh  --install --src /path/to/gns3-gui-source-dir`. For transparent theme add -o option.
 5. Change colorscheme as many as you want as a regular user. See below for more details on how to change colorscheme.
 6. Make sure to choose the following from `Preferences->General->Interface Style`:
-	* Choose `CustomLight` for light themes (this only effect toolbar icons visibility)
-	* Choose `CustomDark` for dark themes	(this only effect toolbar icons visibility)
+	* Choose `CustomLight` for light themes (this only affects toolbar icons visibility)
+	* Choose `CustomDark` for dark themes	(this only affects toolbar icons visibility)
 
 
 ### Install n30x-dark3
