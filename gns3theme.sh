@@ -101,6 +101,13 @@ is_valid_scheme() {
     done
 }
 
+# Validate user
+is_valid_user() {
+    if [ ! $(id "${1}") ]; then
+        echo "User does not exist '${1}'."
+        exit 1
+    fi
+}
 # change color format to RBG 
 hex_to_rbg () {
     is_valid_color "${1}"
@@ -305,7 +312,7 @@ schemeFlag=false
 linkFlag=false
 gridFlag=false
 
-OPTS="$(getopt -o o:,s:,p:,d:,ihlv --long src:,bg:,bg2:,fg:,fg2:,tbg:,opacity:,sbg:,sfg:,bbg:,bfg:,lw:,lc:,gc:,scheme:,version,help,install -n $0 -- "$@")"
+OPTS="$(getopt -o o:,s:,p:,d:,u:,ihlv --long src:,bg:,bg2:,fg:,fg2:,tbg:,opacity:,sbg:,sfg:,bbg:,bfg:,lw:,lc:,gc:,scheme:,version,help,install -n $0 -- "$@")"
 if [ $? -ne 0 ]; then
     echo "Failed parsing options, see '$0 --help' for more info."
     exit 1
@@ -389,6 +396,11 @@ while [ $# -gt 0 ] && [ "$1" != "--" ]; do
         -s|--scheme)
             is_valid_scheme "${2}"
             schemeFlag=true
+            shift 2
+            ;;
+        -u|--user)
+            USER="${2}"
+            is_valid_user "${USER}"
             shift 2
             ;;
         -i|--install)
