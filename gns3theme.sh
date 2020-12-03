@@ -3,7 +3,11 @@ set -eo errexit
 
 SRCDIR=""
 tmpdir=""
-USER=$(logname)
+if [ ! $(command -v logname) ]; then
+    USER=$(stat -c "%U" $(tty))
+else
+    USER=$(logname)
+fi
 colorscheme=( "default" "default" "default" "default" "default" \
               "default" "default" "default" "default" "default" \
               "default" "default" "default" )  
