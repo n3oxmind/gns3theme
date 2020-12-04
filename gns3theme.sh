@@ -3,11 +3,7 @@ set -eo errexit
 
 SRCDIR=""
 tmpdir=""
-if [ ! $(command -v logname) ]; then
-    USER=$(stat -c "%U" $(tty))
-else
-    USER=$(logname)
-fi
+USER=""
 colorscheme=( "default" "default" "default" "default" "default" \
               "default" "default" "default" "default" "default" \
               "default" "default" "default" )  
@@ -39,6 +35,7 @@ usage() {
     printf "  %s\t\t\t%s\n" "--gc" "Change grid color. Required reinstall"
     printf "  %s\t\t\t%s\n" "--src" "Path to gns3-gui source files directory"
     printf "  %s\t\t\t%s\n" "--lw" "Change ethernet and serial links width, Required reinstall gns3-gui"
+    printf "  %s\t\t\t%s\n" "--u" "username"
     printf "  %s\t\t%s\n" "-o, --opacity" "Apply transparency to gns3 gui. Required reinstall gns3-gui"
     printf "  %s\t\t%s\n" "-s, --scheme" "Change gns3 theme from predefined schemes"
     printf "  %s\t%s\n" "-l, --list-schemes" "List gns3 schemes"
@@ -447,6 +444,10 @@ if [ "${installFlag}" == true ]; then
         exit 1
     elif [ ! -d "${SRCDIR}" ]; then
         echo "Directory does not exist '${SRCDIR}'" 
+        exit 1
+    fi
+    if [ "${USER}" == "" ]; then
+        echo "username is required. Please specify username using '-u'."
         exit 1
     fi
     is_root
