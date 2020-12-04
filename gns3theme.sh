@@ -103,7 +103,7 @@ is_valid_scheme() {
 
 # Validate user
 is_valid_user() {
-    if [ ! $(id "${1}") ]; then
+    if ! id "${1}" >/dev/null 2>&1; then
         echo "User does not exist '${1}'."
         exit 1
     fi
