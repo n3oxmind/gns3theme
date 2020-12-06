@@ -38,32 +38,32 @@ n30x-darkblue:    #28283e #26263e #00997a #934806 #20203a #22223e #c46008 #24243
 
 ### Install n30x-dark3
 ```sh
-$ ./gns3theme.sh --scheme n30x-dark3
+$ ./gns3theme.sh -u your_user_name --scheme n30x-dark3
 ```
 ![n30x-dark3](https://user-images.githubusercontent.com/10103340/44069564-3681323a-9f34-11e8-9f6c-7d458b0298bf.png)
 
 ### Install solarized-light theme
 ```sh
-$ gns3theme --scheme solarized-light
+$ gns3theme -u your_user_name --scheme solarized-light
 ```
 ![solarized-light](https://user-images.githubusercontent.com/10103340/44070067-9d04544a-9f36-11e8-9793-e73522e9002b.png)
 
 ### Install gruvbox-light theme
 ```sh
-$ gns3theme --scheme gruvbox-light
+$ gns3theme -u your_user_name --scheme gruvbox-light
 ```
 ![gruvbox-light](https://user-images.githubusercontent.com/10103340/44069710-e9138df8-9f34-11e8-889b-f33b81c9c180.png)
 
 ### Install tomorrow  theme
 ```sh
-$ ./gns3theme.sh --scheme tomorrow 
+$ ./gns3theme.sh -u your_user_name --scheme tomorrow 
 ```
 ![tomorrow-light](https://user-images.githubusercontent.com/10103340/44069498-f4c867aa-9f33-11e8-8ca1-82a26cca134e.png)
 
 
 ### Install n30x-light theme (transparent version)
 ```sh
-$ ./gns3theme.sh --scheme tomorrow 
+$ ./gns3theme.sh -u your_user_name --scheme tomorrow 
 ```
 ![n30x-light](https://user-images.githubusercontent.com/10103340/44069475-d54f28be-9f33-11e8-8a0e-f1fc3bf889c1.png)
 
