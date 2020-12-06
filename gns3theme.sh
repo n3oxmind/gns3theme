@@ -3,25 +3,28 @@ set -eo errexit
 
 SRCDIR=""
 tmpdir=""
-USER=""
+USERNAME=""
 colorscheme=( "default" "default" "default" "default" "default" \
               "default" "default" "default" "default" "default" \
               "default" "default" "default" )  
 
 custom_css="QWidget{\n\tbackground-color: #fbf1c7;\n}\nQMenuBar::item{\n\tbackground-color: #fbf1c7;\n}\nQDockWidget::title{\n\tbackground: #d5c4a1;\n\tpadding-left: 5px;\n}\nQDockWidget, QMenuBar{\n\tcolor: #282828;\n\tfont: bold 14px;\n}\nQTextEdit, QPlainTextEdit, QLineEdit, QSpinBox, QComboBox{\n\tbackground-color: #d5c4a1;\n\tcolor: #282828;\n}\nQTextEdit#uiConsoleTextEdit{\n\tbackground-color: #fbf1c7;\n\tcolor: #282828;\n\tfont: 13px;\n}\nQTabWidget{\n\tfont: 14px;\n\tborder-top: 2px;\n}\nQTabBar::tab{\n\tbackground: #d5c4a1;\n\tcolor: #282828;\n\tmin-width: 8ex;\n\tpadding: 2px;\n\tborder-top-right-radius: 6px;\n\tborder-top-left-radius: 6px;\n}\nQTabBar::tab:selected{\n\tbackground: #458588;\n\tcolor: #FFFFFF;\n}\nQGroupBox{\n\tcolor: #076678;\n\tfont: 14px;\n\tpadding: 15px;\n\tborder-style: none;\n}\nQMainWindow::separator{\n\tbackground: #d5c4a1;\n\twidth: 1px;\n\theight: 1px;\n}\nQComboBox{\n\tselection-background-color: #458588;\n\tselection-color: #FFFFFF;\n}\nQToolBar{\n\tbackground: #d5c4a1;\n\tborder: 0px;\n}\nQPushButton{\n\tbackground-color: #d79921;\n\tcolor: #181818;\n\tfont: 14px;\n}\nQToolButton{\n\tbackground-color: #d5c4a1;\n\tcolor: #181818;\n\tfont: 14px;\n}\nQTreeWidget, QListWidget{\n\tbackground-color: #fbf1c7;\n\tcolor: #282828;\n\talternate-background-color: #d5c4a1; \n\tfont: 14px;\n}\nQTreeWidget#uiTreeWidget{\n\tbackground-color: #d5c4a1;\n\tcolor: #282828;\n\tfont: bold 16px;\n}\nQTreeWidget::item:selected, QTreeWidget::item:hover, QMenu::item:selected,QToolButton::hover,QPushButton::hover,QTabBar::tab:hover{\n\tbackground-color: #458588;\n\tcolor: #fafafa;\n}\nQMenu{\n\tbackground-color: #fbf1c7;\n\tcolor: #282828;\n}\nQLabel{\n\tcolor: #282828;\n\tfont: 14px;\n}\nQLabel#uiTitleLabel{\n\tcolor: #282828;\n\tfont: bold 16px;\n}\nQAbstractScrollArea::corner{\n\tbackground: #fbf1c7;\n}\nQScrollBar::handle:horizontal{\n\tbackground: #d5c4a1;\n\tmin-width: 20px;\n}\nQScrollBar::handle:vertical{\n\tbackground: #d5c4a1;\n\tmin-width: 20px;\n}\nQScrollBar:vertical{\n\twidth: 6px;\n}\nQScrollBar:horizontal{\n\theight: 6px;\n}\nQScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical, QScrollBar::down-arrow:horizontal, QScrollBar::up-arrow:horizontal{ \n\tborder: 0px;\n\theight: 0px; \n\twidth: 0px; \n}\nQScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal, QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical{\n\tbackground: none\n}\nQStatusBar{\n\tbackground-color: #d5c4a1;\n\tcolor: #282828;\n}\nQRadioButton, QCheckBox{\n\tcolor: #282828;\n}\nQRadioButton::disabled, QCheckBox::disabled{\n\tcolor: gray;\n}"
 
-THEME_TEMPLATE="/home/$USER/.config/gns3theme/custom.css"
-if [ ! -f "${THEME_TEMPLATE}" ]; then
-    mkdir -p ${THEME_TEMPLATE%/*}
-    echo -e ${custom_css} > ${THEME_TEMPLATE}
-    chown ${USER}:${USER} ${THEME_TEMPLATE}
-    chmod 755 ${THEME_TEMPLATE}
-fi
+set_custom_theme() {
+    USERNAME="${1}"
+    THEME_TEMPLATE="/home/$USERNAME/.config/gns3theme/custom.css"
+    if [ ! -f "${THEME_TEMPLATE}" ]; then
+        mkdir -p ${THEME_TEMPLATE%/*}
+        echo -e ${custom_css} > ${THEME_TEMPLATE}
+        chown ${USERNAME}:${USERNAME} ${THEME_TEMPLATE}
+        chmod 755 ${THEME_TEMPLATE}
+    fi
+}
 #
 usage() {
-    printf "%s\n" "Usage: $0 --scheme <scheme-name> [OPTIONS]"
-    printf "%s\n" "   or: $0 --scheme <scheme-name> [OPTIONS] --opacity <num>"
-    printf "%s\n" "   or: $0 [OPTION].. "
+    printf "%s\n" "Usage: $0 --scheme <scheme-name> [OPTIONS] -u <username>"
+    printf "%s\n" "   or: $0 --scheme <scheme-name> [OPTIONS] -u <username> --opacity <num>"
+    printf "%s\n" "   or: $0 -u <username> [OPTION].. "
     printf "%s\n" "OPTIONS:"
     printf "  %s\t\t\t%s\n" "--bg"  "Change primary background color"
     printf "  %s\t\t\t%s\n" "--bg2" "Change secondary background color"
@@ -35,26 +38,27 @@ usage() {
     printf "  %s\t\t\t%s\n" "--gc" "Change grid color. Required reinstall"
     printf "  %s\t\t\t%s\n" "--src" "Path to gns3-gui source files directory"
     printf "  %s\t\t\t%s\n" "--lw" "Change ethernet and serial links width, Required reinstall gns3-gui"
-    printf "  %s\t\t\t%s\n" "--u" "username"
+    printf "  %s\t\t\t%s\n" "-u" "Specify username. Manditory option"
     printf "  %s\t\t%s\n" "-o, --opacity" "Apply transparency to gns3 gui. Required reinstall gns3-gui"
     printf "  %s\t\t%s\n" "-s, --scheme" "Change gns3 theme from predefined schemes"
     printf "  %s\t%s\n" "-l, --list-schemes" "List gns3 schemes"
     printf "\n"
     printf "%s\n" "Run this command only once as a root"
-    printf "  %s\t\t%s\n"  "sudo ./gns3theme.sh --install --src /path/to/gns3-gui-source-dir" 
+    printf "  %s\t\t%s\n"  "sudo ./gns3theme.sh --install --src /path/to/gns3-gui-source-dir -u <username>" 
     printf "%s\n" "Install theme from predefined schemes"
-    printf "  %s\t\t%s\n"  "./gns3theme.sh --scheme gruvbox-light" 
-    printf "  %s\t\t%s\n"  "./gns3theme.sh --scheme solarized-light" 
+    printf "  %s\t\t%s\n"  "./gns3theme.sh --scheme gruvbox-light -u <username>" 
+    printf "  %s\t\t%s\n"  "./gns3theme.sh --scheme solarized-light -u <username>" 
     printf "%s\n" "Use the scheme but with different selection color"
-    printf "  %s\t\t%s\n"  "./gns3theme.sh --scheme solarized-light --sbg ef5350"
+    printf "  %s\t\t%s\n"  "./gns3theme.sh --scheme solarized-light --sbg ef5350 -u <username>"
     printf "%s\n" "Install custom scheme"
-    printf "  %s\t\t%s\n"  "./gns3theme.sh --bg 282828 --bg2 323232 --fg FFFFFF --tbg 303030 .." 
-    printf "  %s\t\t%s\n"  "./gns3theme.sh --bg 282828 --bg2 323232 --fg FFFFFF --tbg 303030 -o 0.95 .." 
+    printf "  %s\t\t%s\n"  "./gns3theme.sh  -u <username> --bg 282828 --bg2 323232 --fg FFFFFF --tbg 303030 .." 
+    printf "  %s\t\t%s\n"  "./gns3theme.sh -u <username> --bg 282828 --bg2 323232 --fg FFFFFF --tbg 303030 -o 0.95 .." 
 }
 
 trap clean_up 0 1 2 15
 clean_up() {
-    rm -rf ${tmpdir}
+#    rm -rf ${tmpdir}
+    echo $tmpdir
     #echo "Finished cleaning."
 }
 
@@ -308,6 +312,7 @@ prettyFlag=false
 schemeFlag=false
 linkFlag=false
 gridFlag=false
+userFlag=false
 
 OPTS="$(getopt -o o:,s:,p:,d:,u:,ihlv --long src:,bg:,bg2:,fg:,fg2:,tbg:,opacity:,sbg:,sfg:,bbg:,bfg:,lw:,lc:,gc:,scheme:,version,help,install -n $0 -- "$@")"
 if [ $? -ne 0 ]; then
@@ -396,8 +401,10 @@ while [ $# -gt 0 ] && [ "$1" != "--" ]; do
             shift 2
             ;;
         -u|--user)
-            USER="${2}"
-            is_valid_user "${USER}"
+            USERNAME="${2}"
+            is_valid_user "${USERNAME}"
+            set_custom_theme $USERNAME
+            userFlag=true
             shift 2
             ;;
         -i|--install)
@@ -430,7 +437,10 @@ for i in "${colorscheme[@]}"; do
         break
     fi
 done
-
+if [ ! "${userFlag}" == true ]; then
+    echo "username is required. Please specify username using '-u'."
+    exit 1
+fi
 # applying colorscheme
 if [ "${schemeFlag}" == true ] && [ ! "${installFlag}" == true ]; then
     gns3_colorscheme
@@ -444,10 +454,6 @@ if [ "${installFlag}" == true ]; then
         exit 1
     elif [ ! -d "${SRCDIR}" ]; then
         echo "Directory does not exist '${SRCDIR}'" 
-        exit 1
-    fi
-    if [ "${USER}" == "" ]; then
-        echo "username is required. Please specify username using '-u'."
         exit 1
     fi
     is_root
