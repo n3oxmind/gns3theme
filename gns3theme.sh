@@ -201,7 +201,8 @@ change_colorscheme() {
 # Change grid color. gns3-gui reinstall required
 change_grid_color() {
     if [ "${colorscheme[11]}" != "default" ]; then
-        sed -i "s/\(QtGui.QColor(\)[0-9]\+,.*[0-9]\+,.*[0-9]\+\(.[^)]*)\)/\1${rgbcolor}\2/" "${tmpdir}"/gns3/graphics_view.py
+        sed -i "s/\(QtGui.QColor(\)[0-9].*),/\1${rgbcolor})),/" "${tmpdir}"/gns3/graphics_view.py
+        sed -i "s/\(QtGui.QColor(\)[0-9].*)]/\1${rgbcolor}))]/" "${tmpdir}"/gns3/graphics_view.py
     fi
 }
 
@@ -288,15 +289,9 @@ gns3_gui_install () {
         gns3_colorscheme
     fi
     # change link color/width
-    if [ "${linkFlag}" == true ]; then
-        change_link_color
-        echo "Finished Changing Grid color"
-    fi
+    change_link_color
     # change grid color
-    if [ "${gridFlag}" == true ]; then
-        change_grid_color
-        echo "Finished Changing link color"
-    fi
+    change_grid_color
     # apply changes and install 
     scripts/build_pyqt.py
     python3 setup.py install
