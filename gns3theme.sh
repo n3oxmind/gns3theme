@@ -53,6 +53,8 @@ usage() {
     printf "%s\n" "Install custom scheme"
     printf "  %s\t\t%s\n"  "./gns3theme.sh  -u <username> --bg 282828 --bg2 323232 --fg FFFFFF --tbg 303030 .." 
     printf "  %s\t\t%s\n"  "./gns3theme.sh -u <username> --bg 282828 --bg2 323232 --fg FFFFFF --tbg 303030 -o 0.95 .." 
+    printf "%s\n" "Change link and grid color"
+    printf "  %s\t\t%s\n"  "./gns3theme.sh  -u <username>  --install --scheme n30x-darkw --lc 939393 --gc 323232 
 }
 
 trap clean_up 0 1 2 15
@@ -378,7 +380,7 @@ while [ $# -gt 0 ] && [ "$1" != "--" ]; do
             ;;
         --lw)
             linkFlag=true
-            colorscheme[10]="#${2}"
+            colorscheme[10]="${2}"
             shift 2
             ;;
         --gc)
