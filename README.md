@@ -74,10 +74,3 @@ custom colorscheme file is stored in `~/.config/gns3theme/custom.css`. You can c
 ### Install Other themes
 **Note1**: You can add your own schemes to `colorschemes` file, just follow the given format inside the file.
 see `gns3theme --help` for more information
-
-**Note2**: These flags (--lc, --lw and --gc) are not applied by default even though they're specified in the colorshceme file. For example if you want to make your project more readable and prettier you may need to change the --gc, --lc and --lw. I recommend using the default values from the colorscheme `./gns3theme.sh -u your_user_name -l` or use your own colors in RGB format.
-
-```sh
-$ ./gns3theme.sh -u your_user_name --scheme n30x-dark --lc 939393 --gc 323232 --lw 1.2
-```
-
