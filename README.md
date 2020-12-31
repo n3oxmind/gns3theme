@@ -9,7 +9,7 @@ gns3theme is a shell and  python script that will add custom theme feature to gn
 
 ### List all supported themes (you can add your own)
 ```sh
-$ ./gns3theme.sh -l
+$ ./gns3theme.sh -u your_user_name -l
 scheme-template:  bg      bg2     fg      fg2     tbg     sbg     sfg     bbg     bfg     lc      lw  gc        color
 solarized-light:  #fdf6e3 #eee8d5 #657b83 #0087ff #eee8d5 #0087ff #e4e4e4 #d70000 #1d2021 #657b83 1.2 #e6e6e6   light
 solarized-dark:   #002b36 #073642 #839496 #0087ff #073642 #d75f00 #1c1c1c #8a8a8a #1d2021 #839496 1.2 #003d4d   dark
@@ -36,9 +36,9 @@ n30x-darkblue:    #28283e #26263e #00997a #934806 #20203a #22223e #c46008 #24243
 	* Choose `CustomDark` for dark themes	(this only affects toolbar icons visibility)
 
 
-### Install n30x-dark3
+### Install n30x-darkw
 ```sh
-$ ./gns3theme.sh -u your_user_name --scheme n30x-dark3
+$ ./gns3theme.sh -u your_user_name --scheme n30x-darkw
 ```
 ![n30x-dark3](https://user-images.githubusercontent.com/10103340/44069564-3681323a-9f34-11e8-9f6c-7d458b0298bf.png)
 
@@ -72,6 +72,12 @@ $ ./gns3theme.sh -u your_user_name --scheme tomorrow
 custom colorscheme file is stored in `~/.config/gns3theme/custom.css`. You can change any color manually and see the changes by selecting any of `Preferences->General->Interface Style->{CustomDark, CustomLight}`.
 
 ### Install Other themes
-**Note**: You can add your own schemes to `colorschemes` file, just follow the given format inside the file.
+**Note1**: You can add your own schemes to `colorschemes` file, just follow the given format inside the file.
 see `gns3theme --help` for more information
+
+**Note2**: These flags (--lc, --lw and --gc) are not applied by default even though they're specified in the colorshceme file. For example if you want to make your project more readable and prettier you may need to change the --gc, --lc and --lw. I recommend using the default values from the colorscheme `./gns3theme.sh -u your_user_name -l` or use your own colors in RGB format.
+
+```sh
+$ ./gns3theme.sh -u your_user_name --scheme n30x-dark --lc 939393 --gc 323232 --lw 1.2
+```
 
