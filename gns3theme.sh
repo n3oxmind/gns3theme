@@ -1,22 +1,29 @@
-#!/bin/env bash
+#!/usr/bin/env bash
 set -eo errexit
 
 SRCDIR=""
 tmpdir=""
 USERNAME=""
+OSTYPE="linx"
 colorscheme=( "default" "default" "default" "default" "default" \
               "default" "default" "default" "default" "default" \
               "default" "default" "default" )  
 
 custom_css="QWidget{\n\tbackground-color: #fbf1c7;\n}\nQMenuBar::item{\n\tbackground-color: #fbf1c7;\n}\nQDockWidget::title{\n\tbackground: #d5c4a1;\n\tpadding-left: 5px;\n}\nQDockWidget, QMenuBar{\n\tcolor: #282828;\n\tfont: bold 14px;\n}\nQTextEdit, QPlainTextEdit, QLineEdit, QSpinBox, QComboBox{\n\tbackground-color: #d5c4a1;\n\tcolor: #282828;\n}\nQTextEdit#uiConsoleTextEdit{\n\tbackground-color: #fbf1c7;\n\tcolor: #282828;\n\tfont: 13px;\n}\nQTabWidget{\n\tfont: 14px;\n\tborder-top: 2px;\n}\nQTabBar::tab{\n\tbackground: #d5c4a1;\n\tcolor: #282828;\n\tmin-width: 8ex;\n\tpadding: 2px;\n\tborder-top-right-radius: 6px;\n\tborder-top-left-radius: 6px;\n}\nQTabBar::tab:selected{\n\tbackground: #458588;\n\tcolor: #FFFFFF;\n}\nQGroupBox{\n\tcolor: #076678;\n\tfont: 14px;\n\tpadding: 15px;\n\tborder-style: none;\n}\nQMainWindow::separator{\n\tbackground: #d5c4a1;\n\twidth: 1px;\n\theight: 1px;\n}\nQComboBox{\n\tselection-background-color: #458588;\n\tselection-color: #FFFFFF;\n}\nQToolBar{\n\tbackground: #d5c4a1;\n\tborder: 0px;\n}\nQPushButton{\n\tbackground-color: #d79921;\n\tcolor: #181818;\n\tfont: 14px;\n}\nQToolButton{\n\tbackground-color: #d5c4a1;\n\tcolor: #181818;\n\tfont: 14px;\n}\nQTreeWidget, QListWidget{\n\tbackground-color: #fbf1c7;\n\tcolor: #282828;\n\talternate-background-color: #d5c4a1; \n\tfont: 14px;\n}\nQTreeWidget#uiTreeWidget{\n\tbackground-color: #d5c4a1;\n\tcolor: #282828;\n\tfont: bold 16px;\n}\nQTreeWidget::item:selected, QTreeWidget::item:hover, QMenu::item:selected,QToolButton::hover,QPushButton::hover,QTabBar::tab:hover{\n\tbackground-color: #458588;\n\tcolor: #fafafa;\n}\nQMenu{\n\tbackground-color: #fbf1c7;\n\tcolor: #282828;\n}\nQLabel{\n\tcolor: #282828;\n\tfont: 14px;\n}\nQLabel#uiTitleLabel{\n\tcolor: #282828;\n\tfont: bold 16px;\n}\nQAbstractScrollArea::corner{\n\tbackground: #fbf1c7;\n}\nQScrollBar::handle:horizontal{\n\tbackground: #d5c4a1;\n\tmin-width: 20px;\n}\nQScrollBar::handle:vertical{\n\tbackground: #d5c4a1;\n\tmin-width: 20px;\n}\nQScrollBar:vertical{\n\twidth: 6px;\n}\nQScrollBar:horizontal{\n\theight: 6px;\n}\nQScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical, QScrollBar::down-arrow:horizontal, QScrollBar::up-arrow:horizontal{ \n\tborder: 0px;\n\theight: 0px; \n\twidth: 0px; \n}\nQScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal, QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical{\n\tbackground: none\n}\nQStatusBar{\n\tbackground-color: #d5c4a1;\n\tcolor: #282828;\n}\nQRadioButton, QCheckBox{\n\tcolor: #282828;\n}\nQRadioButton::disabled, QCheckBox::disabled{\n\tcolor: gray;\n}"
 
+if [ $(uname) == "Darwin" ]; then
+    OSTYPE="Darwin"
+fi
 set_custom_theme() {
     USERNAME="${1}"
     THEME_TEMPLATE="/home/$USERNAME/.config/gns3theme/custom.css"
+    if [ ${OSTYPE} == "Darwin" ]; then
+        THEME_TEMPLATE="/Users/$USERNAME/.config/gns3theme/custom.css"
+    fi
     if [ ! -f "${THEME_TEMPLATE}" ]; then
         mkdir -p ${THEME_TEMPLATE%/*}
         echo -e ${custom_css} > ${THEME_TEMPLATE}
-        chown ${USERNAME}:${USERNAME} ${THEME_TEMPLATE}
+        chown ${USERNAME} ${THEME_TEMPLATE}
         chmod 755 ${THEME_TEMPLATE}
     fi
 }
@@ -274,7 +281,7 @@ gns3_gui_install () {
     find /usr/lib \( -name "gns3" -o -name "gns3_gui-*.egg" -o -name "gns3_gui-*.egg-info" \) -type d -prune -exec rm -rf "{}" \+
     find /usr/local/lib \( -name "gns3" -o -name "gns3_gui-*.egg" -o -name "gns3_gui-*.egg-info" \) -type d -prune -exec rm -rf "{}" \+
     # copy src to temp
-    tmpdir=$(mktemp -d -t)
+    tmpdir=$(mktemp -d -t gns3theme)
     cp -af ${SRCDIR}/* ${tmpdir}
     cd $tmpdir
     # patch gns3-gui for custom theme
