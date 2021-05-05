@@ -23,7 +23,7 @@ n30x-darkw:       #252525 #2a2a2a #00997a #b7855f #404040 #323232 #9575cd #c2185
 n30x-darker:      #0d0d0d #141414 #008066 #2979FF #181818 #000000 #BA4551 #161616 #b3b3b3 #008066 1.2 #181818   dark
 n30x-darkblue:    #28283e #26263e #00997a #934806 #20203a #22223e #c46008 #24243e #00997a #939393 1.2 #32324e   dark
 ```
-### Installation
+### Install on Linux
 1. Download/Clone ![gns3-gui](https://github.com/GNS3/gns3-gui/archive/master.zip)
 2. Extract master.zip
 3. Download/Clone ![gns3theme](https://github.com/n3oxmind/gns3theme/tree/master)
@@ -34,6 +34,20 @@ n30x-darkblue:    #28283e #26263e #00997a #934806 #20203a #22223e #c46008 #24243
 6. Make sure to choose the following from `Preferences->General->Interface Style`:
 	* Choose `CustomLight` for light themes (this only affects toolbar icons visibility)
 	* Choose `CustomDark` for dark themes	(this only affects toolbar icons visibility)
+
+### Install on MacOS
+1. Download/Clone ![gns3-gui](https://github.com/GNS3/gns3-gui/archive/master.zip)
+2. Extract master.zip
+3. Download/Clone ![gns3theme](https://github.com/n3oxmind/gns3theme/tree/master)
+4. Extract gns3theme
+3. cd to gns3theme directory
+4. install GNU sed `brew install gnu-sed` - and added to your path `PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"`
+4. Run as root `./gns3theme.sh  --install -u $USER --src /path/to/master_extraction_location_step_2`. For transparent theme add -o option.
+5. Change colorscheme as many as you want as a regular user. See below for more details on how to change colorscheme.
+6. Make sure to choose the following from `Preferences->General->Interface Style`:
+	* Choose `CustomLight` for light themes (this only affects toolbar icons visibility)
+	* Choose `CustomDark` for dark themes	(this only affects toolbar icons visibility)
+
 
 
 ### Install n30x-darkw
