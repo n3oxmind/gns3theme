@@ -281,7 +281,7 @@ gns3_gui_install () {
     find /usr/lib \( -name "gns3" -o -name "gns3_gui-*.egg" -o -name "gns3_gui-*.egg-info" \) -type d -prune -exec rm -rf "{}" \+
     find /usr/local/lib \( -name "gns3" -o -name "gns3_gui-*.egg" -o -name "gns3_gui-*.egg-info" \) -type d -prune -exec rm -rf "{}" \+
     # copy src to temp
-    tmpdir=$(mktemp -d -t gns3theme)
+    tmpdir=$(mktemp -d -t gns3theme.XXXXXXXX)
     cp -af ${SRCDIR}/* ${tmpdir}
     cd $tmpdir
     # patch gns3-gui for custom theme
