@@ -129,9 +129,9 @@ def update_gns3_ui(scheme, src_dir, username, home_dir=None):
     if scheme['gc'] != 'default':
         print("\033[92mPatchFile\033[0m: Changed gns3_gui grid color")
         if scheme['color'] == 'light':
-            new_graphics_view = change_grid_color(scheme['gc'], dark=True)
+            new_graphics_view = change_grid_color(scheme['gc'], dark=True, file_path=gns3_graphics_view_path)
         else:
-            new_graphics_view = change_grid_color(scheme['gc'], light=True)
+            new_graphics_view = change_grid_color(scheme['gc'], light=True, file_path=gns3_graphics_view_path)
 
     print("\033[92mPatchFile\033[0m: Finished patching gns3_gui source code")
 
@@ -273,13 +273,13 @@ def color_luminate(color, lighten=False, darken=False, lum=0):
     return f"({r}, {g}, {b})"
 
 
-def change_grid_color(grid_color, dark=False, light=False):
+def change_grid_color(grid_color, dark=False, light=False, file_path=None):
     """
     Change grid color to fit the current theme
     """
     drawing_grid_color = hex_to_rgb(grid_color)
     node_grid_color = color_luminate(grid_color, darken=dark, lighten=light)
-    gns3_graphics_view_path = "/home/afathi/Downloads/gns3-gui-2.2.26/gns3/graphics_view.py"
+    gns3_graphics_view_path = file_path
 
     with open(gns3_graphics_view_path, 'r') as fh:
         contents = fh.read()
