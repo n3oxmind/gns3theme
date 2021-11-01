@@ -65,6 +65,8 @@ custom colorscheme file is stored in `~/.config/gns3theme/custom_style.css`. You
 
 To add more colorschemes follow the format in `colorschmes.py` and add as many colorschmes as you want.
 
+If you like the icons that i'm using in the screenshots. Copy the **symbols** folder to your GNS3 directory. They will appear under the custom_symbols when you right-click on any appliance. you can change individual devices manually or make them as default icons from gns3 preferences.
+
 ### gns3theme usage
 ```sh
 usage: gns3theme --install <path/to/gns3_gui_dir> --scheme <colorscheme>
