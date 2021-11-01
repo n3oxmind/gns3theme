@@ -55,13 +55,40 @@ $ gns3theme -s n30x-light
 
 
 ### Tips
-'./gns3theme.py --install <gns3_gui_dir>' is only required if you want to make/apply changes to grid color and must be run as root. 
+`./gns3theme.py --install <gns3_gui_dir>` is only required on first installation and if you want to make/apply changes to grid color.
 
-Changing colorscheme is as simple as `./gns3theme.py -s n30x-darker`. To further customize specific colorscheme use --bg, bg2, --fg, --fg2 ..., etc options to target specific ui element. For example, if you like n30x-dark theme and you want to change the selection background color, you can achieve this as below:
+Changing colorscheme is as simple as `./gns3theme.py -s n30x-darker`. To further customize specific colorscheme use --bg, bg2, --fg, --fg2 ..., etc options to target specific ui element. For example, if you like **n30x-dark** theme and you want to change the selection background color, you can achieve this as below:
 ```sh
 $ ./gns3theme.py -s n30x-dark --sbg ffffff
 ```
 custom colorscheme file is stored in `~/.config/gns3theme/custom_style.css`. You can change any color manually with your fav text editor. 
 
-To add more colorscheme follow the format in `colorschmes.py` and add as many colorschmes as you want.
-see `gns3theme --help` for more information
+To add more colorschemes follow the format in `colorschmes.py` and add as many colorschmes as you want.
+
+### gns3theme usage
+```sh
+usage: gns3theme --install <path/to/gns3_gui_dir> --scheme <colorscheme>
+       gns3theme --scheme <colorscheme> [options]
+
+manditory arguments:
+  -i, --install PATH            path to gns3-gui source directory
+  -s, --scheme NAME             choose color scheme to apply for gns3-gui
+  -u, --user USER               Specify username for installation. only used with --install option
+
+optional arguments:
+  --bg COLOR                    change primary background color
+  --bg2 COLOR                   change secondary background color
+  --fg COLOR                    change primary foreground color
+  --fg2 COLOR                   change secondary foreground color
+  --tbg COLOR                   change toolbar background color
+  --sbg COLOR                   change selection background color
+  --sfg COLOR                   change selection foreground color
+  --bbg COLOR                   change button background color
+  --lc COLOR                    change ethernet link color. Reinstall gns3-gui as root is required
+  --lw NUM                      change ethernet and serial links width. Reinstall gns3-gui as root is required
+  --gc COLOR                    change grid color. Reinstall gns3-gui as root is required
+
+optional flags:
+  --help                        show this help
+  --ls                          list predefined color schemes
+```
