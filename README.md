@@ -1,8 +1,8 @@
 # gns3theme
 
-gns3theme is python tool that will allow to add a custom theme to gns3. Support both Linux and MacOS.
+gns3theme is python tool that will adds a custom theme to gns3. Support both Linux and MacOS.
 - Change gns3 theme from a predefined schemes 
-- Change ethernet/serial link width and color (not implemented yet)
+- Change ethernet/serial link width and color 
 - Apply full transparency to gns3-gui (not implemented yet)
 - Create a custom gns3-gui theme.
 
@@ -13,6 +13,7 @@ gns3theme is python tool that will allow to add a custom theme to gns3. Support 
 3. cd to gns3theme directory
 4. Install gns3_gui `sudo ./gns3theme.py --install </path/to/gns3-gui_dir> -u <username> -s <colorscheme>`. Run only once
 5. Add custom theme `./gns3theme.py -s <colorscheme>`. Check `./gns3theme.py --ls` for supported colorschemes.
+6. Start gns3 and choose Edit->Preferences->General->Interface Style->Custom
 
 ### List default colorschemes
 ```sh
