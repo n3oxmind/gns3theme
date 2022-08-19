@@ -7,13 +7,22 @@ gns3theme is python tool that will adds a custom theme to gns3. Support both Lin
 - Create a custom gns3-gui theme.
 
 ### Installation
-1. Download latest ![gns3theme](https://github.com/n3oxmind/gns3theme/tree/master)
-1. Downlad latest ![gns3-gui](https://github.com/GNS3/gns3-gui/releases)
-4. Extract both repors
-3. cd to gns3theme directory
-4. Install gns3_gui `sudo ./gns3theme.py --install </path/to/gns3-gui_dir> -u <username> -s <colorscheme>`. Run only once
-5. Add custom theme `./gns3theme.py -s <colorscheme>`. Check `./gns3theme.py --ls` for supported colorschemes.
-6. Start gns3 and choose Edit->Preferences->General->Interface Style->Custom
+```sh
+git clone git@github.com:n3oxmind/gns3theme.git
+cd gns3theme
+sudo ./gns3theme.py --install /path/to/gns3/installation/directory -u $USER  --scheme <colorscheme>
+./gns3theme.py --scheme -s <colorscheme>
+```
+Add custom theme `./gns3theme.py -s <colorscheme>`. Check `./gns3theme.py --ls` for supported colorschemes.
+Start gns3 and choose Edit->Preferences->General->Interface Style->Custom
+
+### Change grid color and/or link color (only with --install as root)
+```sh
+sudo ./gns3theme.py --install /path/to/gns3/installation/directory -u $USER  --scheme <colorscheme> --lc ffffff --gc 000000
+```
+
+**Note**: `/path/to/gns3/installation/directory` is your gns3 installation directory. For example my gns3 is installed under
+$HOME/.local/lib/python3.10/site-package. gns3theme does not need the gns3-gui source code anymore.
 
 ### List default colorschemes
 ```sh

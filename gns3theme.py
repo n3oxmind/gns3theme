@@ -76,12 +76,13 @@ def update_gns3_ui(scheme, src_dir, username, home_dir=None):
         home_dir = f"/home/{username}"
     elif sys.platform == 'darwin':
         home_dir = f"/Users/{username}"
-    custom_style_path = f"{home_dir}/.config/gns3theme/custom_style.css"
+    custom_style_path = f"{home_dir}.config/gns3theme/custom_style.css"
     # mkdir(Path(custom_style_path).parent)
-    gns3_main_window_path = f"{src_dir}/gns3/main_window.py"
-    gns3_style_path = f"{src_dir}/gns3/style.py"
-    gns3_settings_path = f"{src_dir}/gns3/settings.py"
-    gns3_graphics_view_path = f"{src_dir}/gns3/graphics_view.py"
+    gns3_main_window_path = f"{src_dir}gns3/main_window.py"
+    gns3_style_path = f"{src_dir}gns3/style.py"
+    gns3_settings_path = f"{src_dir}gns3/settings.py"
+    gns3_graphics_view_path = f"{src_dir}gns3/graphics_view.py"
+    gns3_ethernet_link_item_path = f"{src_dir}gns3/items/ethernet_link_item.py"
 
     # apply patch
     tab = ' '*4
@@ -133,12 +134,17 @@ def update_gns3_ui(scheme, src_dir, username, home_dir=None):
         else:
             new_graphics_view = change_grid_color(scheme['gc'], light=True, file_path=gns3_graphics_view_path)
 
+    if scheme['lc'] != 'default':
+        new_ethernet_link_item = change_link_color(scheme['lc'], light=True, file_path=gns3_ethernet_link_item_path)
+        print("\033[92mPatchFile\033[0m: Changed ethernet_link_item color")
+
     print("\033[92mPatchFile\033[0m: Finished patching gns3_gui source code")
 
     save_file(new_main_window, gns3_main_window_path)
     save_file(new_settings, gns3_settings_path)
     save_file(new_style, gns3_style_path)
     save_file(new_graphics_view, gns3_graphics_view_path)
+    save_file(new_ethernet_link_item, gns3_ethernet_link_item_path)
 
     return True
 
@@ -246,6 +252,21 @@ def update_style(scheme):
             pass
     new_scheme = generate_custom_css(new_scheme)
     return new_scheme
+
+
+def change_link_color(link_color, light=False, dark=False, file_path=None):
+    """
+    Change link color based on the select theme. Only new projects will be affected.
+    Old projects will maintains their original link color.
+    """
+
+    with open(file_path, 'r') as fh:
+        contents = fh.read()
+        new_ethernet_link_item = re.sub(r"(\s+self.setPen\(QtGui.QPen\(QtGui.QColor\(\").*?(\"\).*)",
+                                        f"\\1{link_color}\\2",
+                                        contents,
+                                        re.M)
+    return new_ethernet_link_item
 
 
 def color_luminate(color, lighten=False, darken=False, lum=0):
@@ -390,9 +411,11 @@ def main():
             print("\033[91mInstallError\033[0m: Director does not exists '{args.install_scheme}'")
 
         scheme = schemes[args.color_scheme]
+        scheme = parse_scheme_args(scheme, bg=args.bg, bg2=args.bg2, fg=args.fg, fg2=args.fg2, tbg=args.tbg,
+                                   sbg=args.sbg, sfg=args.sfg, bbg=args.bbg, lc=args.lc, lw=args.lw, gc=args.gc)
         update_style(scheme)
         update_gns3_ui(scheme, gns3_gui_dir, args.username)
-        install_gns3_gui(gns3_gui_dir)
+        #install_gns3_gui(gns3_gui_dir)
     elif args.color_scheme and not args.install_scheme:
         if is_root():
             print("\033[91mInstallError\033[0m: Please run as nonroot")
