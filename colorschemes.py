@@ -122,4 +122,19 @@ schemes = {
         'gc': '#e6e6e6',
         'color': 'light',
     },
+    'dwm-dark': {
+        'bg': '#0d0d0d',
+        'bg2': '#141414',
+        'fg': '#ffffff',
+        'fg2': '#00b6ff',
+        'tbg': '#181818',
+        'sbg': '#000000',
+        'sfg': '#BA4551',
+        'bbg': '#161616',
+        'bfg': '#b3b3b3',
+        'lc': '#0a7aca',
+        'lw': 2,
+        'gc': '#303030',
+        'color': 'dark',
+    }
 }

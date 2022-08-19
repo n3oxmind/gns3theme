@@ -31,37 +31,43 @@ solarized-dark
 n30x-dark
 n30x-darker
 n30x-darkblue
+dwm-dark
 
 Add your colorscheme in 'colorschemes.py' file
 ```
 
 ### Install n30x-dark
 ```sh
-$ ./gns3theme.sh -s n30x-dark
+# ./gns3theme.py --scheme n30x-dark
 ```
 ![n30x-dark3](https://user-images.githubusercontent.com/10103340/44069564-3681323a-9f34-11e8-9f6c-7d458b0298bf.png)
 
 
 ### Install solarized-light theme
 ```sh
-$ gns3theme -s solarized-light
+# ./gns3theme.py --scheme solarized-light
 ```
 ![solarized-light](https://user-images.githubusercontent.com/10103340/44070067-9d04544a-9f36-11e8-9793-e73522e9002b.png)
 
 
 ### Install tomorrow theme
 ```sh
-$ gns3theme -s tomorrow
+# ./gns3theme.py --scheme tomorrow
 ```
 ![tomorrow](https://user-images.githubusercontent.com/10103340/44069498-f4c867aa-9f33-11e8-8ca1-82a26cca134e.png)
 
 
 ### Install n30x-light
 ```sh
-$ gns3theme -s n30x-light
+# /gns3theme./py --scheme n30x-light
 ```
 ![n30x-light](https://user-images.githubusercontent.com/10103340/44069475-d54f28be-9f33-11e8-8a0e-f1fc3bf889c1.png)
 
+### Install dwm-dark
+```sh
+# ./gns3theme.py --scheme dwm-dark
+```
+![dwm-dark](https://i.imgur.com/nQ1YTUa.png)
 
 ### Tips
 `./gns3theme.py --install <gns3_gui_dir>` is only required on first installation and if you want to make/apply changes to grid color.
