@@ -11,7 +11,7 @@ gns3theme is python tool that will adds a custom theme to gns3. Support both Lin
 git clone git@github.com:n3oxmind/gns3theme.git
 cd gns3theme
 sudo ./gns3theme.py --install /path/to/gns3/installation/directory -u $USER  --scheme <colorscheme>
-./gns3theme.py --scheme -s <colorscheme>
+./gns3theme.py --scheme <colorscheme>
 ```
 Add custom theme `./gns3theme.py -s <colorscheme>`. Check `./gns3theme.py --ls` for supported colorschemes.
 Start gns3 and choose Edit->Preferences->General->Interface Style->Custom
@@ -21,8 +21,7 @@ Start gns3 and choose Edit->Preferences->General->Interface Style->Custom
 sudo ./gns3theme.py --install /path/to/gns3/installation/directory -u $USER  --scheme <colorscheme> --lc ffffff --gc 000000
 ```
 
-**Note**: `/path/to/gns3/installation/directory` is your gns3 installation directory. For example my gns3 is installed under
-$HOME/.local/lib/python3.10/site-package. gns3theme does not need the gns3-gui source code anymore.
+**Note**: `/path/to/gns3/installation/directory` is your gns3 installation directory. For example my gns3 is installed under `$HOME/.local/lib/python3.10/site-package`. gns3theme does not need the gns3-gui source code anymore.
 
 ### List default colorschemes
 ```sh
