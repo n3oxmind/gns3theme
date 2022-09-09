@@ -8,7 +8,7 @@ gns3theme is python tool that will adds a custom theme to gns3. Support both Lin
 
 ### Installation
 ```sh
-git clone git@github.com:n3oxmind/gns3theme.git
+git clone https://github.com/n3oxmind/gns3theme.git
 cd gns3theme
 sudo ./gns3theme.py --install /path/to/gns3/installation/directory -u $USER  --scheme <colorscheme>
 ./gns3theme.py --scheme <colorscheme>
