@@ -76,13 +76,13 @@ def update_gns3_ui(scheme, src_dir, username, home_dir=None):
         home_dir = f"/home/{username}"
     elif sys.platform == 'darwin':
         home_dir = f"/Users/{username}"
-    custom_style_path = f"{home_dir}.config/gns3theme/custom_style.css"
-    # mkdir(Path(custom_style_path).parent)
-    gns3_main_window_path = f"{src_dir}gns3/main_window.py"
-    gns3_style_path = f"{src_dir}gns3/style.py"
-    gns3_settings_path = f"{src_dir}gns3/settings.py"
-    gns3_graphics_view_path = f"{src_dir}gns3/graphics_view.py"
-    gns3_ethernet_link_item_path = f"{src_dir}gns3/items/ethernet_link_item.py"
+    custom_style_path = f"{home_dir}/.config/gns3theme/custom_style.css"
+    os.mkdir(Path(custom_style_path).parent)
+    gns3_main_window_path = f"{src_dir}/gns3/main_window.py"
+    gns3_style_path = f"{src_dir}/gns3/style.py"
+    gns3_settings_path = f"{src_dir}/gns3/settings.py"
+    gns3_graphics_view_path = f"{src_dir}/gns3/graphics_view.py"
+    gns3_ethernet_link_item_path = f"{src_dir}/gns3/items/ethernet_link_item.py"
 
     # apply patch
     tab = ' '*4
@@ -256,8 +256,7 @@ def update_style(scheme):
 
 def change_link_color(link_color, light=False, dark=False, file_path=None):
     """
-    Change link color based on the select theme. Only new projects will be affected.
-    Old projects will maintains their original link color.
+    Change link color based on the select theme. All projects will be affected.
     """
 
     with open(file_path, 'r') as fh:
@@ -415,7 +414,7 @@ def main():
                                    sbg=args.sbg, sfg=args.sfg, bbg=args.bbg, lc=args.lc, lw=args.lw, gc=args.gc)
         update_style(scheme)
         update_gns3_ui(scheme, gns3_gui_dir, args.username)
-        #install_gns3_gui(gns3_gui_dir)
+        install_gns3_gui(gns3_gui_dir)
     elif args.color_scheme and not args.install_scheme:
         if is_root():
             print("\033[91mInstallError\033[0m: Please run as nonroot")
