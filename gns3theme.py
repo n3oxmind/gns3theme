@@ -73,16 +73,16 @@ def update_gns3_ui(scheme, src_dir, username, home_dir=None):
         False (bool): otherwise
     """
     if sys.platform == 'linux':
-        home_dir = f"/home/{username}"
+        home_dir = Path("/home", username)
     elif sys.platform == 'darwin':
-        home_dir = f"/Users/{username}"
-    custom_style_path = f"{home_dir}.config/gns3theme/custom_style.css"
+        home_dir = Path("/Users", username)
+    custom_style_path = Path(home_dir, ".config/gns3theme/custom_style.css")
     # mkdir(Path(custom_style_path).parent)
-    gns3_main_window_path = f"{src_dir}gns3/main_window.py"
-    gns3_style_path = f"{src_dir}gns3/style.py"
-    gns3_settings_path = f"{src_dir}gns3/settings.py"
-    gns3_graphics_view_path = f"{src_dir}gns3/graphics_view.py"
-    gns3_ethernet_link_item_path = f"{src_dir}gns3/items/ethernet_link_item.py"
+    gns3_main_window_path = Path(src_dir, "gns3/main_window.py")
+    gns3_style_path = Path(src_dir, "gns3/style.py")
+    gns3_settings_path = Path(src_dir, "gns3/settings.py")
+    gns3_graphics_view_path = Path(src_dir, "gns3/graphics_view.py")
+    gns3_ethernet_link_item_path = Path(src_dir, "gns3/items/ethernet_link_item.py")
 
     # apply patch
     tab = ' '*4
