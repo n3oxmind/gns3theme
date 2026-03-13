@@ -22,6 +22,9 @@ RESET = '\033[0m'
 
 IS_MACOS = sys.platform == 'darwin'
 MACOS_GNS3_APP = Path('/Applications/GNS3.app')
+SCRIPT_DIR = Path(__file__).resolve().parent
+BUNDLED_SYMBOLS_DIR = SCRIPT_DIR / 'symbols'
+GNS3_SYMBOLS_DIR = Path.home() / 'GNS3' / 'symbols'
 CONFIG_DIR = Path.home() / '.config' / 'gns3theme'
 USER_SCHEMES_DIR = CONFIG_DIR / 'schemes'
 CSS_PATH = CONFIG_DIR / 'custom_style.css'
@@ -154,38 +157,71 @@ def detect_pyc_version(pyc_path):
         return None
 
 
-def find_gns3_lib(install_path=None):
-    """Find the lib directory containing gns3 package."""
-    if install_path and install_path != 'auto':
-        path = Path(install_path)
-        if (path / 'gns3' / 'main_window.pyc').exists():
-            return path
-        if (path / 'gns3' / 'main_window.py').exists():
-            return path
-        return None
+def find_gns3_lib():
+    """Auto-detect the lib directory containing gns3 package.
 
-    # macOS
+    Returns (path, install_type) where install_type is 'app' or 'source'.
+    'app' means macOS GNS3.app bundle with .pyc files.
+    'source' means pip/brew install with .py files (Linux or macOS).
+    """
+    # macOS GNS3.app bundle (cx_Freeze, .pyc files)
     if IS_MACOS and MACOS_GNS3_APP.exists():
         lib = MACOS_GNS3_APP / 'Contents' / 'Resources' / 'lib'
         if (lib / 'gns3' / 'main_window.pyc').exists():
-            return lib
+            return lib, 'app'
 
-    # Linux
-    if not IS_MACOS:
-        home = Path.home()
-        candidates = []
-        for pyver in ['3.13', '3.12', '3.11', '3.10', '3.9', '3.8']:
+    # pip/brew/source install (.py files) — works on both macOS and Linux
+    for cmd in [
+        ['python3', '-c',
+         'import importlib.util as u; print(u.find_spec("gns3").submodule_search_locations[0])'],
+        ['pip3', 'show', 'gns3-gui'],
+    ]:
+        try:
+            out = subprocess.check_output(cmd, stderr=subprocess.DEVNULL, text=True).strip()
+            if 'Location:' in out:
+                for line in out.splitlines():
+                    if line.startswith('Location:'):
+                        out = line.split(':', 1)[1].strip()
+                        break
+            p = Path(out)
+            if p.name == 'gns3' and (p / 'main_window.py').exists():
+                return p.parent, 'source'
+            if (p / 'gns3' / 'main_window.py').exists():
+                return p, 'source'
+        except (subprocess.CalledProcessError, FileNotFoundError, OSError):
+            continue
+
+    # Fallback: scan common locations
+    home = Path.home()
+    candidates = []
+    for pyver in ['3.14', '3.13', '3.12', '3.11', '3.10', '3.9', '3.8']:
+        candidates.extend([
+            home / f'.local/lib/python{pyver}/site-packages',
+            Path(f'/usr/lib/python{pyver}/site-packages'),
+            Path(f'/usr/lib/python{pyver}/dist-packages'),
+            Path(f'/usr/local/lib/python{pyver}/site-packages'),
+            Path(f'/usr/local/lib/python{pyver}/dist-packages'),
+            Path(f'/usr/lib64/python{pyver}/site-packages'),
+        ])
+    candidates.append(Path('/usr/lib/python3/dist-packages'))
+    # Homebrew on macOS
+    if IS_MACOS:
+        for pyver in ['3.14', '3.13', '3.12', '3.11', '3.10', '3.9']:
             candidates.extend([
-                home / f'.local/lib/python{pyver}/site-packages',
-                Path(f'/usr/lib/python{pyver}/dist-packages'),
-                Path(f'/usr/local/lib/python{pyver}/dist-packages'),
+                Path(f'/opt/homebrew/lib/python{pyver}/site-packages'),
+                Path(f'/usr/local/lib/python{pyver}/site-packages'),
             ])
-        candidates.append(Path('/usr/lib/python3/dist-packages'))
-        for path in candidates:
-            if (path / 'gns3' / 'main_window.py').exists():
-                return path
+    # virtualenvs / pipx
+    for venv_base in [home / '.local/pipx/venvs/gns3-gui',
+                      home / '.virtualenvs/gns3']:
+        if venv_base.exists():
+            for pyver in ['3.14', '3.13', '3.12', '3.11', '3.10', '3.9', '3.8']:
+                candidates.append(venv_base / 'lib' / f'python{pyver}' / 'site-packages')
+    for path in candidates:
+        if (path / 'gns3' / 'main_window.py').exists():
+            return path, 'source'
 
-    return None
+    return None, None
 
 
 def find_matching_python(pyc_path):
@@ -695,24 +731,19 @@ def macos_patch_app(src_app, scheme, backup_dir):
         success("Sign", "Ad-hoc signed the patched app")
 
         # Move patched app to /Applications (requires sudo)
-        success("Install", "Moving patched GNS3.app to /Applications/ (requires sudo)...")
+        check_sudo('gns3theme -s <scheme>')
+        success("Install", "Moving patched GNS3.app to /Applications/...")
         if not bak_app.exists():
-            ret = subprocess.run(['sudo', 'mv', str(src_app), str(bak_app)])
+            ret = subprocess.run(['sudo', 'cp', '-a', str(src_app), str(bak_app)])
             if ret.returncode != 0:
                 error("Install", "Failed to backup original app")
                 sys.exit(1)
             success("Backup", f"Original app backed up to {bak_app}")
-        else:
-            ret = subprocess.run(['sudo', 'rm', '-rf', str(src_app)])
-            if ret.returncode != 0:
-                error("Install", "Failed to remove old app")
-                sys.exit(1)
 
-        ret = subprocess.run(['sudo', 'mv', str(tmp_app), str(src_app)])
+        ret = subprocess.run(
+            ['sudo', 'cp', '-a', str(tmp_app) + '/', str(src_app) + '/'])
         if ret.returncode != 0:
-            error("Install", "Failed to move patched app")
-            if bak_app.exists():
-                subprocess.run(['sudo', 'mv', str(bak_app), str(src_app)])
+            error("Install", "Failed to copy patched app to /Applications/")
             sys.exit(1)
 
         success("Install", "Patched GNS3.app installed to /Applications/")
@@ -724,7 +755,7 @@ def macos_patch_app(src_app, scheme, backup_dir):
             shutil.rmtree(tmp_dir, ignore_errors=True)
 
 
-# --- Linux .py patching ---
+# --- Source .py patching ---
 
 def patch_py_settings(file_path, backup_dir):
     """Add 'Custom' to STYLES in settings.py."""
@@ -872,22 +903,94 @@ def patch_py_style(file_path, backup_dir):
     success("Patch", "Added setCustomStyle to style.py")
 
 
-def install_patches_linux(gns3_dir, scheme, backup_dir):
-    """Patch GNS3 .py source files on Linux."""
+def restore_from_backup(file_path, backup_dir):
+    """Restore a single file from backup if one exists (for re-patching)."""
+    bak = backup_dir / Path(file_path).name
+    if bak.exists():
+        shutil.copy(bak, file_path)
+
+
+def patch_py_link_item(file_path, hex_color, backup_dir):
+    """Patch link item .py: replace fallback '#000000' with theme color."""
+    if not file_path.exists():
+        warn("Patch", f"{file_path.name} not found, skipping")
+        return
+    # Restore original before patching so we always replace from clean state
+    restore_from_backup(file_path, backup_dir)
+    with open(file_path, 'r') as f:
+        content = f.read()
+    if '#000000' not in content:
+        warn("Patch", f"{file_path.name}: no #000000 to replace, skipping")
+        return
+    backup_file(file_path, backup_dir)
+    new_content = content.replace('#000000', hex_color)
+    with open(file_path, 'w') as f:
+        f.write(new_content)
+    success("Patch", f"{file_path.name} link color set to {hex_color}")
+
+
+def patch_py_pycutext(file_path, hex_color, backup_dir):
+    """Patch pycutext.py: replace hardcoded black colors in write() and
+    SyntaxColor.get_color() with the theme foreground color."""
+    if not file_path.exists():
+        warn("Patch", f"{file_path.name} not found, skipping")
+        return
+    # Restore original before patching so we always replace from clean state
+    restore_from_backup(file_path, backup_dir)
+    with open(file_path, 'r') as f:
+        content = f.read()
+    r, g, b = int(hex_color[1:3], 16), int(hex_color[3:5], 16), int(hex_color[5:7], 16)
+    new_qcolor = f'QColor({r}, {g}, {b})'
+    new_tuple = f'({r}, {g}, {b})'
+    patched = False
+    new_content = content
+    # Patch write() default color: QColor(0, 0, 0)
+    if 'QColor(0, 0, 0)' in new_content:
+        new_content = new_content.replace('QColor(0, 0, 0)', new_qcolor)
+        patched = True
+    # Patch SyntaxColor.get_color() default return: (0, 0, 0)
+    # This is the tuple returned for non-keyword input text
+    if 'return (0, 0, 0)' in new_content:
+        new_content = new_content.replace('return (0, 0, 0)', f'return {new_tuple}')
+        patched = True
+    if not patched:
+        warn("Patch", f"{file_path.name}: no black color patterns to replace, skipping")
+        return
+    backup_file(file_path, backup_dir)
+    with open(file_path, 'w') as f:
+        f.write(new_content)
+    success("Patch", f"Console text color set to {hex_color}")
+
+
+def install_patches_source(gns3_dir, scheme, backup_dir):
+    """Patch GNS3 .py source files (pip/brew/source installs)."""
     gns3_pkg = Path(gns3_dir) / 'gns3'
+    import os
+    if not os.access(gns3_pkg / 'settings.py', os.W_OK):
+        error("PermissionError",
+              f"No write access to {gns3_pkg}. Try running with sudo")
+        sys.exit(1)
     patch_py_settings(gns3_pkg / 'settings.py', backup_dir)
     patch_py_main_window(gns3_pkg / 'main_window.py', backup_dir)
     patch_py_style(gns3_pkg / 'style.py', backup_dir)
+
+    # Patch console text color
+    fg = scheme.get('fg', '#d8dee9')
+    patch_py_pycutext(gns3_pkg / 'pycutext.py', fg, backup_dir)
+
+    # Patch link colors
+    link_color = scheme.get('lc', scheme.get('fg', '#d8dee9'))
+    patch_py_link_item(gns3_pkg / 'items' / 'ethernet_link_item.py', link_color, backup_dir)
+    patch_py_link_item(gns3_pkg / 'items' / 'serial_link_item.py', link_color, backup_dir)
+
     save_config(scheme)
     success("Install", "Patching complete!")
 
 
 # --- CSS generation ---
 
-def generate_custom_css(data=None):
+def generate_custom_css(data):
     """Generate CSS string from selector-properties dict."""
-    if not data:
-        data = css.custom_style
     parts = []
     for selector, properties in data.items():
         parts.append(f'{selector}{{\n')
@@ -1031,7 +1134,51 @@ def save_config(scheme):
     success("Config", f"Saved config to {CONFIG_PATH}")
 
 
+# --- Symbols ---
+
+def install_symbols():
+    """Copy bundled SVG symbols to ~/GNS3/symbols/."""
+    if not BUNDLED_SYMBOLS_DIR.is_dir():
+        error("Symbols", f"Bundled symbols not found at {BUNDLED_SYMBOLS_DIR}")
+        sys.exit(1)
+
+    svgs = sorted(BUNDLED_SYMBOLS_DIR.glob('*.svg'))
+    if not svgs:
+        error("Symbols", "No SVG files found in bundled symbols directory")
+        sys.exit(1)
+
+    mkdir(GNS3_SYMBOLS_DIR)
+
+    installed = 0
+    skipped = 0
+    for svg in svgs:
+        dest = GNS3_SYMBOLS_DIR / svg.name
+        if dest.exists():
+            skipped += 1
+            continue
+        shutil.copy2(svg, dest)
+        installed += 1
+
+    if installed:
+        success("Symbols", f"Installed {installed} symbols to {GNS3_SYMBOLS_DIR}")
+    if skipped:
+        warn("Symbols", f"Skipped {skipped} symbols (already exist)")
+    if installed:
+        print(f"\n{GREEN}Done!{RESET} Symbols are available in GNS3 symbol selection dialog.")
+
+
 # --- Restore ---
+
+def check_sudo(hint=''):
+    """Validate sudo access before performing privileged operations."""
+    ret = subprocess.run(['sudo', '-n', 'true'], capture_output=True)
+    if ret.returncode != 0:
+        msg = "This operation requires sudo."
+        if hint:
+            msg += f" Run with: sudo {hint}"
+        error("PermissionError", msg)
+        sys.exit(1)
+
 
 def restore_macos():
     """Restore original GNS3.app from backup."""
@@ -1039,43 +1186,45 @@ def restore_macos():
     if not bak_app.exists():
         warn("Restore", "No backup found at /Applications/GNS3.app.bak")
         return
-    success("Restore", "Restoring original GNS3.app (requires sudo)...")
-    ret = subprocess.run(['sudo', 'rm', '-rf', str(MACOS_GNS3_APP)])
-    if ret.returncode != 0:
-        error("Restore", "Failed to remove patched app")
-        sys.exit(1)
-    ret = subprocess.run(['sudo', 'mv', str(bak_app), str(MACOS_GNS3_APP)])
+    check_sudo('gns3theme --restore')
+    success("Restore", "Restoring original GNS3.app...")
+    ret = subprocess.run(['sudo', 'cp', '-a', str(bak_app), str(MACOS_GNS3_APP)])
     if ret.returncode != 0:
         error("Restore", "Failed to restore backup")
         sys.exit(1)
-    success("Restore", "Original GNS3.app restored")
+    success("Restore", "Original GNS3.app restored (backup kept at GNS3.app.bak)")
 
 
-def restore_linux(gns3_dir):
+def restore_source(gns3_dir):
     """Restore original GNS3 files from backups."""
     gns3_pkg = Path(gns3_dir) / 'gns3'
     backup_dir = CONFIG_DIR / 'backups'
     restored = False
 
-    for name in ['settings.pyc', 'settings.py', 'main_window.py']:
+    import os
+    if gns3_pkg.exists() and not os.access(gns3_pkg, os.W_OK):
+        error("PermissionError",
+              f"No write access to {gns3_pkg}. Try running with sudo")
+        sys.exit(1)
+
+    # Map backup filenames to their relative paths under gns3_pkg
+    restore_map = {
+        'settings.pyc': 'settings.pyc',
+        'settings.py': 'settings.py',
+        'main_window.py': 'main_window.py',
+        'style.py': 'style.py',
+        'pycutext.py': 'pycutext.py',
+        'ethernet_link_item.py': 'items/ethernet_link_item.py',
+        'serial_link_item.py': 'items/serial_link_item.py',
+    }
+
+    for name, rel_path in restore_map.items():
         bak = backup_dir / name
         if bak.exists():
-            target = gns3_pkg / name
+            target = gns3_pkg / rel_path
             shutil.copy(bak, target)
-            bak.unlink()
             success("Restore", f"Restored {name}")
             restored = True
-
-    style_bak = backup_dir / 'style.pyc'
-    if style_bak.exists():
-        style_py = gns3_pkg / 'style.py'
-        style_pyc = gns3_pkg / 'style.pyc'
-        if style_py.exists():
-            style_py.unlink()
-        shutil.copy(style_bak, style_pyc)
-        style_bak.unlink()
-        success("Restore", "Restored style.pyc")
-        restored = True
 
     if not restored:
         warn("Restore", f"No backups found in {backup_dir}")
@@ -1096,18 +1245,26 @@ def main():
         print_colorschemes()
         return
 
+    if args.install_symbols:
+        install_symbols()
+        if not args.color_scheme:
+            return
+
     if args.restore:
-        if IS_MACOS:
-            restore_macos()
+        if args.restore == 'auto':
+            gns3_lib, install_type = find_gns3_lib()
+            if not gns3_lib:
+                error("Restore",
+                      "Could not find GNS3 installation. "
+                      "Specify the path manually: --restore /path/to/site-packages")
+                sys.exit(1)
+            if install_type == 'app':
+                restore_macos()
+            else:
+                restore_source(str(gns3_lib))
         else:
-            gns3_dir = args.restore
-            if gns3_dir == 'auto':
-                gns3_lib = find_gns3_lib()
-                if not gns3_lib:
-                    error("Restore", "Could not find GNS3 installation")
-                    sys.exit(1)
-                gns3_dir = str(gns3_lib)
-            restore_linux(gns3_dir)
+            # User specified path — could be macOS source or Linux
+            restore_source(args.restore)
         return
 
     if not args.color_scheme:
@@ -1119,41 +1276,45 @@ def main():
     scheme = deepcopy(all_schemes[args.color_scheme])
     scheme = parse_scheme_args(scheme, args)
 
-    # Generate CSS
+    # Generate CSS and install
     mkdir(CONFIG_DIR)
     style_css = update_style(scheme)
     save_file(style_css, str(CSS_PATH))
 
-    if args.install_path:
-        backup_dir = CONFIG_DIR / 'backups'
+    backup_dir = CONFIG_DIR / 'backups'
 
-        if IS_MACOS:
-            if not MACOS_GNS3_APP.exists():
-                error("InstallError", "GNS3.app not found in /Applications/")
-                sys.exit(1)
+    if args.gns3_dir:
+        # User-specified path — always source (.py) install
+        gns3_dir = args.gns3_dir
+        p = Path(gns3_dir)
+        if not p.is_dir():
+            error("InstallError", f"Directory does not exist: '{gns3_dir}'")
+            sys.exit(1)
+        if not (p / 'gns3' / 'main_window.py').exists():
+            error("InstallError",
+                  f"No GNS3 package found in '{gns3_dir}'. "
+                  "Path should be the site-packages directory containing gns3/")
+            sys.exit(1)
+        success("Install", f"Using GNS3 at {gns3_dir}")
+        install_patches_source(gns3_dir, scheme, backup_dir)
+    else:
+        # Auto-detect
+        gns3_lib, install_type = find_gns3_lib()
+        if not gns3_lib:
+            error("InstallError",
+                  "Could not find GNS3 installation. "
+                  "Specify the path manually: --gns3-dir /path/to/site-packages")
+            sys.exit(1)
+
+        if install_type == 'app':
             success("AutoDetect", f"Found GNS3.app at {MACOS_GNS3_APP}")
             macos_patch_app(MACOS_GNS3_APP, scheme, backup_dir)
         else:
-            gns3_dir = args.install_path
-            if gns3_dir == 'auto':
-                gns3_lib = find_gns3_lib()
-                if not gns3_lib:
-                    error("InstallError", "Could not find GNS3 installation")
-                    sys.exit(1)
-                gns3_dir = str(gns3_lib)
-                success("AutoDetect", f"Found GNS3 at {gns3_dir}")
+            success("AutoDetect", f"Found GNS3 at {gns3_lib}")
+            install_patches_source(str(gns3_lib), scheme, backup_dir)
 
-            if not Path(gns3_dir).is_dir():
-                error("InstallError", f"Directory does not exist: '{gns3_dir}'")
-                sys.exit(1)
-
-            install_patches_linux(gns3_dir, scheme, backup_dir)
-
-        print(f"\n{GREEN}Done!{RESET} Restart GNS3 and select "
-              f"Edit -> Preferences -> General -> Interface Style -> {GREEN}Custom{RESET}")
-    else:
-        save_config(scheme)
-        success("Done", "Custom style saved. Select Custom in GNS3 Interface Style preferences")
+    print(f"\n{GREEN}Done!{RESET} Restart GNS3 and select "
+          f"Edit -> Preferences -> General -> Interface Style -> {GREEN}Custom{RESET}")
 
 
 if __name__ == "__main__":
