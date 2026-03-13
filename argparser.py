@@ -29,8 +29,7 @@ class CustomFormatter(argparse.RawDescriptionHelpFormatter):
             return ', '.join(opts)
 
 
-USAGE = """%(prog)s --install [PATH] --scheme <colorscheme>
-       %(prog)s --scheme <colorscheme> [options]
+USAGE = """%(prog)s --scheme <colorscheme> [options]
        %(prog)s --restore [PATH]\n"""
 
 DESCRIPTION = "gns3theme adds custom themes to GNS3 GUI. Supports Linux and macOS."
@@ -47,11 +46,10 @@ group_main = parser.add_argument_group(title='main arguments')
 group_options = parser.add_argument_group(title='optional arguments')
 group_flags = parser.add_argument_group(title='flags')
 
-group_main.add_argument('-i', '--install', dest='install_path', metavar='PATH',
-                        nargs='?', const='auto',
-                        help='patch GNS3 installation (auto-detect or specify path)')
 group_main.add_argument('-s', '--scheme', dest='color_scheme', metavar='NAME',
-                        help='color scheme to apply')
+                        help='color scheme to apply and install')
+group_main.add_argument('--gns3-dir', dest='gns3_dir', metavar='PATH',
+                        help='GNS3 site-packages path (auto-detected if omitted)')
 
 group_options.add_argument('--bg', dest='bg', metavar='COLOR',
                            help='primary background color')
@@ -79,6 +77,8 @@ group_options.add_argument('--lbl', dest='lbl', metavar='COLOR',
 group_flags.add_argument('--help', action='help', help='show this help')
 group_flags.add_argument('--ls', dest='list_schemes', action='store_true',
                          help='list available color schemes')
+group_flags.add_argument('--symbols', dest='install_symbols', action='store_true',
+                         help='install bundled device symbols to ~/GNS3/symbols/')
 group_flags.add_argument('--restore', dest='restore', metavar='PATH',
                          nargs='?', const='auto',
                          help='restore original GNS3 files from backups')

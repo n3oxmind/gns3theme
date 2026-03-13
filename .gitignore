@@ -1,2 +1,5 @@
 __pycache__/
 test/
+cmd.sh
+output.log
+*_src.py
