@@ -11,6 +11,17 @@ A Python tool that adds custom color themes to the GNS3 GUI. Works on **Linux** 
 - Auto-detects GNS3 installation (GNS3.app, pip, brew, source)
 - Safe patching with automatic backups
 
+## Screenshots
+
+![n30x-dark](https://user-images.githubusercontent.com/10103340/44069564-3681323a-9f34-11e8-9f6c-7d458b0298bf.png)
+*`n30x-dark`*
+
+![solarized-light](https://user-images.githubusercontent.com/10103340/44070067-9d04544a-9f36-11e8-9793-e73522e9002b.png)
+*`solarized-light`*
+
+![tomorrow](https://user-images.githubusercontent.com/10103340/44069498-f4c867aa-9f33-11e8-8ca1-82a26cca134e.png)
+*`tomorrow`*
+
 ## Quick start
 
 ```sh
